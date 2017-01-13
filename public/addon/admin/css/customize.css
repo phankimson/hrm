@@ -1,0 +1,90 @@
+.cursor-pointer{
+    cursor: pointer;
+}
+.close-tabs{    
+    position: absolute;
+    right:2px;
+    top:2px;
+}
+.nav>li>a{
+    padding-right: 20px;
+}
+.tr-space{
+    padding-bottom:  15px;
+}
+.table-hover>tbody>tr:hover, .table>tbody>tr.active>td, .table>tbody>tr.active>th, .table>tbody>tr>td.active, .table>tbody>tr>th.active, .table>tfoot>tr.active>td, .table>tfoot>tr.active>th, .table>tfoot>tr>td.active, .table>tfoot>tr>th.active, .table>thead>tr.active>td, .table>thead>tr.active>th, .table>thead>tr>td.active, .table>thead>tr>th.active{
+    background-color: #3598dc;
+}
+.table-hover>tbody>tr.active:hover>td, .table-hover>tbody>tr.active:hover>th, .table-hover>tbody>tr:hover>.active, .table-hover>tbody>tr>td.active:hover, .table-hover>tbody>tr>th.active:hover{
+    background-color: #36c6d3;
+}
+.table.dataTable thead .sorting:after{
+    opacity: 0;
+}
+.table.dataTable thead .sorting_asc:after{
+    opacity: 0;
+}
+.table.dataTable thead .sorting_desc:after{
+    opacity: 0;
+}
+.select2-container--open {
+    z-index: 10050;          /* form dialog z-index:10002 (computed)*/
+}
+.borderless tr td {
+    border: none !important;
+    padding: 8px !important;
+}
+
+.loading-theme {
+    background: url("../img/loading.gif") no-repeat scroll 50% 50% rgba(0, 0, 0, 0);
+    display: none;
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 9999;
+}
+th, td {
+    white-space: nowrap;
+}
+.cke
+{
+    z-index: 10055 !important;
+}
+.cke_dialog
+{
+    z-index: 10055 !important;
+}
+
+
+.portlet > .portlet-title > .tools > .close-big {
+  background-image: url(../img/portlet-remove-icon.png);
+}
+.portlet.box > .portlet-title > .tools > .close-big {
+  display: inline-block;
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-left : 5px;
+  padding-top: 10px;
+  height: 20px;
+  background-repeat: no-repeat !important;
+  text-indent: -10000px;
+  outline: none;
+  background-image: url("../img/portlet-remove-icon-white.png");
+  background-color: inherit;
+  border : none;
+}
+.feeds li .col1 {
+   width: 85%;
+}
+
+.feeds li .col2 {
+   width: 15%;
+}
+.dropdown-menu{
+    z-index: 10055 !important;
+}
+.logo-default {
+    margin: 1px 0 0;    
+}

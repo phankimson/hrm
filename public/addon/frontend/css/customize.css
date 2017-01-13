@@ -1,0 +1,29 @@
+.cursor-pointer{
+    cursor: pointer;
+}
+.close-tabs{    
+    position: absolute;
+    right:2px;
+    top:2px;
+}
+.nav>li>a{
+    padding-right: 20px;
+}
+.logo-frontpage {
+    margin: 12px 0 0;
+}
+#container-mixitup .mix{
+    display: none;
+}
+.mt-element-card .mt-card-item{
+    border: none;
+}
+.mt-element-overlay .mt-overlay-1 img{
+    height: 125px;
+}
+.tr-space{
+    padding-bottom:  15px;
+}
+.tr-copy{
+    display: none;
+}
