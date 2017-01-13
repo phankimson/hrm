@@ -434,11 +434,48 @@ var EposHand = function () {
          var jQuerylink = jQuery(e.target);
           e.preventDefault();
          if(!jQuerylink.data('lockedAt') || +new Date() - jQuerylink.data('lockedAt') > 300) {
-           if(action['d']==true){   
-          var date = jQuery('input[name="date"]').val();
-          if(date){
-              var postdata = {data :date};  
-            RequestURLWaiting('update/timesheet','json',postdata,function(data){
+           if(action['d']==true){
+               var obj = {};
+               var crit = false;
+               obj.oper = 'edit';
+               jQuery.each(arr, function(k, v) {
+                   if (v.class.indexOf("select2-check")>0&&jQuery('#'+v.id+'').select2('val')==""){
+                       crit = false;
+                       return false;
+                   }else if(v.class.indexOf("not-null")>0&&!jQuery('input[name="'+v.name+'"]').val()){
+                       crit = false;
+                       return false;
+                   }else{
+                       crit = true;
+                   }
+
+                   if(v.class.indexOf("select2me")>0){
+                       obj[v.name] = jQuery('#'+v.id).select2('val');
+                   }else if(v.class.indexOf("make-switch")>0){
+                       if(jQuery('input[name="'+v.name+'"]').bootstrapSwitch('state') == true){
+                           obj[v.name]  = 1;
+                       }else{
+                           obj[v.name]  = 0;
+                       }
+                   }else if(v.class.indexOf("ckeditor")>0 || v.class == 'ckeditor'){
+                       obj[v.name] = CKEDITOR.instances[v.name].getData();
+                   }else if(v.class.indexOf("number")>0 || v.class == 'number'){
+                       obj[v.name] = jQuery('input[name="'+v.name+'"]').val().replace(".", "");
+                   }else if(v.class.indexOf("date")>0 || v.class == 'date'){
+                       obj[v.name] = formatDateDefault(jQuery('input[name="'+v.name+'"]').val());
+                   }else{
+                       if(v.type=='textarea'){
+                           obj[v.name] = jQuery('textarea[name="'+v.name+'"]').val();
+                       }else if(v.type=='select'){
+                           obj[v.name] = jQuery('select[name="'+v.name+'"] option:selected').val();
+                       }else{
+                           obj[v.name] = jQuery('input[name="'+v.name+'"]').val();
+                       }
+                   }
+               });
+               if(crit==true){
+                   var postdata = {data : JSON.stringify(obj)};
+                   RequestURLWaiting('update/timesheet','json',postdata,function(data){
                 if(data.status == true){
                     jQuery('#notification').EPosMessage('success',data.message);
                 }else{

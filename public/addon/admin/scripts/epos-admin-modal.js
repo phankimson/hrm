@@ -275,12 +275,20 @@
        jQuery('.form-control').not('.config').not('input[type="search"]').not('select[name="grid_length"]').attr('disabled','');
        jQuery('.cancel,a.save').attr('disabled',''); 
        sessionStorage.removeItem('rowid');
+           jQuery.each(arr, function(k, v) {
+              if(v.class.indexOf("number")>0 || v.class == 'number'){
+                   jQuery('.number').number(true, 0,',','.');
+                   return false;
+               }
+           });
        }else if(type==2){//Add button
           jQuery.each(arr, function(k, v) {      
             if(v.class.indexOf("ckeditor")>0 || v.class == 'ckeditor'){
                 CKEDITOR.instances[v.name].setData('');
             }else if(v.class.indexOf("select2me")>0 || v.class == 'select2me'){
                  jQuery('#'+v.id).select2('val','');  
+            }else if(v.class.indexOf("number")>0 || v.class == 'number'){
+                jQuery('.number').number(true, 0,',','.');
             }
         });  
         shortcut.add(key+"S",function(e) {btnSave(e);});

@@ -165,7 +165,7 @@
                                                 </tr>
                                                 <tr>
                                                   <td class="col-xs-1"><label class="control-label">{{trans('employee.national')}}</label></td>
-                                                  <td class="col-md-2"><select name="national" position="14" id="national" class="select2me input-medium form-control" data-placeholder="Select...">
+                                                  <td class="col-md-2"><select name="national" position="14" id="national" class="input-medium form-control select2me" data-placeholder="Select...">
                                                             <option value=""></option>
                                                             <option value="AF">Afghanistan</option>
                                                             <option value="AL">Albania</option>

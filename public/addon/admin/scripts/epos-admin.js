@@ -227,6 +227,12 @@
        jQuery('.make-switch').not('.config').parents('.bootstrap-switch').addClass('bootstrap-switch-disabled');
        jQuery('a.cancel,a.save').attr('disabled','');  
        sessionStorage.removeItem('rowid');
+           jQuery.each(arr, function(k, v) {
+               if(v.class.indexOf("number")>0 || v.class == 'number'){
+                   jQuery('.number').number(true, 0,',','.');
+                   return false;
+               }
+           });
        }else if(type==2){//Add button
         shortcut.add(key+"S",function(e) {btnSave(e);});
         shortcut.add(key+"C",function(e) {btnCancel(e);});
