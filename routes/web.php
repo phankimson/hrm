@@ -24,7 +24,7 @@ Route::group(['middleware'=>['web']],function(){
   Route::post("timekeeper",['uses'=>'TimeKeeperController@save']);
   Route::post("timesheet",['uses'=>'TimeSheetController@save']); 
   Route::post("advance",['uses'=>'AdvanceController@save']);
-  Route::post("labor-contact",['uses'=>'LaborContactController@save']);
+  Route::post("labor-contract",['uses'=>'LaborContractController@save']);
   });  
   Route::group(["prefix"=>"update"],function(){    
   Route::post("profile",['uses'=>'UserController@updateprofile']);
@@ -41,7 +41,7 @@ Route::group(['middleware'=>['web']],function(){
   Route::post("timekeeper",['uses'=>'TimeKeeperController@delete']);
   Route::post("timesheet",['uses'=>'TimeSheetController@delete']);
   Route::post("advance",['uses'=>'AdvanceController@delete']);
-  Route::post("labor-contact",['uses'=>'LaborContactController@delete']);
+  Route::post("labor-contract",['uses'=>'LaborContractController@delete']);
   }); 
   Route::group(["prefix"=>"import"],function(){       
   Route::post("history-action",['uses'=>'HistoryActionController@import']);   
@@ -51,7 +51,7 @@ Route::group(['middleware'=>['web']],function(){
   Route::post("department",['uses'=>'DepartmentController@import']);
   Route::post("employee",['uses'=>'EmployeeController@import']);
   Route::post("timekeeper",['uses'=>'TimeKeeperController@import']);
-  Route::post("labor-contact",['uses'=>'LaborContactController@import']);
+  Route::post("labor-contract",['uses'=>'LaborContractController@import']);
   }); 
   Route::group(["prefix"=>"export"],function(){    
   Route::get("history-action",array('uses'=>'HistoryActionController@export'));  
@@ -61,7 +61,7 @@ Route::group(['middleware'=>['web']],function(){
   Route::get("department",['uses'=>'DepartmentController@export']);
   Route::get("employee",['uses'=>'EmployeeController@export']);
   Route::get("timekeeper",['uses'=>'TimeKeeperController@export']);
-  Route::get("labor-contact",['uses'=>'LaborContactController@export']);
+  Route::get("labor-contract",['uses'=>'LaborContractController@export']);
   }); 
    Route::group(["prefix"=>"get"],function(){    
     Route::post("permission",['uses'=>'PermissionController@loadPermission']);
@@ -83,7 +83,7 @@ Route::get("employee",['uses'=>'EmployeeController@showPage']);
 Route::get("timekeeper",['uses'=>'TimeKeeperController@showPage']);
 Route::get("timesheet",['uses'=>'TimeSheetController@showPage']);
 Route::get("advance",['uses'=>'AdvanceController@showPage']);
-Route::get("labor-contact",['uses'=>'LaborContactController@showPage']);
+Route::get("labor-contract",['uses'=>'LaborContractController@showPage']);
  });
 Route::get("logout",['uses'=>'DashboardController@doLogout']);
 Route::get("login",['uses'=>'UserController@showLogin']);
@@ -110,7 +110,7 @@ Route::group(["prefix"=>"admin"],function(){
   Route::post("timekeeper",['uses'=>'TimeKeeperController@save']);
   Route::post("timesheet",['uses'=>'TimeSheetController@save']); 
   Route::post("advance",['uses'=>'AdvanceController@save']);
-  Route::post("labor-contact",['uses'=>'LaborContactController@save']);
+  Route::post("labor-contract",['uses'=>'LaborContractController@save']);
   });  
   Route::group(["prefix"=>"update"],function(){    
   Route::post("profile",['uses'=>'UserController@updateprofile']);
@@ -130,7 +130,7 @@ Route::group(["prefix"=>"admin"],function(){
   Route::post("employee",['uses'=>'EmployeeController@delete']);
   Route::post("timesheet",['uses'=>'TimeSheetController@delete']);
   Route::post("timekeeper",['uses'=>'TimeKeeperController@delete']);
-  Route::post("labor-contact",['uses'=>'LaborContactController@delete']);
+  Route::post("labor-contract",['uses'=>'LaborContractController@delete']);
   }); 
   Route::group(["prefix"=>"import"],function(){    
   Route::post("menu",array('uses'=>'MenuController@import')); 
@@ -144,7 +144,7 @@ Route::group(["prefix"=>"admin"],function(){
   Route::post("department",['uses'=>'DepartmentController@import']);
   Route::post("employee",['uses'=>'EmployeeController@import']);
   Route::post("timekeeper",['uses'=>'TimeKeeperController@import']);
-  Route::post("labor-contact",['uses'=>'LaborContactController@import']);
+  Route::post("labor-contract",['uses'=>'LaborContractController@import']);
   }); 
   Route::group(["prefix"=>"export"],function(){    
   Route::get("menu",array('uses'=>'MenuController@export'));    
@@ -158,7 +158,7 @@ Route::group(["prefix"=>"admin"],function(){
   Route::get("department",['uses'=>'DepartmentController@export']);
   Route::get("employee",['uses'=>'EmployeeController@export']);
   Route::get("timekeeper",['uses'=>'TimeKeeperController@export']);
-  Route::get("labor-contact",['uses'=>'LaborContactController@export']);
+  Route::get("labor-contract",['uses'=>'LaborContractController@export']);
   }); 
    Route::group(["prefix"=>"get"],function(){    
     Route::post("permission",['uses'=>'PermissionController@loadPermission']);    
@@ -184,7 +184,7 @@ Route::get("employee",['uses'=>'EmployeeController@showPage']);
 Route::get("timekeeper",['uses'=>'TimeKeeperController@showPage']);
 Route::get("timesheet",['uses'=>'TimeSheetController@showPage']);
 Route::get("advance",['uses'=>'AdvanceController@showPage']);
-Route::get("labor-contact",['uses'=>'LaborContactController@showPage']);
+Route::get("labor-contract",['uses'=>'LaborContractController@showPage']);
  });
 Route::post("query",['uses'=>'QueryController@querySql']); 
 Route::get("logout",['uses'=>'DashboardController@doLogout']);

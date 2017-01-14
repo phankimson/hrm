@@ -144,10 +144,10 @@
                                         <thead>
                                         <tr>
                                             <th> {{trans('global.no')}}</th>
-                                            <th> {{trans('labor-contact.code')}}</th>
-                                            <th> {{trans('labor-contact.employee')}}</th>
-                                            <th> {{trans('labor-contact.contact_date')}}</th>
-                                            <th> {{trans('labor-contact.contact_end')}}</th>
+                                            <th> {{trans('labor_contact.code')}}</th>
+                                            <th> {{trans('labor_contact.employee')}}</th>
+                                            <th> {{trans('labor_contact.contact_date')}}</th>
+                                            <th> {{trans('labor_contact.contact_end')}}</th>
                                             <th> {{trans('menu.active')}}</th>
                                         </tr>
                                         </thead>
@@ -172,15 +172,17 @@
                                 <div class="portlet-body" id='form-action'>
                                     <div id="notification"></div>
                                     <div class="form-group">
-                                        <label class="col-sm-4 control-label">{{Lang::get('labor-contract.date')}}</label>
+                                        <label class="col-sm-4 control-label">{{trans('labor_contract.date')}}</label>
                                         <div class="input-group input-large date-picker input-daterange" data-date-format="dd/mm/yyyy" data-date="10/11/2012">
-                                            <input class="form-control" type="text"  position="3" name="contact_date">
+                                            <input class="form-control date-picker date" type="text"  position="3" name="contract_date">
                                             <span class="input-group-addon"> to </span>
-                                            <input class="form-control" type="text"  position="4" name="contact_end">
+                                            <input class="form-control date-picker date" type="text"  position="4" name="contract_end">
                                         </div>
                                     </div>
+                                    <div class="tr-space"></div>
+                                    <div class="tr-space"></div>
                                     <div class="form-group">
-                                        <label class="col-sm-4 control-label">{{trans('labor-contact.code')}} (*)</label>
+                                        <label class="col-sm-4 control-label">{{trans('labor_contract.code')}} (*)</label>
                                         <div class="col-sm-5">
                                             <input type="text" class="form-control input-large not-null" position="1" maxlength="50" name="code" id="maxlength_defaultconfig">
                                         </div>
@@ -188,9 +190,9 @@
                                     <div class="tr-space"></div>
                                     <div class="tr-space"></div>
                                     <div class="form-group">
-                                        <label class="col-sm-4 control-label">{{trans('labor-contact.employee')}} (*)</label>
+                                        <label class="col-sm-4 control-label">{{trans('employee.name')}} (*)</label>
                                         <div class="col-sm-5">
-                                            <select class="form-control input-large select2me" position="2" id="employee" data-placeholder="Select...">
+                                            <select class="form-control input-large select2me" position="2" name="employee_id" id="employee_id" data-placeholder="Select...">
                                                 <option value=""></option>
                                                 @foreach($employee as $e)
                                                     <option value="{{$e['id']}}">{{$e['fullname']}}</option>

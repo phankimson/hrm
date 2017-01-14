@@ -44,7 +44,7 @@ return [
     'timekeeper'=>'Chấm công',
     'advance'=>'Bảng tạm ứng lương',
     'department'=>'Bộ phận',
-    'product-type'=>'Loại hàng hóa',
+    'labor-contract'=>'Hợp đồng lao động',
     'product-group'=>'Nhóm hàng hóa',
     'timesheet'=>'Bảng chấm công',
     'period'=>'Kỳ làm việc',

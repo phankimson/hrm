@@ -2,41 +2,41 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
-use App\Http\Models\LaborContact;
+use App\Http\Models\LaborContract;
 use App\Http\Models\Employee;
 use App\Classes\Helpers;
 use Excel;
 use DB;
 
-class LaborContactController extends Controller
+class LaborContractController extends Controller
 {
     private $data;
     private $column;
     public function __construct()
     {
-        $this->data = LaborContact::all();
-        $column  = DB::getSchemaBuilder()->getColumnListing('labor_contact');
+        $this->data = LaborContract::all();
+        $column  = DB::getSchemaBuilder()->getColumnListing('labor_contract');
         $this->column = array_diff($column, array("id"));
     }
 
     public function showPage(){
         $employee = Employee::get_all();
-        return view("admin.pages.listLaborContact",['data'=>$this->data,'employee'=>$employee]);
+        return view("admin.pages.listLaborContract",['data'=>$this->data,'employee'=>$employee]);
     }
     public function save(Request $request){
         $colum = $this->column;
         $data = $request->input('data');
         $t = json_decode($data);
         if($t->oper=='add'||$t->oper=='copy'){
-            $return = new LaborContact();
+            $return = new LaborContract();
         }else{
-            $return = LaborContact::find($t->id);
+            $return = LaborContract::find($t->id);
         }
         foreach($colum as $value){
             $return->$value           = Helpers::get_not_null($t-> $value,0);
         }
         $return->save();
-        $lst_data =  LaborContact::get_all($return->id);
+        $lst_data =  LaborContract::get_all($return->id);
         Helpers::save_history_action($t->oper, serialize($lst_data->toArray()));
         return response()->json( [
             'status' 	 => true,
@@ -55,7 +55,7 @@ class LaborContactController extends Controller
                 'message' => trans('messages.error_delete'),
             ]);
         }else{
-            $result = LaborContact::find($id);
+            $result = LaborContract::find($id);
             Helpers::save_history_action('delete', serialize($result->toArray()));
             $result -> delete();
             return response()->json( [
@@ -68,7 +68,7 @@ class LaborContactController extends Controller
     public function export(){
         Excel::create('ExcelFormImport', function ($excel) {
 
-            $excel->sheet('LaborContact', function ($sheet) {
+            $excel->sheet('LaborContract', function ($sheet) {
 
                 // getting data to display - in my case only one record
                 $table = $this->column;
@@ -101,12 +101,12 @@ class LaborContactController extends Controller
             $sheet = Excel::load($file, function($reader) {})->get();
             $count = 0;
             foreach($sheet as $sh){
-                $return = new LaborContact();
+                $return = new LaborContract();
                 foreach($colum as $value){
                     $return->$value           = Helpers::get_not_null($sh-> $value,0);
                 }
                 $return -> save();
-                $data[$count] = LaborContact::get_all($return->id);
+                $data[$count] = LaborContract::get_all($return->id);
                 $content[$count] = $data[$count]->toArray();
                 $count++;
             }

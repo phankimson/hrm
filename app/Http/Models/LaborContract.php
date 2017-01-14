@@ -3,9 +3,9 @@ namespace App\Http\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class LaborContact extends Model
+class LaborContract extends Model
 {
-    public $table="labor_contact";
+    public $table="labor_contract";
     public $timestamps = false;
     protected $fillable = array('id');
     public function scopeTypeWhere($query,$column, $value)
@@ -29,7 +29,7 @@ class LaborContact extends Model
      */
 
     public static function get_all($id=null){
-        $data = LaborContact::TypeWhere('id',$id)->get();
+        $data = LaborContract::TypeWhere('id',$id)->get();
         return $data;
     }
 }   

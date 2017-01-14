@@ -45,7 +45,7 @@ return [
     'advance'=>'Advance',
     'timekeeper'=>'Timekeeper',
     'department'=>'Department',
-    'product-type'=>'Product Type',
+    'labor-contract'=>'Labor Contact',
     'product-group'=>'Product Group',
     'timesheet'=>'Timesheet',
     'period'=>'Period',

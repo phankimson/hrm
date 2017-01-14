@@ -1,0 +1,6 @@
+<?php
+
+return array(
+    'code' => "Mã h?p ??ng",
+    'date'=>'Th?i h?n h?p ??ng',
+);
