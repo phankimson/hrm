@@ -1,6 +1,8 @@
 <?php
 
 return array(
-    'code' => "M� h?p ??ng",
-    'date'=>'Th?i h?n h?p ??ng',
+    'code' => "Mã hợp đồng",
+    'date'=>'Ngày',
+    'contract_date'=>'Ngày ký',
+    'contract_end'=>'Ngày hết hạn',
 );

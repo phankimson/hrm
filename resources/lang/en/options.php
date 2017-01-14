@@ -11,7 +11,5 @@ return array(
     'company'=>'Company',
     'address'=>'Address',
     'phone'=>'Phone',
-    'default_stock'=>'Default stock',
-    'check_stock'=>'Check quantity stock',
-    'check_max_min'=>'Check quantity max min',
+    'director_company'=>'Director company',
 );

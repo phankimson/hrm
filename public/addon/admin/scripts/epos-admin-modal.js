@@ -223,7 +223,7 @@
                             }else if(v.class.indexOf("date-picker")>0 || v.class == 'date-picker'){
                                     jQuery('input[name="'+v.name+'"]').val(formatDate(data[v.name])); 
                             }else if(v.class.indexOf("number")>0 || v.class == 'number'){
-                                    jQuery('input[name="'+v.name+'"]').val(formatNumber(data[v.name])); 
+                                    jQuery('input[name="'+v.name+'"]').val(data[v.name]); 
                             }else{
                                 if(v.type === 'textarea'){
                                  jQuery('textarea[name="'+v.name+'"]').val(data[v.name]);      
@@ -575,7 +575,7 @@
                 }else if(v.class.indexOf("ckeditor")>0 || v.class == 'ckeditor'){
                               obj[v.name] = CKEDITOR.instances[v.name].getData();
                 }else if(v.class.indexOf("number")>0 || v.class == 'number'){
-                              obj[v.name] = jQuery('input[name="'+v.name+'"]').val().replace(".", "");
+                              obj[v.name] = jQuery('input[name="'+v.name+'"]').val();
                 }else if(v.class.indexOf("image")>0 || v.class == 'image'){
                             a = jQuery('.change-image')[0][1];                           
                 }else if(v.class.indexOf("date")>0 || v.class == 'date'){

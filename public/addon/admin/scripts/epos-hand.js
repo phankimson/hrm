@@ -274,7 +274,7 @@ var EposHand = function () {
                 }else if(v.class.indexOf("ckeditor")>0 || v.class == 'ckeditor'){
                               obj[v.name] = CKEDITOR.instances[v.name].getData();
                 }else if(v.class.indexOf("number")>0 || v.class == 'number'){
-                              obj[v.name] = jQuery('input[name="'+v.name+'"]').val().replace(".", "");
+                              obj[v.name] = jQuery('input[name="'+v.name+'"]').val();
                 }else if(v.class.indexOf("date")>0 || v.class == 'date'){
                               obj[v.name] = formatDateDefault(jQuery('input[name="'+v.name+'"]').val());                        
                 }else{
@@ -397,7 +397,7 @@ var EposHand = function () {
                 }else if(v.class.indexOf("ckeditor")>0 || v.class == 'ckeditor'){
                               obj[v.name] = CKEDITOR.instances[v.name].getData();
                 }else if(v.class.indexOf("number")>0 || v.class == 'number'){
-                              obj[v.name] = jQuery('input[name="'+v.name+'"]').val().replace(".", "");
+                              obj[v.name] = jQuery('input[name="'+v.name+'"]').val();
                 }else if(v.class.indexOf("date")>0 || v.class == 'date'){
                               obj[v.name] = formatDateDefault(jQuery('input[name="'+v.name+'"]').val());                        
                 }else{

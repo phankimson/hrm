@@ -55,15 +55,19 @@
                                                 <tr>          
                                                   <td class="col-xs-1"><label class="control-label">{{trans('options.company')}}</label></td>
                                                   <td class="col-md-2"><input type="text" class="form-control input-large config" maxlength="100" name="company" value="{{$options->where('code','COMPANY')->implode('value')}}" id="maxlength_defaultconfig"></td>     
-                                                </tr>                                                                                           
+                                                </tr> 
                                                 <tr>          
-                                                  <td class="col-xs-1"><label class="control-label">{{trans('options.check_stock')}}</label></td>
-                                                  <td class="col-md-2"><input type="checkbox" name="check_stock" class="form-control make-switch config" {{$options->where('code','CHECK_STOCK')->implode('value') == '1' ? 'checked' : 'false' }} data-size="small" data-handle-width="25" data-on-text="<i class='fa fa-check'></i>" data-off-text="<i class='fa fa-times'></i>"></td>     
-                                                </tr>
+                                                  <td class="col-xs-1"><label class="control-label">{{trans('options.address')}}</label></td>
+                                                  <td class="col-md-2"><input type="text" class="form-control input-large config" maxlength="100" name="address" value="{{$options->where('code','ADDRESS')->implode('value')}}" id="maxlength_defaultconfig"></td>     
+                                                </tr> 
                                                 <tr>          
-                                                  <td class="col-xs-1"><label class="control-label">{{trans('options.check_max_min')}}</label></td>
-                                                  <td class="col-md-2"><input type="checkbox" name="check_max_min" class="form-control make-switch config" {{$options->where('code','CHECK_MAX_MIN')->implode('value') == '1' ? 'checked' : 'false'}}  data-size="small" data-handle-width="25" data-on-text="<i class='fa fa-check'></i>" data-off-text="<i class='fa fa-times'></i>"></td>     
-                                                </tr>
+                                                  <td class="col-xs-1"><label class="control-label">{{trans('options.phone')}}</label></td>
+                                                  <td class="col-md-2"><input type="text" class="form-control input-large config" maxlength="100" name="phone" value="{{$options->where('code','PHONE')->implode('value')}}" id="maxlength_defaultconfig"></td>     
+                                                </tr> 
+                                                <tr>          
+                                                  <td class="col-xs-1"><label class="control-label">{{trans('options.director_company')}}</label></td>
+                                                  <td class="col-md-2"><input type="text" class="form-control input-large config" maxlength="100" name="director_company" value="{{$options->where('code','DIRECTOR_COMPANY')->implode('value')}}" id="maxlength_defaultconfig"></td>     
+                                                </tr>                                                
                                             </table> 
                                 </div>
                                 <div class="modal-footer">                                    

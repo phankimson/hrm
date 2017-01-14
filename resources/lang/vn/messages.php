@@ -48,6 +48,7 @@ return [
     'you_must_select_item_to_copy' => 'Bạn phải chọn dòng để sao chép !',
     'you_must_select_item_to_delete' => 'Bạn phải chọn dòng để xóa !',
     'you_must_select_item_to_edit' => 'Bạn phải chọn dòng để sửa !',
+    'you_must_select_item_to_print' => 'Bạn phải chọn dòng để in !',
     'you_must_select_company' =>'Bạn phải chọn công ty !',
     'you_must_select_item_to_upload'=>'Bạn phải chọn dòng để upload !',
     'no_matching_records_found' => 'Không có dòng nào được tìm thấy.',

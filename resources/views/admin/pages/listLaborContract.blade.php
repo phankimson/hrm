@@ -17,6 +17,7 @@
             <!-- BEGIN CONTENT -->
     <div class="page-content-wrapper">
         <!-- BEGIN CONTENT BODY -->
+        <div id="add_modal"></div>
         <div class="page-content">
             <div class="modal fade" id="import" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -77,13 +78,6 @@
                         <span class="caption-subject font-purple bold uppercase">{{trans('menu.department')}}</span>
                     </div>
                     <div class="pull-right">
-                        <a class="btn default blue-stripe add tooltips" data-original-title="Ctrl+Alt+A" data-placement="top" data-container="body"><i class="fa fa-plus"></i> {{trans('global.add')}} </a>
-                        <a class="btn default yellow-stripe copy tooltips" data-original-title="Ctrl+Alt+X" data-placement="top" data-container="body"><i class="fa fa-copy"></i> {{trans('global.copy')}} </a>
-                        <a class="btn default red-stripe edit tooltips" data-original-title="Ctrl+Alt+E" data-placement="top" data-container="body"><i class="fa fa-edit" ></i> {{trans('global.edit')}} </a>
-                        <a class="btn default green-stripe save tooltips" data-original-title="Ctrl+Alt+S" data-placement="top" data-container="body"><i class="fa fa-save" ></i> {{trans('global.save')}} </a>
-                        <a class="btn default purple-stripe cancel tooltips" data-original-title="Ctrl+Alt+C" data-placement="top" data-container="body"><i class="fa fa-ban " ></i> {{trans('global.cancel')}} </a>
-                        <a class="btn default dark-stripe delete tooltips" data-original-title="Ctrl+Alt+D" data-placement="top" data-container="body"> <i class="fa fa-times"></i> {{trans('global.delete')}} </a>
-                        <a class="btn default blue-stripe import tooltips" data-original-title="Ctrl+Alt+I" data-placement="top" data-container="body"> <i class="fa fa-database"></i> {{trans('global.import')}} </a>
                         <div class="btn-group">
                             <a class="btn purple" href="javascript:;" data-toggle="dropdown" aria-expanded="false">
                                 <i class="fa fa-print"></i> {{trans('global.print')}}
@@ -92,11 +86,19 @@
                             <ul class="dropdown-menu" id="datatable_ajax_tools">
                                 @foreach($print as $p)
                                     <li>
-                                        <a class='printlabor' href="#{{$p->code}}">{{$p->name}}</a>
+                                        <a class='print' data="{{$p->code}}" href="javascript:;">{{$p->name}}</a>
                                     </li>
                                 @endforeach
                             </ul>
                         </div>
+                        <a class="btn default blue-stripe add tooltips" data-original-title="Ctrl+Alt+A" data-placement="top" data-container="body"><i class="fa fa-plus"></i> {{trans('global.add')}} </a>
+                        <a class="btn default yellow-stripe copy tooltips" data-original-title="Ctrl+Alt+X" data-placement="top" data-container="body"><i class="fa fa-copy"></i> {{trans('global.copy')}} </a>
+                        <a class="btn default red-stripe edit tooltips" data-original-title="Ctrl+Alt+E" data-placement="top" data-container="body"><i class="fa fa-edit" ></i> {{trans('global.edit')}} </a>
+                        <a class="btn default green-stripe save tooltips" data-original-title="Ctrl+Alt+S" data-placement="top" data-container="body"><i class="fa fa-save" ></i> {{trans('global.save')}} </a>
+                        <a class="btn default purple-stripe cancel tooltips" data-original-title="Ctrl+Alt+C" data-placement="top" data-container="body"><i class="fa fa-ban " ></i> {{trans('global.cancel')}} </a>
+                        <a class="btn default dark-stripe delete tooltips" data-original-title="Ctrl+Alt+D" data-placement="top" data-container="body"> <i class="fa fa-times"></i> {{trans('global.delete')}} </a>
+                        <a class="btn default blue-stripe import tooltips" data-original-title="Ctrl+Alt+I" data-placement="top" data-container="body"> <i class="fa fa-database"></i> {{trans('global.import')}} </a>
+                        
                     </div>
                 </div>
                 <div class="portlet-body">
@@ -123,10 +125,10 @@
                                         <thead>
                                         <tr>
                                             <th> {{trans('global.no')}}</th>
-                                            <th> {{trans('labor_contact.code')}}</th>
-                                            <th> {{trans('labor_contact.employee')}}</th>
-                                            <th> {{trans('labor_contact.contact_date')}}</th>
-                                            <th> {{trans('labor_contact.contact_end')}}</th>
+                                            <th> {{trans('labor_contract.code')}}</th>
+                                            <th> {{trans('employee.name')}}</th>
+                                            <th> {{trans('labor_contract.contract_date')}}</th>
+                                            <th> {{trans('labor_contract.contract_end')}}</th>
                                             <th> {{trans('menu.active')}}</th>
                                         </tr>
                                         </thead>
@@ -205,7 +207,7 @@
         jQuery(document).ready(function() {
             EposAdmin.permission = <?= json_encode(session()->get('permission'));?>;
             EposAdmin.data= <?= json_encode($data->toArray());?>;
-            EposAdmin.url = <?= json_encode(['save_url'=>'add/timekeeper','delete_url'=>'update/timekeeper','import_url'=>'import/timekeeper']);?>;
+            EposAdmin.url = <?= json_encode(['save_url'=>'add/labor-contract','delete_url'=>'update/labor-contract','import_url'=>'import/labor-contract','print_url'=>'get/labor-contract']);?>;
         });
     </script>
 
@@ -219,6 +221,7 @@
 
     <script src="{{ url('public/global/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js')}}" type="text/javascript"></script>
     <script src="{{ url('public/global/plugins/shortcuts.js')}}" type="text/javascript"></script>
+    <script src="{{ url('public/global/plugins/jquery.print.js')}}" type="text/javascript"></script>
 
     <script src="{{ url('public/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js')}}" type="text/javascript"></script>
     <script src="{{ url('public/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js')}}" type="text/javascript"></script>

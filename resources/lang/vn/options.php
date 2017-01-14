@@ -11,7 +11,5 @@ return array(
     'company'=>'Công ty',
     'address'=>'Địa chỉ',
     'phone'=>'Số điện thoại',
-    'default_stock'=>'Kho ngầm định',
-    'check_stock'=>'Kiểm tra tồn kho',
-    'check_max_min'=>'Kiểm tra tồn kho tối đa, tối thiểu',
+    'director_company'=>'Giám đốc công ty',
 );

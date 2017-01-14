@@ -48,6 +48,7 @@ return [
     'you_must_select_item_to_copy' => 'You must select item to copy !',
     'you_must_select_item_to_delete' => 'You must select item to delete !',
     'you_must_select_item_to_edit' => 'You must select item to edit !',
+    'you_must_select_item_to_print' => 'You must select item to print !',
     'you_must_select_company' =>'You must select company !',
     'you_must_select_item_to_upload'=>'You must select item to upload !',
     'no_matching_records_found' => 'No matching records found',

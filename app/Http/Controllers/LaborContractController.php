@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Http\Models\LaborContract;
 use App\Http\Models\Employee;
 use App\Http\Models\Template;
+use App\Http\Models\Options;
 use App\Classes\Helpers;
 use Excel;
 use DB;
@@ -21,8 +22,9 @@ class LaborContractController extends Controller
     }
 
     public function showPage(){
+        $option = Options::get_code('TEMPLATE_CONTRACT');
         $employee = Employee::get_all();
-        $print = Template::get_by_code('H?L?');
+        $print = Template::get_by_code($option->value);
         return view("admin.pages.listLaborContract",['data'=>$this->data,'employee'=>$employee,'print'=>$print]);
     }
     public function save(Request $request){
@@ -124,6 +126,44 @@ class LaborContractController extends Controller
                 'message' => trans('messages.error_import'),
             ]);
         }
+    }
+       public function printData(Request $request){
+        $data = $request->input('data');
+        $t = json_decode($data);
+        $company_name = Options::get_code('COMPANY');
+        $company_director = Options::get_code('DIRECTOR_COMPANY');
+        $company_country = 'Việt Nam';
+        $company_phone = Options::get_code('PHONE');
+        $company_address = Options::get_code('ADDRESS');
+        $print = Template::get_by_code($t->key);
+        $employee = Employee::get_all($t->employee_id);
+        $salary_other = number_format($employee->first()->allowances_accordance_salaries+$employee->first()->telephone_allowance+$employee->first()->orther_allowance, 0, ',', '.');
+        $list = array('$company.name'=>$company_name->value,
+            '$company.director'=>$company_director->value,
+            '$company.country'=>$company_country,
+            '$company.phone'=>$company_phone->value,
+            '$company.address'=>$company_address->value,
+            '$labor.code'=>$t->code,
+            '$day'=>date("d"),
+            '$month'=>date("m"),
+            '$year'=>date('Y'),
+            '$employee.fullname'=>$employee->first()->fullname,
+            '$employee.address'=>$employee->first()->address,
+            '$employee.national'=>$employee->first()->national,
+            '$employee.birthday'=> date_format(date_create($employee->first()->birthday),'d/m/Y'),
+            '$employee.identity_card'=>$employee->first()->identity_card,
+            '$employee.card_date'=>date_format(date_create($employee->first()->identity_card_date),'d/m/Y'),
+            '$employee.card_place'=>$employee->first()->identity_card_place,
+            '$employee.position'=>$employee->first()->position,
+            '$employee.salary'=>number_format($employee->first()->salary_main, 0, ',', '.'),
+            '$employee.orther'=>$salary_other,
+            '$employee.begin'=>date_format(date_create($t->contract_date),'d/m/Y'),
+            '$employee.end'=>date_format(date_create($t->contract_end),'d/m/Y'),
+            );
+            $newprint = strtr($print->first()->content,$list);
+            return response()->json( [
+                'arr'             => $newprint,
+            ]);   
     }
 
 }

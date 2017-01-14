@@ -29,6 +29,7 @@
     transText["please_input_all_field_require"] = "{{trans('messages.please_input_all_field_require')}}";
     transText["you_must_select_item_to_copy"] = "{{trans('messages.you_must_select_item_to_copy')}}";
     transText["you_must_select_item_to_edit"] = "{{trans('messages.you_must_select_item_to_edit')}}";
+    transText["you_must_select_item_to_print"] = "{{trans('messages.you_must_select_item_to_print')}}";
     transText["you_must_select_item_to_delete"] = "{{trans('messages.you_must_select_item_to_delete')}}";
     transText["you_must_select_company"] = "{{trans('messages.you_must_select_company')}}";    
     transText["you_must_select_item_to_upload"] = "{{trans('messages.you_must_select_item_to_upload')}}";

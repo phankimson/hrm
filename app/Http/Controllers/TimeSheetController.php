@@ -152,11 +152,10 @@ class TimeSheetController extends Controller
          }else{
         $id = TimeSheet::get_employee($t->period_id);    
          foreach($id as $d){
-             $value = TimeSheet::find($d->id);
-             $value -> delete();
+             $result = TimeSheet::find($d->id);
+             $result -> delete();
+             Helpers::save_history_action('delete', serialize($result->toArray()));
          }
-         Helpers::save_history_action('delete', serialize($result->toArray()));
-	 $result -> delete();
             return response()->json( [
                 'status' 	 => true,
                 'message' => trans('messages.success_delete'),

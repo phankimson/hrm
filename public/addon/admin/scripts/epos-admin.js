@@ -178,10 +178,8 @@
                             }else if(v.class.indexOf("date-picker")>0 || v.class == 'date-picker'){
                                     jQuery('input[name="'+v.name+'"]').val(formatDate(data[v.name])); 
                             }else if(v.class.indexOf("number")>0 || v.class == 'number'){
-                                    jQuery('input[name="'+v.name+'"]').val(formatNumber(data[v.name])); 
-                            }else if(v.class.indexOf("number")>0 || v.class == 'number'){
-                              obj[v.name] = jQuery('input[name="'+v.name+'"]').val().replace(".", "");
-                }           else{
+                                    jQuery('input[name="'+v.name+'"]').val(data[v.name]); 
+                            }else{
                                if(v.type === 'textarea'){
                                  jQuery('textarea[name="'+v.name+'"]').val(data[v.name]);      
                                   }else if(v.type === 'select'){
@@ -211,6 +209,7 @@
        shortcut.add(key+"D",function(e) {btnDelete(e);});
        shortcut.add(key+"I",function(e) {btnImport(e);});
        jQuery('.fileinput').fileinput('clear');
+       jQuery('a.print').on('click',btnPrint);
        jQuery('#upload,#import').modal('hide'); 
        jQuery('#oper').text('');
        jQuery('.make-switch').not('.config').bootstrapSwitch('state', true);     
@@ -378,6 +377,8 @@
                               obj[v.name] = CKEDITOR.instances[v.name].getData();
                 }else if(v.class.indexOf("image")>0 || v.class == 'image'){
                             a = jQuery('.change-image')[0][1];                           
+                }else if(v.class.indexOf("number")>0 || v.class == 'number'){
+                              obj[v.name] = jQuery('input[name="'+v.name+'"]').val().replace(".", "");
                 }else if(v.class.indexOf("date")>0 || v.class == 'date'){
                               obj[v.name] = formatDateDefault(jQuery('input[name="'+v.name+'"]').val());                        
                 }else{
@@ -538,6 +539,62 @@
          }
         jQuerylink.data('lockedAt', +new Date()); 
         };     
+        var btnPrint = function(e){
+          var $this = this;
+        var $link = $(e.target);
+          e.preventDefault();
+         if(!$link.data('lockedAt') || +new Date() - $link.data('lockedAt') > 300) {    
+           var obj = {};  
+           obj.key = jQuery($this).attr('data');           
+           var crit = false;
+            jQuery.each(arr, function(k, v) { 
+                if (v.class.indexOf("select2-check")>0&&jQuery('#'+v.id+'').select2('val')==""){                   
+                    crit = false;
+                    return false;
+                }else if(v.class.indexOf("not-null")>0&&!jQuery('input[name="'+v.name+'"]').val()){
+                    crit = false;
+                    return false;
+                }else{
+                    crit = true;                  
+                }
+                
+                if(v.class.indexOf("select2me")>0){
+                    obj[v.name] = jQuery('#'+v.id).select2('val');  
+                }else if(v.class.indexOf("make-switch")>0){
+                        if(jQuery('input[name="'+v.name+'"]').bootstrapSwitch('state') == true){
+                         obj[v.name]  = 1;
+                        }else{
+                         obj[v.name]  = 0;
+                        }  
+                }else if(v.class.indexOf("ckeditor")>0 || v.class == 'ckeditor'){
+                              obj[v.name] = CKEDITOR.instances[v.name].getData();
+                }else if(v.class.indexOf("number")>0 || v.class == 'number'){
+                              obj[v.name] = jQuery('input[name="'+v.name+'"]').val().replace(".", "");
+                }else if(v.class.indexOf("date")>0 || v.class == 'date'){
+                              obj[v.name] = formatDateDefault(jQuery('input[name="'+v.name+'"]').val());                        
+                }else{
+                   if(v.type=='textarea'){
+                   obj[v.name] = jQuery('textarea[name="'+v.name+'"]').val();      
+                    }else if(v.type=='select'){
+                   obj[v.name] = jQuery('select[name="'+v.name+'"] option:selected').val();      
+                    }else{
+                   obj[v.name] = jQuery('input[name="'+v.name+'"]').val(); 
+                    }
+                }
+            });  
+          if(crit==true){
+             var postdata = {data : JSON.stringify(obj)};  
+            RequestURLWaiting(url['print_url'],'json',postdata,function(data){
+                jQuery('#add_modal').append('<div id="print">'+data.arr+'</div>');
+                jQuery('#print').print().remove();
+                initStatus(1);
+            },true);    
+         }else{
+       bootbox.alert(transText["you_must_select_item_to_print"]);  
+    }
+        $link.data('lockedAt', +new Date()); 
+    }
+   };
     return {
         //main function to initiate the module
         init: function () {

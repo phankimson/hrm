@@ -42,7 +42,7 @@ class Employee extends Model
      public static function get_advance($department=null,$period){
                 $value = Employee::join('department','department.id','=','employee.department_id')->TypeWhere('employee.department_id',$department)->with(['advance' => function($query)use($period){$query->where('advance.period_id','=',$period)->select('advance.id','advance.advance_amount','employee_id');}])->select('employee.id','employee.code','employee.fullname','employee.position','department.name as department')->orderBy('department.name')->get()->toArray();
                 return $value;
-            }       
+            }                   
      public function timesheet()
     {
         return $this->hasMany('App\Http\Models\Timesheet','employee_id');

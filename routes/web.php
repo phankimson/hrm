@@ -67,6 +67,7 @@ Route::group(['middleware'=>['web']],function(){
     Route::post("permission",['uses'=>'PermissionController@loadPermission']);
     Route::post("timesheet",['uses'=>'TimeSheetController@load']);
     Route::post("advance",['uses'=>'AdvanceController@import']);
+    Route::post("labor-contract",['uses'=>'LaborContractController@printData']);
   }); 
  Route::group(['middleware' => 'check.permission'], function () { 
 Route::get("/",['uses'=>'DashboardController@showIndex']);
@@ -164,6 +165,7 @@ Route::group(["prefix"=>"admin"],function(){
     Route::post("permission",['uses'=>'PermissionController@loadPermission']);    
     Route::post("timesheet",['uses'=>'TimeSheetController@load']); 
     Route::post("advance",['uses'=>'AdvanceController@load']); 
+    Route::post("labor-contract",['uses'=>'LaborContractController@printData']);
   }); 
  Route::group(['middleware' => 'check.permission'], function () { 
 Route::get("index",['uses'=>'DashboardController@showIndex']); 
