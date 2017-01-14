@@ -150,9 +150,9 @@ class TimeSheetController extends Controller
                 'message' => trans('messages.error_delete'),
             ]);  
          }else{
-        $id = TimeSheet::get_timesheet_delete($company, $date);    
+        $id = TimeSheet::get_employee($t->period_id);    
          foreach($id as $d){
-             $value = TimeSheet::find($d['id']);
+             $value = TimeSheet::find($d->id);
              $value -> delete();
          }
          Helpers::save_history_action('delete', serialize($result->toArray()));

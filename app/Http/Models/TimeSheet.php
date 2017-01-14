@@ -32,7 +32,7 @@ class TimeSheet extends Model
         return $data;
     }
     public static function get_employee($period=null,$department=null){
-        $data = TimeSheet::join('employee','employee.id','=','timesheet.employee_id')->TypeWhereIn('employee.department_id',$department)->TypeWhere('timesheet.period_id',$period)->get();
+        $data = TimeSheet::join('employee','employee.id','=','timesheet.employee_id')->TypeWhereIn('employee.department_id',$department)->TypeWhere('timesheet.period_id',$period)->select('employee.*','timesheet.*')->get();
         return $data;
     }
        public static function get_save($employee,$day,$period){
