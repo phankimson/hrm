@@ -86,36 +86,15 @@
                         <a class="btn default blue-stripe import tooltips" data-original-title="Ctrl+Alt+I" data-placement="top" data-container="body"> <i class="fa fa-database"></i> {{trans('global.import')}} </a>
                         <div class="btn-group">
                             <a class="btn purple" href="javascript:;" data-toggle="dropdown" aria-expanded="false">
-                                <i class="fa fa-cogs"></i> {{trans('global.tools')}}
+                                <i class="fa fa-print"></i> {{trans('global.print')}}
                                 <i class="fa fa-angle-down"></i>
                             </a>
                             <ul class="dropdown-menu" id="datatable_ajax_tools">
-                                <li>
-                                    <a href="javascript:;" data-action="0" class="tool-action">
-                                        <i class="icon-printer"></i> {{trans('global.print')}} </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;" data-action="1" class="tool-action">
-                                        <i class="icon-check"></i> {{trans('global.copy')}} </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;" data-action="2" class="tool-action">
-                                        <i class="icon-doc"></i> {{trans('global.export_pdf')}} </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;" data-action="3" class="tool-action">
-                                        <i class="icon-paper-clip"></i> {{trans('global.export_excel')}}</a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;" data-action="4" class="tool-action">
-                                        <i class="icon-cloud-upload"></i> {{trans('global.export_csv')}}</a>
-                                </li>
-                                <li class="divider"> </li>
-                                <li>
-                                    <a href="javascript:;" data-action="5" class="tool-action">
-                                        <i class="icon-refresh"></i> {{trans('global.view')}}</a>
-                                </li>
-                                </li>
+                                @foreach($print as $p)
+                                    <li>
+                                        <a class='printlabor' href="#{{$p->code}}">{{$p->name}}</a>
+                                    </li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>

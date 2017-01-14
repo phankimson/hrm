@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Models\LaborContract;
 use App\Http\Models\Employee;
+use App\Http\Models\Template;
 use App\Classes\Helpers;
 use Excel;
 use DB;
@@ -21,7 +22,8 @@ class LaborContractController extends Controller
 
     public function showPage(){
         $employee = Employee::get_all();
-        return view("admin.pages.listLaborContract",['data'=>$this->data,'employee'=>$employee]);
+        $print = Template::get_by_code('H?L?');
+        return view("admin.pages.listLaborContract",['data'=>$this->data,'employee'=>$employee,'print'=>$print]);
     }
     public function save(Request $request){
         $colum = $this->column;

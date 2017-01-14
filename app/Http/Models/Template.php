@@ -31,5 +31,9 @@ class Template extends Model
     public static function get_all($id=null){
         $data = Template::TypeWhere('id',$id)->get();
         return $data;
-    }   
+    }
+    public static function get_by_code($code){
+        $value = Template::where('code','like',$code.'%')->get();
+        return $value;
+    }
 }
