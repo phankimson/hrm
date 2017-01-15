@@ -19,7 +19,9 @@ return [
     'title'=>'Human resource management software',
     'statistics'=>"Statistics",
     'config'=>'Config',
-    'chart_quantity'=> "Quantity sale chart",
-    'chart_revenue'=> "Revenue sale chart",
-    'chart_revenue_cost_profit'=> "Revenue, Cost, Profit Chart",
+    'birthday_employee'=> "Birthday Employee",
+    'birthday'=> "Birthday",
+    'not'=> "Don't have",
+    'labor_contract_comming'=> "Labor contract comming soon",
+    'expire_contract'=>"Expire contract",
 ];

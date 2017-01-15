@@ -39,7 +39,7 @@ return [
     'user_control' => 'Phân hệ người dùng',
     'report'=>'Báo cáo',
     'warehouse'=>'Kho',
-    'receipt-warehouse'=>'Nhập kho',
+    'overtime'=>'Bảng chấm tăng ca',
     'issue-warehouse'=>'Xuất kho',
     'timekeeper'=>'Chấm công',
     'advance'=>'Bảng tạm ứng lương',

@@ -1,21 +1,22 @@
 <?php
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
-use App\Http\Models\Advance;
+use App\Http\Models\Overtime;
 use App\Http\Models\Employee;
 use App\Http\Models\Department;
 use App\Http\Models\Period;
 
-class AdvanceController extends Controller{
+
+class OvertimeController extends Controller{
     public function showPage(){
         $department = Department::get_active();
         $period = Period::get_active();
-        return view("admin.pages.Advance",['department'=>$department,'period'=>$period]);
+        return view("admin.pages.Overtime",['department'=>$department,'period'=>$period]);
     }
     public function load(Request $request){
         $data = $request->input('data');
         $d = json_decode($data);
-        $value = Advance::get_employee($d->period_id,$d->department_id);
+        $value = Overtime::get_employee($d->period_id,$d->department_id);
         if($d->oper == 'add' &&$value ->count() <=0){         
           $employee = Employee::get_department($d->department_id);
           for($i =0; $i<$employee->count();$i++){
@@ -52,11 +53,11 @@ class AdvanceController extends Controller{
         $t = json_decode($data);  
            foreach($t->hot as $ts){
                 if($ts->value>0){
-                   $value = Advance::get_save($ts -> id, $t->period_id);
+                   $value = Overtime::get_save($ts -> id, $t->period_id);
                         if($value !== null){
-                        $return = Advance::find($value->id);
+                        $return = Overtime::find($value->id);
                         }else{
-                        $return = new Advance(); 
+                        $return = new Overtime(); 
                         }
                         $return->period_id            = $t -> period_id;
                         $return->employee_id          = $ts -> id;
@@ -70,14 +71,14 @@ class AdvanceController extends Controller{
             ]);        
     }      
    
-     public function delete(Request $request){
+      public function delete(Request $request){
         $data = $request->input('data');
         $t = json_decode($data);
          $check = true;
          if($check ==true){
-         $id = Advance::get_employee($t->period_id);    
+         $id = Overtime::get_employee($t->period_id);    
          foreach($id as $d){
-            $result = Advance::find($d->id);
+            $result = Overtime::find($d->id);
             $result -> delete();
             Helpers::save_history_action('delete', serialize($result->toArray()));
          }

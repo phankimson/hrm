@@ -12,19 +12,11 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/xampp/htdocs/hrm/app/Http/Models/TimeSheet.php</file>
             <file>file:/E:/xampp/htdocs/hrm/routes/web.php</file>
-            <file>file:/E:/xampp/htdocs/hrm/resources/views/admin/pages/listLaborContract.blade.php</file>
+            <file>file:/E:/xampp/htdocs/hrm/public/addon/admin/scripts/epos-advance.js</file>
+            <file>file:/E:/xampp/htdocs/hrm/public/addon/admin/scripts/epos-overtime.js</file>
+            <file>file:/E:/xampp/htdocs/hrm/resources/views/admin/pages/Overtime.blade.php</file>
             <file>file:/E:/xampp/htdocs/hrm/resources/views/admin/includes/header.blade.php</file>
-            <file>file:/E:/xampp/htdocs/hrm/public/addon/admin/scripts/epos-admin-modal.js</file>
-            <file>file:/E:/xampp/htdocs/hrm/index.php</file>
-            <file>file:/E:/xampp/htdocs/hrm/public/addon/admin/scripts/epos-admin.js</file>
-            <file>file:/E:/xampp/htdocs/hrm/app/Http/Controllers/LaborContractController.php</file>
-            <file>file:/E:/xampp/htdocs/hrm/app/Http/Models/Options.php</file>
-            <file>file:/E:/xampp/htdocs/hrm/public/addon/global/scripts/framework.js</file>
-            <file>file:/E:/xampp/htdocs/hrm/app/Http/Controllers/TimeSheetController.php</file>
-            <file>file:/E:/xampp/htdocs/hrm/app/Http/Models/Template.php</file>
-            <file>file:/E:/xampp/htdocs/hrm/resources/views/admin/pages/listEmployee.blade.php</file>
             <file>file:/E:/xampp/htdocs/hrm/public/addon/admin/scripts/epos-hand.js</file>
         </group>
     </open-files>

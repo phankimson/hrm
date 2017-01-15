@@ -2,6 +2,7 @@
 namespace App\Http\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use DB;
 
 class Employee extends Model
 {
@@ -23,6 +24,15 @@ class Employee extends Model
             return $query->whereNotNull($column);
              }
         }
+         public function scopeTypeWhereBetween($query,$column, $array)
+        {
+             if($array){
+            return $query->whereBetween($column,$array);                 
+             }else{
+            return $query->whereNotNull($column);
+             }
+        }
+     
         /**
     * @return \Illuminate\Database\Eloquent\Relations\HasMany
     */
@@ -40,9 +50,14 @@ class Employee extends Model
                 return $value;
             }
      public static function get_advance($department=null,$period){
-                $value = Employee::join('department','department.id','=','employee.department_id')->TypeWhere('employee.department_id',$department)->with(['advance' => function($query)use($period){$query->where('advance.period_id','=',$period)->select('advance.id','advance.advance_amount','employee_id');}])->select('employee.id','employee.code','employee.fullname','employee.position','department.name as department')->orderBy('department.name')->get()->toArray();
+                $value = Employee::join('department','department.id','=','employee.department_id')->TypeWhere('employee.department_id',$department)->with(['advance' => function($query)use($period){$query->where('advance.period_id','=',$period)->select('advance.id','advance.value','employee_id');}])->select('employee.id','employee.code','employee.fullname','employee.position','department.name as department')->orderBy('department.name')->get()->toArray();
                 return $value;
-            }                   
+            }   
+     public static function get_birthday($arr = null){
+           $data = Employee::TypeWhereBetween(DB::raw('DATE_FORMAT(birthday, "%m-%d")'),$arr)->get();
+        return $data;
+     }
+
      public function timesheet()
     {
         return $this->hasMany('App\Http\Models\Timesheet','employee_id');

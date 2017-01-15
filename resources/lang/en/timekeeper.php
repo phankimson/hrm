@@ -15,4 +15,9 @@ return array(
     'insurance-tracking' => "Insurance tracking",
     'date' => 'date',
     'time' => 'time',
+    'overtine'=> 'Overtime',
+    'w'=>'Work',
+    'off'=>'Offline',
+    'al'=>'Annual Leave',
+    'lo'=>'Leave Offset',
 );

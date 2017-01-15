@@ -17,6 +17,37 @@
         $start = date("Y-m-d",strtotime($option_dt->value,strtotime($end)))}}
             <!-- BEGIN CONTENT -->
             <div class="page-content-wrapper">
+                <!-- INFO MODAL -->
+                <div class="modal fade" id="notification" data-backdrop="true" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                    <h4 class="modal-title">Thông báo cập nhật</h4>
+                                </div>
+                                <div class="modal-body">                                     
+                                    <div class="row">
+                                        <div class="container">
+                                        <h2 class="text-warning">Update</h2>
+                                        <p>- Thông báo sinh nhật nhân viên</p> 
+                                        <p>- Thông báo hợp đồng lao động sắp hết hạn</p> 
+                                        <p>- Bảng tạm ứng lương</p> 
+                                        <p>- Hợp đồng lao động</p> 
+                                        <p>- Bảng tăng ca nhân viên</p> 
+                                         <h2 class="text-warning">Fix</h2>
+                                        <p>- Danh mục Chấm công</p> 
+                                        <p>- Bảng chấm công</p> 
+                                         <h4 class="text-warning col-sm-6 text-justify">Have nice day !!</h4>
+                                        </div>
+                                       
+                                    </div> 
+                                </div>                                
+                            </div>
+                            <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+                    </div>
+                <!-- INFO MODAL -->
                 <!-- BEGIN CONTENT BODY -->
                 <div class="page-content">                  
                     <div class="page-bar">
@@ -52,17 +83,73 @@
                             <div class="portlet light bordered">
                                 <div class="portlet-title">
                                     <div class="caption">
-                                        <i class="icon-pie-chart font-green"></i>
-                                        <span class="caption-subject font-green bold uppercase">{{trans('index.chart_revenue_cost_profit')}}</span>
-                                        <span class="caption-helper change">{{date("d/m/Y",strtotime($start)).'-'.date("d/m/Y",strtotime($end))}}</span>
+                                        <i class="icon-emoticon-smile font-green"></i>
+                                        <span class="caption-subject font-green bold uppercase">{{trans('index.birthday_employee')}}</span>
+                                        <span class="caption-helper change">{{date("d/m/Y",strtotime($end)).'-'.date("d/m/Y",strtotime($start))}}</span>
                                     </div>                                    
                                 </div>
                                 <div class="portlet-body">
-                                    <div id="site_statistics_loading_3">
-                                        <img src="{{url('public/global/img/loading.gif')}}" alt="loading" /> </div>
-                                    <div id="site_statistics_content_3" class="display-none">
-                                        <div id="site_statistics_3" class="chart"> </div>
-                                    </div>
+                                    <div class="mt-actions birthday-base">
+                                        <div class="mt-action hidden">
+                                                    <div class="mt-action-img">
+                                                        <img style="width:45px;height:45px" src=""> </div>
+                                                    <div class="mt-action-body">
+                                                        <div class="mt-action-row">
+                                                            <div class="mt-action-info ">
+                                                                <div class="mt-action-icon ">
+                                                                    <i class="icon-present"></i>
+                                                                </div>
+                                                                <div class="mt-action-details ">
+                                                                    <span class="mt-action-author"></span>
+                                                                    <p class="mt-action-desc"></p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mt-action-datetime ">
+                                                                <span class="mt-action-date"></span>
+                                                                <span class="mt-action-dot bg-green"></span>                             
+                                                            </div>
+                                                            <div class="mt-action-buttons ">
+                                                                <div class="btn-group btn-group-circle">                                                           
+                                                                    <button type="button" class="btn btn-outline green btn-sm ">{{trans('index.birthday')}}</button>                                                   
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        @if($employee->count()>0)
+                                           <h2 class="hidden">{{trans('index.not')}}</h2>
+                                        @foreach($employee as $e)
+                                                <div class="mt-action">
+                                                    <div class="mt-action-img">
+                                                        <img style="width:45px;height:45px" src="{{url($e->image)}}"> </div>
+                                                    <div class="mt-action-body">
+                                                        <div class="mt-action-row">
+                                                            <div class="mt-action-info ">
+                                                                <div class="mt-action-icon ">
+                                                                    <i class="icon-present"></i>
+                                                                </div>
+                                                                <div class="mt-action-details ">
+                                                                    <span class="mt-action-author">{{$e->fullname}}</span>
+                                                                    <p class="mt-action-desc">{{$e->position}}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mt-action-datetime ">
+                                                                <span class="mt-action-date">{{date("d/m/Y",strtotime($e->birthday))}}</span>
+                                                                <span class="mt-action-dot bg-green"></span>                             
+                                                            </div>
+                                                            <div class="mt-action-buttons ">
+                                                                <div class="btn-group btn-group-circle">                                                           
+                                                                    <button type="button" class="btn btn-outline green btn-sm {{date("d/m",strtotime($e->birthday)) === date("d/m")? 'active' :'' }}">{{trans('index.birthday')}}</button>                                                   
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        @endforeach
+                                        @else
+                                        <h2>{{trans('index.not')}}</h2>
+                                        @endif
+                                            </div>
                                 </div>
                             </div>
                             <!-- END PORTLET-->
@@ -72,120 +159,79 @@
                             <div class="portlet light bordered">
                                 <div class="portlet-title">
                                     <div class="caption">
-                                        <i class="icon-bar-chart font-green"></i>
-                                        <span class="caption-subject font-green bold uppercase">{{trans('index.chart_revenue_cost_profit')}}</span>
-                                        <span class="caption-helper">{{date('Y')}}</span>
+                                        <i class="icon-paper-clip font-green"></i>
+                                        <span class="caption-subject font-green bold uppercase">{{trans('index.labor_contract_comming')}}</span>
+                                        <span class="caption-helper  change">{{date("d/m/Y",strtotime($end)).'-'.date("d/m/Y",strtotime($start))}}</span>
                                     </div>                                    
                                 </div>
                                 <div class="portlet-body">
-                                    <div id="site_activities_loading_3">
-                                        <img src="{{url('public/global/img/loading.gif')}}" alt="loading" /> </div>
-                                    <div id="site_activities_content_3" class="display-none">
-                                        <div id="site_activities_3" class="chart"> </div>
-                                    </div>
-                                     <div style="margin: 20px 0 10px 30px">
-                                        <div class="row" id="note-chart-3">                                            
-                                        </div>
-                                     </div>    
+                                    <div class="mt-actions contract-base">
+                                        <div class="mt-action hidden">
+                                                    <div class="mt-action-img">
+                                                        <img style="width:45px;height:45px" src=""> </div>
+                                                    <div class="mt-action-body">
+                                                        <div class="mt-action-row">
+                                                            <div class="mt-action-info ">
+                                                                <div class="mt-action-icon ">
+                                                                    <i class="icon-present"></i>
+                                                                </div>
+                                                                <div class="mt-action-details ">
+                                                                    <span class="mt-action-author"></span>
+                                                                    <p class="mt-action-desc"></p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mt-action-datetime ">
+                                                                <span class="mt-action-date"></span>
+                                                                <span class="mt-action-dot bg-green"></span>                             
+                                                            </div>
+                                                            <div class="mt-action-buttons ">
+                                                                <div class="btn-group btn-group-circle">                                                           
+                                                                    <button type="button" class="btn btn-outline green btn-sm ">{{trans('index.birthday')}}</button>                                                   
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        @if($contract->count()>0)
+                                         <h2 class="hidden">{{trans('index.not')}}</h2>
+                                        @foreach($contract as $e)
+                                                <div class="mt-action">
+                                                    <div class="mt-action-img">
+                                                        <img style="width:45px;height:45px" src="{{url($e->image)}}"> </div>
+                                                    <div class="mt-action-body">
+                                                        <div class="mt-action-row">
+                                                            <div class="mt-action-info">
+                                                                <div class="mt-action-icon">
+                                                                    <i class="icon-docs"></i>
+                                                                </div>
+                                                                <div class="mt-action-details ">
+                                                                    <span class="mt-action-author">{{$e->fullname}}</span>
+                                                                    <p class="mt-action-desc">{{$e->position}}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mt-action-datetime ">
+                                                                <span class="mt-action-date">{{date("d/m/Y",strtotime($e->contract_end))}}</span>
+                                                                <span class="mt-action-dot bg-red"></span>                             
+                                                            </div>
+                                                            <div class="mt-action-buttons ">
+                                                                <div class="btn-group btn-group-circle">                                                           
+                                                                    <button type="button" class="btn btn-outline red btn-sm {{date("d/m",strtotime($e->contract_end)) === date("d/m")? 'active' :'' }}">{{trans('index.expire_contract')}}</button>                                                   
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        @endforeach
+                                        @else
+                                        <h2>{{trans('index.not')}}</h2>
+                                        @endif
+                                            </div>   
                                 </div>
                             </div>
                             <!-- END PORTLET-->
                         </div>  
                     </div>
                     <!-- END DASHBOARD STATS 1-->
-                    <div class="row">
-                        <div class="col-md-6 col-sm-6">
-                            <!-- BEGIN PORTLET-->
-                            <div class="portlet light bordered">
-                                <div class="portlet-title">
-                                    <div class="caption">
-                                        <i class="icon-pie-chart font-green"></i>
-                                        <span class="caption-subject font-green bold uppercase">{{trans('index.chart_quantity')}}</span>
-                                        <span class="caption-helper change">{{date("d/m/Y",strtotime($start)).'-'.date("d/m/Y",strtotime($end))}}</span>
-                                    </div>                                    
-                                </div>
-                                <div class="portlet-body">
-                                    <div id="site_statistics_loading_1">
-                                        <img src="{{url('public/global/img/loading.gif')}}" alt="loading" /> </div>
-                                    <div id="site_statistics_content_1" class="display-none">
-                                        <div id="site_statistics_1" class="chart"> </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- END PORTLET-->
-                        </div>  
-                        <div class="col-md-6 col-sm-6">
-                            <!-- BEGIN PORTLET-->
-                            <div class="portlet light bordered">
-                                <div class="portlet-title">
-                                    <div class="caption">
-                                        <i class="icon-bar-chart font-green"></i>
-                                        <span class="caption-subject font-green bold uppercase">{{trans('index.chart_quantity')}}</span>
-                                        <span class="caption-helper">{{date('Y')}}</span>
-                                    </div>                                    
-                                </div>
-                                <div class="portlet-body">
-                                    <div id="site_activities_loading_1">
-                                        <img src="{{url('public/global/img/loading.gif')}}" alt="loading" /> </div>
-                                    <div id="site_activities_content_1" class="display-none">
-                                        <div id="site_activities_1" class="chart"> </div>
-                                    </div>
-                                     <div style="margin: 20px 0 10px 30px">
-                                        <div class="row" id="note-chart">                                            
-                                        </div>
-                                     </div>    
-                                </div>
-                            </div>
-                            <!-- END PORTLET-->
-                        </div>  
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 col-sm-6">
-                            <!-- BEGIN PORTLET-->
-                            <div class="portlet light bordered">
-                                <div class="portlet-title">
-                                    <div class="caption">
-                                        <i class="icon-pie-chart font-green"></i>
-                                        <span class="caption-subject font-green bold uppercase">{{trans('index.chart_revenue')}}</span>
-                                        <span class="caption-helper change">{{date("d/m/Y",strtotime($start)).'-'.date("d/m/Y",strtotime($end))}}</span>
-                                    </div>                                    
-                                </div>
-                                <div class="portlet-body">
-                                    <div id="site_statistics_loading_2">
-                                        <img src="{{url('public/global/img/loading.gif')}}" alt="loading" /> </div>
-                                    <div id="site_statistics_content_2" class="display-none">
-                                        <div id="site_statistics_2" class="chart"> </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- END PORTLET-->
-                        </div>                         
-                        <div class="col-md-6 col-sm-6">
-                            <!-- BEGIN PORTLET-->
-                            <div class="portlet light bordered">
-                                <div class="portlet-title">
-                                    <div class="caption">
-                                        <i class="icon-bar-chart font-green"></i>
-                                        <span class="caption-subject font-green bold uppercase">{{trans('index.chart_revenue')}}</span>
-                                        <span class="caption-helper">{{date('Y')}}</span>
-                                    </div>                                    
-                                </div>
-                                <div class="portlet-body">
-                                    <div id="site_activities_loading_2">
-                                        <img src="{{url('public/global/img/loading.gif')}}" alt="loading" /> </div>
-                                    <div id="site_activities_content_2" class="display-none">
-                                        <div id="site_activities_2" class="chart"> </div>
-                                    </div>
-                                     <div style="margin: 20px 0 10px 30px">
-                                        <div class="row" id="note-chart-2">                                            
-                                        </div>
-                                     </div>    
-                                </div>
-                            </div>
-                            <!-- END PORTLET-->
-                        </div>  
-                    </div>
-                    
                     
                     
                     
@@ -209,8 +255,8 @@
                Dashboard.url = <?= json_encode(['load_chart_url'=>'get/load-chart']);?>;               
            });
         </script>
-          <!-- BEGIN PAGE LEVEL SCRIPTS -->
-
+           <!-- BEGIN PAGE LEVEL SCRIPTS -->
+        <script src="{{url('public/addon/admin/scripts/index.js')}}" type="text/javascript"></script>
         <!-- END PAGE LEVEL SCRIPTS -->
          <!-- BEGIN PAGE LEVEL PLUGINS -->
         <script src="{{url('public/global/plugins/moment.min.js')}}" type="text/javascript"></script>

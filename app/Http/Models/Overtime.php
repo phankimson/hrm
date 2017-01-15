@@ -3,9 +3,9 @@ namespace App\Http\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Advance extends Model
+class Overtime extends Model
 {
-	public $table="advance";
+	public $table="overtime";
         protected $fillable = array('id');
         public function scopeTypeWhere($query,$column, $value)
             {
@@ -28,15 +28,15 @@ class Advance extends Model
     */
       
     public static function get_all($id=null){
-        $data = Advance::TypeWhere('id',$id)->get();
+        $data = Overtime::TypeWhere('id',$id)->get();
         return $data;
     }
     public static function get_employee($period=null,$department=null){
-        $data = Advance::join('employee','employee.id','=','advance.employee_id')->TypeWhereIn('employee.department_id',$department)->TypeWhere('advance.period_id',$period)->get();
+        $data = Overtime::join('employee','employee.id','=','overtime.employee_id')->TypeWhereIn('employee.department_id',$department)->TypeWhere('overtime.period_id',$period)->get();
         return $data;
     }
      public static function get_save($employee,$period){
-        $value = Advance::where('employee_id','=',$employee)->where('period_id','=',$period)->first();
+        $value = Overtime::where('employee_id','=',$employee)->where('period_id','=',$period)->first();
         return $value;
     }
  

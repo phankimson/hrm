@@ -2,6 +2,7 @@
 namespace App\Http\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use DB;
 
 class LaborContract extends Model
 {
@@ -24,6 +25,14 @@ class LaborContract extends Model
             return $query->whereNotNull($column);
         }
     }
+           public function scopeTypeWhereBetween($query,$column, $array)
+        {
+             if($array){
+            return $query->whereBetween($column,$array);                 
+             }else{
+            return $query->whereNotNull($column);
+             }
+        }
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -32,4 +41,8 @@ class LaborContract extends Model
         $data = LaborContract::TypeWhere('id',$id)->get();
         return $data;
     }
+         public static function get_end($arr = null){
+           $data = LaborContract::join('employee','employee.id','=','labor_contract.employee_id')->TypeWhereBetween(DB::raw('DATE_FORMAT(contract_end, "%m-%d")'),$arr)->get();
+        return $data;
+     }
 }   

@@ -15,4 +15,9 @@ return array(
     'insurance-tracking' => "Theo dõi bảo hiểm",
     'date' => 'Chấm công theo ngày',
     'time' => 'Chấm công theo giờ',
+    'overtine'=> 'Tăng ca',
+    'w'=>'Tính công',
+    'off'=>'Không tính công',
+    'al'=>'Trừ phép năm',
+    'lo'=>'Trừ phép bù',
 );

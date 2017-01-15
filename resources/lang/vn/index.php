@@ -19,7 +19,9 @@ return [
     'title'=>'Phần mềm quản lý nhân sự',
     'statistics'=>'Thống kê',
     'config'=>'Thiết lập',
-    'chart_quantity'=> "Biểu đồ bán sản phẩm",
-    'chart_revenue'=> "Biểu đồ doanh thu",
-    'chart_revenue_cost_profit'=> "Biểu đồ doanh thu ,chi phí, lợi nhuận",
+    'birthday_employee'=> "Sinh nhật nhân viên",
+    'birthday'=> "Sinh nhật",
+    'not'=> "Hiện tại chưa có",
+    'labor_contract_comming'=> "Hợp đồng sắp hết hạn",
+    'expire_contract'=>"Hết hạn",
 ];

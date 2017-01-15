@@ -25,6 +25,7 @@ Route::group(['middleware'=>['web']],function(){
   Route::post("timesheet",['uses'=>'TimeSheetController@save']); 
   Route::post("advance",['uses'=>'AdvanceController@save']);
   Route::post("labor-contract",['uses'=>'LaborContractController@save']);
+  Route::post("overtime",['uses'=>'OvertimeController@save']);
   });  
   Route::group(["prefix"=>"update"],function(){    
   Route::post("profile",['uses'=>'UserController@updateprofile']);
@@ -42,6 +43,7 @@ Route::group(['middleware'=>['web']],function(){
   Route::post("timesheet",['uses'=>'TimeSheetController@delete']);
   Route::post("advance",['uses'=>'AdvanceController@delete']);
   Route::post("labor-contract",['uses'=>'LaborContractController@delete']);
+  Route::post("overtime",['uses'=>'OvertimeController@delete']);
   }); 
   Route::group(["prefix"=>"import"],function(){       
   Route::post("history-action",['uses'=>'HistoryActionController@import']);   
@@ -66,8 +68,10 @@ Route::group(['middleware'=>['web']],function(){
    Route::group(["prefix"=>"get"],function(){    
     Route::post("permission",['uses'=>'PermissionController@loadPermission']);
     Route::post("timesheet",['uses'=>'TimeSheetController@load']);
-    Route::post("advance",['uses'=>'AdvanceController@import']);
+    Route::post("advance",['uses'=>'AdvanceController@load']);
     Route::post("labor-contract",['uses'=>'LaborContractController@printData']);
+    Route::post("load-chart",['uses'=>'DashboardController@loadChart']);
+    Route::post("overtime",['uses'=>'OvertimeController@load']);
   }); 
  Route::group(['middleware' => 'check.permission'], function () { 
 Route::get("/",['uses'=>'DashboardController@showIndex']);
@@ -85,6 +89,7 @@ Route::get("timekeeper",['uses'=>'TimeKeeperController@showPage']);
 Route::get("timesheet",['uses'=>'TimeSheetController@showPage']);
 Route::get("advance",['uses'=>'AdvanceController@showPage']);
 Route::get("labor-contract",['uses'=>'LaborContractController@showPage']);
+Route::get("overtime",['uses'=>'OvertimeController@showPage']);
  });
 Route::get("logout",['uses'=>'DashboardController@doLogout']);
 Route::get("login",['uses'=>'UserController@showLogin']);
@@ -112,6 +117,7 @@ Route::group(["prefix"=>"admin"],function(){
   Route::post("timesheet",['uses'=>'TimeSheetController@save']); 
   Route::post("advance",['uses'=>'AdvanceController@save']);
   Route::post("labor-contract",['uses'=>'LaborContractController@save']);
+  Route::post("overtime",['uses'=>'OvertimeController@save']);
   });  
   Route::group(["prefix"=>"update"],function(){    
   Route::post("profile",['uses'=>'UserController@updateprofile']);
@@ -132,6 +138,7 @@ Route::group(["prefix"=>"admin"],function(){
   Route::post("timesheet",['uses'=>'TimeSheetController@delete']);
   Route::post("timekeeper",['uses'=>'TimeKeeperController@delete']);
   Route::post("labor-contract",['uses'=>'LaborContractController@delete']);
+  Route::post("overtime",['uses'=>'OvertimeController@delete']);
   }); 
   Route::group(["prefix"=>"import"],function(){    
   Route::post("menu",array('uses'=>'MenuController@import')); 
@@ -166,6 +173,8 @@ Route::group(["prefix"=>"admin"],function(){
     Route::post("timesheet",['uses'=>'TimeSheetController@load']); 
     Route::post("advance",['uses'=>'AdvanceController@load']); 
     Route::post("labor-contract",['uses'=>'LaborContractController@printData']);
+    Route::post("load-chart",['uses'=>'DashboardController@loadChart']);
+    Route::post("overtime",['uses'=>'OvertimeController@load']);
   }); 
  Route::group(['middleware' => 'check.permission'], function () { 
 Route::get("index",['uses'=>'DashboardController@showIndex']); 
@@ -187,6 +196,7 @@ Route::get("timekeeper",['uses'=>'TimeKeeperController@showPage']);
 Route::get("timesheet",['uses'=>'TimeSheetController@showPage']);
 Route::get("advance",['uses'=>'AdvanceController@showPage']);
 Route::get("labor-contract",['uses'=>'LaborContractController@showPage']);
+Route::get("overtime",['uses'=>'OvertimeController@showPage']);
  });
 Route::post("query",['uses'=>'QueryController@querySql']); 
 Route::get("logout",['uses'=>'DashboardController@doLogout']);

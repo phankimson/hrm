@@ -38,7 +38,7 @@ var EposAdvance = function () {
    
                 var ArrayHeaders=['Tên nhân viên','Bộ phận','Vị trí','Số tiền'];
 
-                var ArrayColumn =[{data:'fullname',readOnly: true,renderer: addTotal},{data:'department',readOnly: true},{data:'position',readOnly: true},{data:'amount',readOnly: true,type:'numeric', renderer: numberRenderer}];
+                var ArrayColumn =[{data:'fullname',readOnly: true,renderer: addTotal},{data:'department',readOnly: true},{data:'position',readOnly: true},{data:'value',readOnly: true,type:'numeric', renderer: numberRenderer}];
                  
                  function numberRenderer(instance, td, row, col, prop, value) {
                       if(row == instance.countRows() - 1){
@@ -94,7 +94,7 @@ var EposAdvance = function () {
    
                 var ArrayHeaders=['Mã nhân viên','Tên nhân viên','Bộ phận','Vị trí','Số tiền'];
 
-                var ArrayColumn =[{data:'code',readOnly: true,renderer: addTotal},{data:'fullname',readOnly: true},{data:'department',readOnly: true},{data:'position',readOnly: true},{data:'value',readOnly: true,type:'numeric', renderer: numberRenderer}];
+                var ArrayColumn =[{data:'code',readOnly: true,renderer: addTotal},{data:'fullname',readOnly: true},{data:'department',readOnly: true},{data:'position',readOnly: true},{data:'value',type:'numeric', renderer: numberRenderer}];
                  
                  function numberRenderer(instance, td, row, col, prop, value) {
                       if(row == instance.countRows() - 1){
@@ -146,16 +146,7 @@ var EposAdvance = function () {
                   columnSorting: true,
                    stretchH: 'all',
 //                  contextMenu: true,
-                  columns: ArrayColumn,
-                    cells: function (row, col, prop) {
-                    var cellProperties = {};
-                    if(row === (data.length-1) && col === (ArrayColumn.length-1)) {
-                      cellProperties.readOnly = true;
-                    }else{
-                      cellProperties.readOnly = false;  
-                    };
-                    return cellProperties;
-                  }
+                  columns: ArrayColumn          
                 });
           
     };
@@ -384,11 +375,48 @@ var EposAdvance = function () {
          var jQuerylink = jQuery(e.target);
           e.preventDefault();
          if(!jQuerylink.data('lockedAt') || +new Date() - jQuerylink.data('lockedAt') > 300) {
-           if(action['d']==true){   
-          var date = jQuery('input[name="date"]').val();
-          if(date){
-              var postdata = {data :date};  
-            RequestURLWaiting('update/timesheet','json',postdata,function(data){
+           if(action['d']==true){
+               var obj = {};
+               var crit = false;
+               obj.oper = 'edit';
+               jQuery.each(arr, function(k, v) {
+                   if (v.class.indexOf("select2-check")>0&&jQuery('#'+v.id+'').select2('val')==""){
+                       crit = false;
+                       return false;
+                   }else if(v.class.indexOf("not-null")>0&&!jQuery('input[name="'+v.name+'"]').val()){
+                       crit = false;
+                       return false;
+                   }else{
+                       crit = true;
+                   }
+
+                   if(v.class.indexOf("select2me")>0){
+                       obj[v.name] = jQuery('#'+v.id).select2('val');
+                   }else if(v.class.indexOf("make-switch")>0){
+                       if(jQuery('input[name="'+v.name+'"]').bootstrapSwitch('state') == true){
+                           obj[v.name]  = 1;
+                       }else{
+                           obj[v.name]  = 0;
+                       }
+                   }else if(v.class.indexOf("ckeditor")>0 || v.class == 'ckeditor'){
+                       obj[v.name] = CKEDITOR.instances[v.name].getData();
+                   }else if(v.class.indexOf("number")>0 || v.class == 'number'){
+                       obj[v.name] = jQuery('input[name="'+v.name+'"]').val().replace(".", "");
+                   }else if(v.class.indexOf("date")>0 || v.class == 'date'){
+                       obj[v.name] = formatDateDefault(jQuery('input[name="'+v.name+'"]').val());
+                   }else{
+                       if(v.type=='textarea'){
+                           obj[v.name] = jQuery('textarea[name="'+v.name+'"]').val();
+                       }else if(v.type=='select'){
+                           obj[v.name] = jQuery('select[name="'+v.name+'"] option:selected').val();
+                       }else{
+                           obj[v.name] = jQuery('input[name="'+v.name+'"]').val();
+                       }
+                   }
+               });
+               if(crit==true){
+                   var postdata = {data : JSON.stringify(obj)};
+                   RequestURLWaiting(url['delete_url'],'json',postdata,function(data){
                 if(data.status == true){
                     jQuery('#notification').EPosMessage('success',data.message);
                 }else{
@@ -421,10 +449,6 @@ var EposAdvance = function () {
                         }  
                 }else if(v.class.indexOf("ckeditor")>0 || v.class == 'ckeditor'){
                               obj[v.name] = CKEDITOR.instances[v.name].getData();
-                }else if(v.class.indexOf("number")>0 || v.class == 'number'){
-                              obj[v.name] = jQuery('input[name="'+v.name+'"]').val().replace(".", "");
-                }else if(v.class.indexOf("image")>0 || v.class == 'image'){
-                            a = jQuery('.change-image')[0][1];                           
                 }else if(v.class.indexOf("date")>0 || v.class == 'date'){
                               obj[v.name] = formatDateDefault(jQuery('input[name="'+v.name+'"]').val());                        
                 }else{
@@ -437,7 +461,7 @@ var EposAdvance = function () {
                     }
                 }
             }); 
-                   obj.hot = hot.getSourceData();
+               obj.hot = hot.getSourceData();
               var postdata = {data : JSON.stringify(obj)};  
               if(postdata){
              RequestURLWaiting(url['save_url'],'json',postdata,function(data){

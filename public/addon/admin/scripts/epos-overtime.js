@@ -1,14 +1,14 @@
-var EposHand = function () {  
+var Epos = function () {  
        var key = 'Ctrl+Alt+';
        var hot = '';
        var container = document.getElementById('table-excel');
      var action ;var url; 
       var permission = function(){
-          action = EposHand.permission;
+          action = Epos.permission;
           return action;
       };
        var link  = function(){
-          url = EposHand.url;
+          url = Epos.url;
           return url;
       };   
       var arr = [];
@@ -33,66 +33,47 @@ var EposHand = function () {
             });
        
             }; 
-        var initPrint = function (data,date) {
+             var initPrint = function (data) {
                  var data = data;
-                 var split = date.split('/');
-                 var month = split[0];
-                 var year = split[1];
-//               function customDropdownRenderer(instance, td, row, col, prop, value, cellProperties)
-//                {
-//                    var selectedId;
-//                    for (var index = 0; index < optionsList.length; index++)
-//                    {
-//                        if (parseInt(value) === optionsList[index].id)
-//                        {
-//                            selectedId = optionsList[index].id;
-//                            value = optionsList[index].text;            
-//                        }
-//                    }
-//                    Handsontable.TextCell.renderer.apply(this, arguments);
-//                    // you can use the selectedId for posting to the DB or server
-//                }
-                               
-                var ArrayHeaders=['Tên nhân viên'];
-                for(var i = 1; i<=daysInMonth(month,year);i++){
-                    ArrayHeaders.push(i);
-                };
-                var ArrayColumn =[{data:'fullname',readOnly: true,width : ( 0.15 * $(window).width() )}];
-                for(var i = 1; i<=daysInMonth(month,year);i++){
-                   var columnsList = {   
-                   data : i,
-                   readOnly: true,
-                   width :  ($(window).width() - ( 0.5 * $(window).width() )) /daysInMonth(month,year)
-                 };
-                    ArrayColumn.push(columnsList);
-                }; 
-                if(hot){
-                    hot.destroy();
+   
+                var ArrayHeaders=['Tên nhân viên','Bộ phận','Vị trí','Số tiền'];
+
+                var ArrayColumn =[{data:'fullname',readOnly: true,renderer: addTotal},{data:'department',readOnly: true},{data:'position',readOnly: true},{data:'value',readOnly: true,type:'numeric', renderer: numberRenderer}];
+                 
+                 function numberRenderer(instance, td, row, col, prop, value) {
+                      if(row == instance.countRows() - 1){
+                        td.style.textAlign = 'right';
+                        value = getTotal(prop);
+                    }
+                     Handsontable.NumericRenderer.apply(this, arguments);
+                     var escaped = Handsontable.helper.stringify(value);
+                        escaped = formatNumber(escaped);
+                        td.innerHTML = escaped;
+
+                        return td;
+                  }
+                  
+                function addTotal(instance, td, row, col, prop, value){
+                    if(row == instance.countRows() - 1){
+                    td.style.fontWeight = 'bold';
+                    td.style.textAlign = 'right';
+                    td.innerText = 'Total: ';
+                    return;
+                    } else {
+                    Handsontable.NumericRenderer.apply(this, arguments);
+                    }
                 }
-                hot = new Handsontable(container, {
-                  data: data,
-                  colHeaders: ArrayHeaders,       
-                  minSpareRows: 0,
-                   stretchH: 'all',
-//                  contextMenu: true,
-                  columns: ArrayColumn
-                });
-    };
-        var initTotal = function (data,tk) {
-                 var data = data;    
-                var ArrayHeaders=['Mã nhân viên','Tên nhân viên'];
-                $.each(tk, function(index, item) {
-                    ArrayHeaders.push(item.code);
-                });
-                var ArrayColumn =[{data:'code',readOnly: true,width : ( 0.1 * $(window).width() )},{data:'fullname',readOnly: true,width : ( 0.1 * $(window).width() )}];
-                $.each(tk, function(index, item) {
-                    var columnsList = {   
-                   data : item.code,
-                   readOnly: true,
-                   width : ( 1 * $(window).width() )/item.length
-                 };
-                    ArrayColumn.push(columnsList);
-                });                
+            
+                function getTotal(prop){
+                    var total = 0;
+                     data.reduce(function(sum, row){
+                        if(row[prop] !==null){
+                          total += parseInt(row[prop]);   
+                        }     
+                    }, 0);
+                     return total;
+                }  
+          
                 if(hot){
                     hot.destroy();
                 }
@@ -100,109 +81,68 @@ var EposHand = function () {
                   data: data,
                   colHeaders: ArrayHeaders,
                   rowHeaders: true,         
-                  minSpareRows: 0,
-                  height: ( 1 * $(window).height() ),
-                  nativeScrollbars: true,
-                   stretchH: 'all',
+                  minSpareRows: 1,
+                  stretchH: 'all',
 //                  contextMenu: true,
                   columns: ArrayColumn
                 });
           
     };
-        var initTable = function (data,timekeeper,date) {
+       
+        var initTable = function (data) {
                  var data = data;
-                 var optionsList = timekeeper;
-                 var split = date.split('/');
-                 var month = split[0];
-                 var year = split[1];
-               function customDropdownRenderer(instance, td, row, col, prop, value, cellProperties)
-                {
-                          var selectedId;
-                            for (var index = 0; index < optionsList.length; index++)
-                            {
-                                if (value === ','+optionsList[index].id)
-                                {
-                                    selectedId = optionsList[index].id;
-                                    value = optionsList[index].id; 
-                                    break;
-                                }else if(value != null && value != optionsList[index].id){
-                                   value = value.replace(/,/i,"");
-                                   break;
-                                }
-                            }
-                    Handsontable.TextCell.renderer.apply(this, arguments);
-                    // you can use the selectedId for posting to the DB or server
-                }
-                               
-                var ArrayHeaders=['Mã nhân viên','Tên nhân viên','Bộ phận','Vị trí'];
-                var header;
-                for(var i = 1; i<=daysInMonth(month,year);i++){
-                    var d = new Date(year+'-'+month+'-'+i);
-                    header = getWeekDay(d);
-                    ArrayHeaders.push(i+' '+header);
-                };
-                var ArrayColumn =[{data:'code',readOnly: true},{data:'fullname',readOnly: true},{data:'department',readOnly: true},{data:'position',readOnly: true}];
-                for(var i = 1; i<=daysInMonth(month,year);i++){
-                   var columnsList = {   
-                   data : i,
-                   editor: 'select2',
-                   renderer: customDropdownRenderer,
-                    select2Options: { // these options are the select2 initialization options 
-                        data: optionsList,
-                        dropdownAutoWidth: true,
-                        multiple : true,
-                        allowClear: true,
-                        width: jQuery(window).width()*0.2
+   
+                var ArrayHeaders=['Mã nhân viên','Tên nhân viên','Bộ phận','Vị trí','Số giờ làm ngày thường','Số giờ làm ngày nghỉ','Số giờ làm ngày lễ'];
+
+                var ArrayColumn =[{data:'code',readOnly: true,renderer: addTotal},{data:'fullname',readOnly: true},{data:'department',readOnly: true},{data:'position',readOnly: true},{data:'value',type:'numeric'},{data:'value1',type:'numeric', renderer: numberRenderer},{data:'value2',type:'numeric', renderer: numberRenderer}];
+                 
+                 function numberRenderer(instance, td, row, col, prop, value) {
+                         td.style.textAlign = 'right';
+                      if(row == instance.countRows() - 1 ){                    
+                        value = getTotal(prop);
                     }
-                 };
-                    ArrayColumn.push(columnsList);
-                };
-                 function GreenRowRenderer(instance, td, row, col, prop, value, cellProperties) {
-                        Handsontable.renderers.TextRenderer.apply(this, arguments);
-                        td.style.fontWeight = 'bold';
-                        td.style.color = 'green';
-                        td.style.background = '#CEC';
-                           var selectedId;
-                            for (var index = 0; index < optionsList.length; index++)
-                            {
-                                if (value === ','+optionsList[index].id)
-                                {
-                                    selectedId = optionsList[index].id;
-                                    value = optionsList[index].id; 
-                                    break;
-                                }else if(value != null && value != optionsList[index].id){
-                                   value = value.replace(/,/i,"");
-                                   break;
-                                }
-                            }
-                    Handsontable.TextCell.renderer.apply(this, arguments);
-                    // you can use the selectedId for posting to the DB or server
-                      }  
+                     Handsontable.NumericRenderer.apply(this, arguments);
+                     var escaped = Handsontable.helper.stringify(value);
+                        escaped = formatNumber(escaped);
+                        td.innerHTML = escaped;
+                        return td;
+                  }
+            
+                function addTotal(instance, td, row, col, prop, value){
+                    if(row == instance.countRows() - 1){
+                    td.style.fontWeight = 'bold';
+                    td.style.textAlign = 'right';
+                    td.innerText = 'Total: ';
+                    return;
+                    } else {
+                    Handsontable.NumericRenderer.apply(this, arguments);
+                    }
+                }
+            
+                   function getTotal(prop){
+                    return data.reduce(function(sum, row){
+                       return sum + row[prop]; 
+                    }, 0);
+                }
+          
                 if(hot){
                     hot.destroy();
                 }
                 hot = new Handsontable(container, {
                   data: data,
                   colHeaders: ArrayHeaders,
-                  rowHeaders: true, 
+                  rowHeaders: true,         
+                  minSpareRows: 1,
+                  height: ( 1 * $(window).height() ),
                   fixedColumnsLeft: 2,
                   manualColumnFreeze: true,
-                  height: ( 1 * $(window).height() ),
-                  minSpareRows: 0,
                   manualColumnResize: true,
                   manualRowResize: true,
                   columnSorting: true,
-                  stretchH: 'all',
-                  columns: ArrayColumn,
-                   cells: function (row, col, prop) {
-                           var cellProperties = {};
-                           var d = new Date(year+'-'+month+'-'+prop);
-                           header = getWeekDay(d);
-                           if(header=='Sun'){
-                            cellProperties.renderer = GreenRowRenderer;   
-                           }
-                           return cellProperties;
-                        }
+                   stretchH: 'all',
+//                  contextMenu: true,
+                  columns: ArrayColumn
+            
                 });
           
     };
@@ -214,8 +154,7 @@ var EposHand = function () {
        shortcut.remove(key+"S");
        shortcut.remove(key+"C");
        shortcut.remove(key+"P");
-       shortcut.remove(key+"T");
-       jQuery('a.add,a.find,a.cancel,a.edit,a.save,a.delete,a.print,a.total,a.saveovertime').off('click');
+       jQuery('a.add,a.find,a.cancel,a.edit,a.save,a.delete,a.print').off('click');
        jQuery('.select2-multiple').select2();
       if(type==1){//Default
        jQuery('a.cancel,a.save').attr('disabled',''); 
@@ -225,13 +164,11 @@ var EposHand = function () {
        shortcut.add(key+"A",function(e) {btnAdd(e);});
        shortcut.add(key+"E",function(e) {btnEdit(e);});
        shortcut.add(key+"D",function(e) {btnDelete(e);});  
-       shortcut.add(key+"P",function(e) {btnPrint(e);});  
-       shortcut.add(key+"T",function(e) {btnTotal(e);}); 
+       shortcut.add(key+"P",function(e) {btnPrint(e);});   
        jQuery('a.add').on('click',btnAdd);
        jQuery('a.edit').on('click',btnEdit);
        jQuery('a.delete').on('click',btnDelete);
        jQuery('a.print').on('click',btnPrint);
-       jQuery('a.total').on('click',btnTotal);
 //       jQuery('a.export').on('click',btnExport);
        }else if(type==2){//Add,Edit button
         jQuery('a.cancel,a.save').removeAttr('disabled');
@@ -274,7 +211,7 @@ var EposHand = function () {
                 }else if(v.class.indexOf("ckeditor")>0 || v.class == 'ckeditor'){
                               obj[v.name] = CKEDITOR.instances[v.name].getData();
                 }else if(v.class.indexOf("number")>0 || v.class == 'number'){
-                              obj[v.name] = jQuery('input[name="'+v.name+'"]').val();
+                              obj[v.name] = jQuery('input[name="'+v.name+'"]').val().replace(".", "");
                 }else if(v.class.indexOf("date")>0 || v.class == 'date'){
                               obj[v.name] = formatDateDefault(jQuery('input[name="'+v.name+'"]').val());                        
                 }else{
@@ -397,7 +334,7 @@ var EposHand = function () {
                 }else if(v.class.indexOf("ckeditor")>0 || v.class == 'ckeditor'){
                               obj[v.name] = CKEDITOR.instances[v.name].getData();
                 }else if(v.class.indexOf("number")>0 || v.class == 'number'){
-                              obj[v.name] = jQuery('input[name="'+v.name+'"]').val();
+                              obj[v.name] = jQuery('input[name="'+v.name+'"]').val().replace(".", "");
                 }else if(v.class.indexOf("date")>0 || v.class == 'date'){
                               obj[v.name] = formatDateDefault(jQuery('input[name="'+v.name+'"]').val());                        
                 }else{
@@ -508,10 +445,6 @@ var EposHand = function () {
                         }  
                 }else if(v.class.indexOf("ckeditor")>0 || v.class == 'ckeditor'){
                               obj[v.name] = CKEDITOR.instances[v.name].getData();
-                }else if(v.class.indexOf("number")>0 || v.class == 'number'){
-                              obj[v.name] = jQuery('input[name="'+v.name+'"]').val().replace(".", "");
-                }else if(v.class.indexOf("image")>0 || v.class == 'image'){
-                            a = jQuery('.change-image')[0][1];                           
                 }else if(v.class.indexOf("date")>0 || v.class == 'date'){
                               obj[v.name] = formatDateDefault(jQuery('input[name="'+v.name+'"]').val());                        
                 }else{
@@ -524,7 +457,7 @@ var EposHand = function () {
                     }
                 }
             }); 
-                   obj.hot = hot.getSourceData();
+               obj.hot = hot.getSourceData();
               var postdata = {data : JSON.stringify(obj)};  
               if(postdata){
              RequestURLWaiting(url['save_url'],'json',postdata,function(data){
@@ -641,5 +574,5 @@ var EposHand = function () {
                     }, 0);
                });
         });
-   EposHand.init();
+   Epos.init();
 });

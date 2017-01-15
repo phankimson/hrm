@@ -40,7 +40,7 @@ return [
     'warehouse'=>'Warehouse',
     'report'=>'Report',
     'warehouse'=>'Warehouse',
-    'receipt-warehouse'=>'Receipt Warehouse',
+    'overtime'=>'Overtime',
     'issue-warehouse'=>'Issue Warehouse',
     'advance'=>'Advance',
     'timekeeper'=>'Timekeeper',

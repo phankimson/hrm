@@ -212,7 +212,13 @@
                                                         <div class="form-group">
                                                             <label class="col-sm-4 control-label">{{trans('timekeeper.method')}}</label>
                                                              <div class="col-md-4">
-                                                                     <input type="text" class="form-control input-medium"  position="5" maxlength="100" name="method" id="maxlength_defaultconfig">
+                                                                 <select name="method" id="method" position="5" class="input-medium form-control select2me" data-placeholder="Select..."> 
+                                                                        <option value=""></option>
+                                                                        <option value="1">{{trans('timekeeper.w')}}</option>
+                                                                        <option value="2">{{trans('timekeeper.off')}}</option> 
+                                                                        <option value="3">{{trans('timekeeper.al')}}</option>
+                                                                        <option value="4">{{trans('timekeeper.lo')}}</option> 
+                                                                     </select>                                                                   
                                                             </div>
                                                         </div> 
                                                         <div class="tr-space"></div>
