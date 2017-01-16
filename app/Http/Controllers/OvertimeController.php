@@ -28,12 +28,16 @@ class OvertimeController extends Controller{
                 'message' => trans('messages.success_load'),
             ]);
         }else if($d->oper == 'edit' &&$value ->count() >0 || $d->oper == 'print' &&$value ->count() >0){
-          $employee = Employee::get_advance($d->department_id,$d->period_id);
+          $employee = Employee::get_overtime($d->department_id,$d->period_id);
           foreach($employee as $key => $val){
-              if(count($val['advance'])){
-              $employee[$key]['value']=$val['advance'][0]['value'];        
+              if(count($val['overtime'])){
+              $employee[$key]['value']=$val['overtime'][0]['value'];   
+              $employee[$key]['value1']=$val['overtime'][0]['value1']; 
+              $employee[$key]['value2']=$val['overtime'][0]['value2']; 
               }else{
               $employee[$key]['value']=0;    
+              $employee[$key]['value1']=0;  
+              $employee[$key]['value2']=0;  
               }           
           }
              return response()->json( [
@@ -62,6 +66,8 @@ class OvertimeController extends Controller{
                         $return->period_id            = $t -> period_id;
                         $return->employee_id          = $ts -> id;
                         $return->value                = $ts -> value;
+                        $return->value1                = $ts -> value1;
+                        $return->value2                = $ts -> value2;
                         $return->save();      
                 }          
             }       

@@ -17,8 +17,9 @@ class CreateOvertimeTable extends Migration
             $table->increments('id')->index();
             $table->integer('period_id');
             $table->integer('employee_id');
-            $table->tinyInteger('type');
             $table->integer('value');
+            $table->integer('value1');
+            $table->integer('value2');
             $table->timestamps();
         });
     }

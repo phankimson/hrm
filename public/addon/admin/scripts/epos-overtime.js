@@ -94,11 +94,11 @@ var Epos = function () {
    
                 var ArrayHeaders=['Mã nhân viên','Tên nhân viên','Bộ phận','Vị trí','Số giờ làm ngày thường','Số giờ làm ngày nghỉ','Số giờ làm ngày lễ'];
 
-                var ArrayColumn =[{data:'code',readOnly: true,renderer: addTotal},{data:'fullname',readOnly: true},{data:'department',readOnly: true},{data:'position',readOnly: true},{data:'value',type:'numeric'},{data:'value1',type:'numeric', renderer: numberRenderer},{data:'value2',type:'numeric', renderer: numberRenderer}];
+                var ArrayColumn =[{data:'code',readOnly: true,renderer: addTotal},{data:'fullname',readOnly: true},{data:'department',readOnly: true},{data:'position',readOnly: true},{data:'value',type:'numeric',renderer: numberRenderer},{data:'value1',type:'numeric', renderer: numberRenderer},{data:'value2',type:'numeric', renderer: numberRenderer}];
                  
                  function numberRenderer(instance, td, row, col, prop, value) {
                          td.style.textAlign = 'right';
-                      if(row == instance.countRows() - 1 ){                    
+                      if(row == instance.countRows() - 1 ){      
                         value = getTotal(prop);
                     }
                      Handsontable.NumericRenderer.apply(this, arguments);
@@ -119,11 +119,15 @@ var Epos = function () {
                     }
                 }
             
-                   function getTotal(prop){
-                    return data.reduce(function(sum, row){
-                       return sum + row[prop]; 
+                    function getTotal(prop){
+                    var total = 0;
+                  data.reduce(function(sum, row){
+                        if(row[prop] !==null){
+                          total += parseFloat(row[prop]);   
+                        }     
                     }, 0);
-                }
+                     return total;
+                }  
           
                 if(hot){
                     hot.destroy();
@@ -142,7 +146,7 @@ var Epos = function () {
                    stretchH: 'all',
 //                  contextMenu: true,
                   columns: ArrayColumn
-            
+ 
                 });
           
     };
