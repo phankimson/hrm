@@ -56,7 +56,11 @@ class Employee extends Model
        public static function get_overtime($department=null,$period){
                 $value = Employee::join('department','department.id','=','employee.department_id')->TypeWhere('employee.department_id',$department)->with(['overtime' => function($query)use($period){$query->where('overtime.period_id','=',$period)->select('overtime.id','overtime.value','overtime.value1','overtime.value2','employee_id');}])->select('employee.id','employee.code','employee.fullname','employee.position','department.name as department')->orderBy('department.name')->get()->toArray();
                 return $value;
-            }        
+            }    
+        public static function get_payroll($department=null,$period){
+                $value = Employee::join('department','department.id','=','employee.department_id')->TypeWhere('employee.department_id',$department)->with(['advance' => function($query)use($period){$query->where('advance.period_id','=',$period)->select('advance.id','advance.value','employee_id');}])->with(['timesheet' => function($query)use($period){$query->where('timesheet.period_id','=',$period)->get();}])->with(['overtime' => function($query)use($period){$query->where('overtime.period_id','=',$period)->select('overtime.id','overtime.value','overtime.value1','overtime.value2','employee_id');}])->select('employee.*','department.name as department')->orderBy('department.name')->get();
+                return $value;
+            }            
      public static function get_birthday($arr = null){
            $data = Employee::TypeWhereBetween(DB::raw('DATE_FORMAT(birthday, "%m-%d")'),$arr)->get();
         return $data;

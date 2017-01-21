@@ -67,6 +67,6 @@ return [
     'report-detail-warehouse'=> 'Báo cáo chi tiết xuất nhập tồn',
     'report-history-price'=> 'Báo cáo lịch sử giá',
     'report-income-shift'=>'Báo cáo ca',
-    'report-total-income'=>'Báo cáo tổng doanh thu',
+    'payroll'=>'Bảng lương',
     'return'=>'Trả hàng',
 ];

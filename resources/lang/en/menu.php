@@ -67,6 +67,6 @@ return [
     'report-detail-warehouse'=> 'Report Detail Warehouse',
     'report-history-price'=> 'Report History Price',
     'report-income-shift'=>'Report Income Shift',
-    'report-total-income'=>'Report Total Income',
+    'payroll'=>'Payroll',
     'return'=>'Return Goods',
 ];

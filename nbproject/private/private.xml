@@ -12,8 +12,14 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/xampp/htdocs/hrm/database/migrations/2017_01_16_195718_create_payroll_table.php</file>
-            <file>file:/E:/xampp/htdocs/hrm/database/migrations/2017_01_15_194931_create_overtime_table.php</file>
+            <file>file:/E:/xampp/htdocs/hrm/routes/web.php</file>
+            <file>file:/E:/xampp/htdocs/hrm/app/Http/Controllers/PayrollController.php</file>
+            <file>file:/E:/xampp/htdocs/hrm/app/Http/Models/Employee.php</file>
+            <file>file:/E:/xampp/htdocs/hrm/app/Http/Models/Advance.php</file>
+            <file>file:/E:/xampp/htdocs/hrm/resources/lang/vn/menu.php</file>
+            <file>file:/E:/xampp/htdocs/hrm/app/Http/Models/Payroll.php</file>
+            <file>file:/E:/xampp/htdocs/hrm/resources/lang/en/menu.php</file>
+            <file>file:/E:/xampp/htdocs/hrm/app/Http/Controllers/TimeSheetController.php</file>
             <file>file:/E:/xampp/htdocs/hrm/resources/views/admin/includes/header.blade.php</file>
             <file>file:/E:/xampp/htdocs/hrm/resources/views/admin/includes/head.blade.php</file>
             <file>file:/E:/xampp/htdocs/hrm/resources/views/admin/pages/Payroll.blade.php</file>
