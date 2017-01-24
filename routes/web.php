@@ -181,6 +181,7 @@ Route::group(["prefix"=>"admin"],function(){
     Route::post("labor-contract",['uses'=>'LaborContractController@printData']);
     Route::post("load-chart",['uses'=>'DashboardController@loadChart']);
     Route::post("overtime",['uses'=>'OvertimeController@load']);
+    Route::post("payroll",['uses'=>'PayrollController@load']);
   }); 
  Route::group(['middleware' => 'check.permission'], function () { 
 Route::get("index",['uses'=>'DashboardController@showIndex']); 

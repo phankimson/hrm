@@ -20,4 +20,5 @@ return array(
     'off'=>'Không tính công',
     'al'=>'Trừ phép năm',
     'lo'=>'Trừ phép bù',
+    'ns'=>'Làm đêm',
 );

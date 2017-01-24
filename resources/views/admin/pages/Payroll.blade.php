@@ -83,7 +83,7 @@
            Epos.url = <?= json_encode(['load_url'=>'get/payroll','delete_url'=>'update/payroll','save_url'=>'add/payroll']);?>;
         });  
         </script>         
-        <script src="{{ url('public/addon/admin/scripts/epos-overtime.js')}}"></script>
+        <script src="{{ url('public/addon/admin/scripts/epos-payroll.js')}}"></script>
          <!-- BEGIN PAGE LEVEL PLUGINS -->
         <script src="{{url('public/global/plugins/select2/js/select2.full.min.js')}}" type="text/javascript"></script>
 

@@ -20,4 +20,5 @@ return array(
     'off'=>'Offline',
     'al'=>'Annual Leave',
     'lo'=>'Leave Offset',
+    'ns'=>'Night Shift',
 );

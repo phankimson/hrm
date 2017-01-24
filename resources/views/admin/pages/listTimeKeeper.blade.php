@@ -218,6 +218,7 @@
                                                                         <option value="2">{{trans('timekeeper.off')}}</option> 
                                                                         <option value="3">{{trans('timekeeper.al')}}</option>
                                                                         <option value="4">{{trans('timekeeper.lo')}}</option> 
+                                                                        <option value="5">{{trans('timekeeper.ns')}}</option> 
                                                                      </select>                                                                   
                                                             </div>
                                                         </div> 
