@@ -65,7 +65,10 @@ class Employee extends Model
            $data = Employee::TypeWhereBetween(DB::raw('DATE_FORMAT(birthday, "%m-%d")'),$arr)->get();
         return $data;
      }
-     
+     public static function get_probationary($arr = null){
+           $data = Employee::TypeWhereBetween(DB::raw('DATE_FORMAT(end_probationary_coefficient, "%m-%d")'),$arr)->get();
+        return $data;
+     }
 
      public function timesheet()
     {

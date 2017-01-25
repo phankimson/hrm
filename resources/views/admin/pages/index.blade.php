@@ -232,7 +232,85 @@
                         </div>  
                     </div>
                     <!-- END DASHBOARD STATS 1-->
-                    
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6">
+                            <!-- BEGIN PORTLET-->
+                            <div class="portlet light bordered">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        <i class="icon-badge font-green"></i>
+                                        <span class="caption-subject font-green bold uppercase">{{trans('index.probationary_ending')}}</span>
+                                        <span class="caption-helper change">{{date("d/m/Y",strtotime($end)).'-'.date("d/m/Y",strtotime($start))}}</span>
+                                    </div>                                    
+                                </div>
+                                <div class="portlet-body">
+                                    <div class="mt-actions birthday-base">
+                                        <div class="mt-action hidden">
+                                                    <div class="mt-action-img">
+                                                        <img style="width:45px;height:45px" src=""> </div>
+                                                    <div class="mt-action-body">
+                                                        <div class="mt-action-row">
+                                                            <div class="mt-action-info ">
+                                                                <div class="mt-action-icon ">
+                                                                    <i class="icon-like"></i>
+                                                                </div>
+                                                                <div class="mt-action-details ">
+                                                                    <span class="mt-action-author"></span>
+                                                                    <p class="mt-action-desc"></p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mt-action-datetime ">
+                                                                <span class="mt-action-date"></span>
+                                                                <span class="mt-action-dot bg-blue"></span>                             
+                                                            </div>
+                                                            <div class="mt-action-buttons ">
+                                                                <div class="btn-group btn-group-circle">                                                           
+                                                                    <button type="button" class="btn btn-outline blue btn-sm ">{{trans('index.probationary')}}</button>                                                   
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        @if($employee_probationary->count()>0)
+                                           <h2 class="hidden">{{trans('index.not')}}</h2>
+                                        @foreach($employee_probationary as $e)
+                                                <div class="mt-action">
+                                                    <div class="mt-action-img">
+                                                        <img style="width:45px;height:45px" src="{{url($e->image)}}"> </div>
+                                                    <div class="mt-action-body">
+                                                        <div class="mt-action-row">
+                                                            <div class="mt-action-info ">
+                                                                <div class="mt-action-icon ">
+                                                                    <i class="icon-like"></i>
+                                                                </div>
+                                                                <div class="mt-action-details ">
+                                                                    <span class="mt-action-author">{{$e->fullname}}</span>
+                                                                    <p class="mt-action-desc">{{$e->position}}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mt-action-datetime ">
+                                                                <span class="mt-action-date">{{date("d/m/Y",strtotime($e->end_probationary_coefficient))}}</span>
+                                                                <span class="mt-action-dot bg-blue"></span>                             
+                                                            </div>
+                                                            <div class="mt-action-buttons ">
+                                                                <div class="btn-group btn-group-circle">                                                           
+                                                                    <button type="button" class="btn btn-outline blue btn-sm {{date("d/m",strtotime($e->end_probationary_coefficient)) === date("d/m")? 'active' :'' }}">{{trans('index.probationary')}}</button>                                                   
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        @endforeach
+                                        @else
+                                        <h2>{{trans('index.not')}}</h2>
+                                        @endif
+                                            </div>
+                                </div>
+                            </div>
+                            <!-- END PORTLET-->
+                        </div>                          
+                    </div>
+                    <!-- END DASHBOARD STATS 1-->
                     
                     
                 </div>

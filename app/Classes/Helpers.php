@@ -77,4 +77,24 @@ class Helpers {
     }
     return $count;
 }
+ public static function calculator_personal_income_tax($value,$option){
+        // Tổng TN tính thuế      
+        $total_taxable_income = $value['total_salary']+$value['service_charge']-$value['telephone_allowance']-$value['shift_meal_allowance']-$value['petrol_allowance']-$value['orther_allowance']-$value['nss']- $value['pht']-$value['wps']-$value['wdps']-$value['social_insurance']-$value['health_insurance']-$value['unemployment_insurance']-$value['trade_union_fund']- $value['personal_deductions']-$value['number_dependents'];
+         if($total_taxable_income>0){
+         $value['total_taxable_income'] = $total_taxable_income;   
+         }else{
+         $value['total_taxable_income'] = 0;    
+         };
+          // Thuế TNCN
+         for($i=1;$i<8;$i++){
+             $k = 'PERSONAL_INCOME_LV'.$i;
+            if($total_taxable_income==0||$total_taxable_income<0){
+             $value['personal_income_tax'] = 0;     
+            }elseif($total_taxable_income>$option->where('code',$k)->first()->value){
+            $value['personal_income_tax'] = $option->where('code',$k)->first()->value1 * $total_taxable_income - $option->where('code',$k)->first()->value2;  
+              break;
+            }              
+         }
+         return $value;
+    }
 }

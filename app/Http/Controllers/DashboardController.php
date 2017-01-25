@@ -18,8 +18,9 @@ class DashboardController extends Controller
         $start = date("m-d");
         $end = date("m-d",strtotime($option_dt->value));
         $employee = Employee::get_birthday(array($start,$end));
+        $employee_probationary = Employee::get_probationary(array($start,$end));
         $contract = LaborContract::get_end(array($start,$end));
-        return view("admin.pages.index",['employee'=>$employee,'contract'=>$contract]);
+        return view("admin.pages.index",['employee'=>$employee,'contract'=>$contract,'employee_probationary'=>$employee_probationary]);
     }
     
     

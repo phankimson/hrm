@@ -24,4 +24,6 @@ return [
     'not'=> "Don't have",
     'labor_contract_comming'=> "Labor contract comming soon",
     'expire_contract'=>"Expire contract",
+    'probationary'=>"Probationary",
+    'probationary_ending'=>"Probationary ending",
 ];

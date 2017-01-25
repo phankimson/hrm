@@ -1,7 +1,6 @@
 <?php
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
-use App\Http\Models\Payroll;
 use App\Http\Models\Employee;
 use App\Http\Models\Options;
 use App\Http\Models\Department;
@@ -36,6 +35,12 @@ class PayrollController extends Controller{
           $percent_unemployment_insurance = $options->where('code','PERCENT_UNEMPLOYEE')->first();
           $percent_trade_union_fund =$options->where('code','PERCENT_TRADE_UNION')->first();
           
+          $price_personal_deductions = $options->where('code','PRICE_PERSION_DEDUCT')->first();
+          $price_number_dependents =  $options->where('code','PRICE_NUMBER_DEDUCT')->first(); 
+          
+          $calculator_personal_income_tax =  $options->where('code','CALCULATOR_PERSONAL_INCOME_TAX')->first(); 
+          $calculator_insurrance =  $options->where('code','CALCULATOR_INSURRANCE')->first(); 
+          
           $employee = Employee::get_payroll($d->department_id,$d->period_id);
           if(strpos($offday_option->value,",")){ 
               $offDay = explode(',',$offday_option->value);          // SunDay :0 & Saturday:6            
@@ -45,11 +50,18 @@ class PayrollController extends Controller{
           $date = explode('/',$period->first()->code);
           $workDay = Helpers::countDays($date[1], $date[0],$offDay );
           foreach($employee as $k=>$v){
-               $timekeeper_code = ''; $ts = [];
+               $timekeeper_code = ''; $ts = [];$timekeeper_code_probationary='';$tsp = [];$total_work = 0 ;$total_probationary_work=0;
                foreach($v->timesheet as $t){
-                $timekeeper_code .= str_replace(",","",$t->timekeeper_code).',';
+                   if(strtotime($date[1].'-'.$date[0].'-'.$t->day)-strtotime($v->end_probationary_coefficient)>0){
+                     $timekeeper_code .= preg_replace('/^,/', '', $t->timekeeper_code).',';
+                     $total_work ++;
+                   }else{
+                     $timekeeper_code_probationary .=   preg_replace('/^,/', '', $t->timekeeper_code).',';
+                     $total_probationary_work ++;
+                   }
                  }
              $timesheet= explode(',',$timekeeper_code);
+             $timesheet_probationary = explode(',',$timekeeper_code_probationary);
               foreach($timekeeper as $tk){
                   if(isset($ts[$tk->method])){
                 $ts[$tk->method] += $tk->value * count(array_keys($timesheet,$tk->code)) ;
@@ -57,22 +69,35 @@ class PayrollController extends Controller{
                 $ts[$tk->method] = 0 ;      
                 $ts[$tk->method] += $tk->value * count(array_keys($timesheet,$tk->code)) ;      
                   }
-                }               
+                }
+               foreach($timekeeper as $tkp){
+                  if(isset($tsp[$tkp->method])){
+                $tsp[$tkp->method] += $tkp->value * count(array_keys($timesheet_probationary,$tkp->code)) ;
+                  }else{
+                $tsp[$tkp->method] = 0 ;      
+                $tsp[$tkp->method] += $tkp->value * count(array_keys($timesheet_probationary,$tkp->code)) ;      
+                  }
+                }      
              $salary_work_day = ($v->salary_main + $v->allowances_accordance_salaries) / $workDay ;  
-             $total_work = count($timesheet) - 1;
+             $salary_probationary_work_day = ($v->salary_main * $v->probationary_coefficient) / $workDay ;  
             $item['code'] = $v->code;   
             $item['fullname'] = $v->fullname;  
             $item['department'] = $v->department;
             $item['position'] = $v->position;
             $item['begin_work_date'] = $v->begin_work_date ;
-            $item['salary_main'] = $v->salary_main ;
+            $item['salary_main'] = $v->salary_main + $v->allowances_accordance_salaries;
+            $item['salary_probationary'] = $v->salary_main * $v->probationary_coefficient;
             $item['salary_insurance'] = $v->salary_insurance ;
             $item['allowances_accordance_salaries'] = $v->allowances_accordance_salaries ;
+            $item['wdp'] = $tsp['1'];
+            $item['wdps'] = $item['wdp'] * $salary_probationary_work_day;
             $item['wd'] = $ts['1']+$ts['5'];
             $item['wds'] = $item['wd'] * $salary_work_day;
-            $item['wp'] =  $ts['1']+$ts['3']+$ts['4']+$ts['5'] - $total_work + $ts['2'];
-            $item['wps'] = $item['wp'] * $salary_work_day;
+            $item['wp'] =  ($ts['1']+$ts['3']+$ts['4']+$ts['5'] - $total_work + $ts['2'])+ ($tsp['1']+$tsp['3']+$tsp['4']+$tsp['5'] - $total_probationary_work + $tsp['2']);
+            $item['wps'] = ($ts['1']+$ts['3']+$ts['4']+$ts['5'] - $total_work + $ts['2']) * $salary_work_day + ($tsp['1']+$tsp['3']+$tsp['4']+$tsp['5'] - $total_probationary_work + $tsp['2'])* $salary_probationary_work_day ;
             $item['ph1'] = 0 ; $item['ph2'] = 0; $item['ph3'] = 0;
+            $item['personal_deductions'] = $v->personal_deductions * $price_personal_deductions->value;
+            $item['number_dependents'] = $v->number_dependents * $price_number_dependents->value;
              foreach($v->overtime as $o){
                 $item['ph1'] += $o->value/$hourworkday_option->value;
                 $item['ph2'] += $o->value1/$hourworkday_option->value;
@@ -89,16 +114,41 @@ class PayrollController extends Controller{
             $item['petrol_allowance'] = $v->petrol_allowance;
             $item['shift_meal_allowance'] = $v->shift_meal_allowance;
             $item['orther_allowance'] = $v->orther_allowance;
-            $item['total_salary'] = $item['orther_allowance']+$item['telephone_allowance']+$item['petrol_allowance']+$item['shift_meal_allowance']+$item['wds'] + $item['nss'] + $item['als'] + $item['wcs'] + $item['wps']+ $item['pht'];    
+            $item['total_salary'] = $item['orther_allowance']+$item['telephone_allowance']+$item['petrol_allowance']+$item['shift_meal_allowance']+$item['wds'] + $item['nss'] + $item['als'] + $item['wcs'] + $item['wps']+ $item['pht']+$item['wdps'];    
             $item['advanced'] = 0;
             foreach($v->advance as $a){
                 $item['advanced'] += $a->value ;
                  }
-            $item['service_charge'] = 0;
-            $item['social_insurance'] =  $item['salary_insurance']* $percent_social_insurance->value * ($ts['1']+$ts['3']+$ts['4']+$ts['5']) / $workDay ;
-            $item['health_insurance'] = $item['salary_insurance']* $percent_health_insurance->value * ($ts['1']+$ts['3']+$ts['4']+$ts['5']) / $workDay;
-            $item['unemployment_insurance'] = $item['salary_insurance']* $percent_unemployment_insurance->value * ($ts['1']+$ts['3']+$ts['4']+$ts['5']) / $workDay;
-            $item['trade_union_fund'] = $item['salary_insurance']* $percent_trade_union_fund->value * ($ts['1']+$ts['3']+$ts['4']+$ts['5']) / $workDay;   
+            $item['service_charge'] = 0;          
+            $item['on_leave_pay'] = 0;
+          if($v->state == 0 || $v->state == 1){
+            $item['total_taxable_income'] = 0; 
+            $item['personal_income_tax'] = 0;  
+            $item['social_insurance'] = 0;
+            $item['health_insurance'] = 0;
+            $item['unemployment_insurance'] = 0;
+            $item['trade_union_fund'] = 0;
+          }else{
+             if($calculator_insurrance->value == 1){ 
+            $item['social_insurance'] =  $item['salary_insurance']* $percent_social_insurance->value  ;
+            $item['health_insurance'] = $item['salary_insurance']* $percent_health_insurance->value ;
+            $item['unemployment_insurance'] = $item['salary_insurance']* $percent_unemployment_insurance->value;
+            $item['trade_union_fund'] = $item['salary_insurance']* $percent_trade_union_fund->value;  
+             }else{
+            $item['social_insurance'] = 0;
+            $item['health_insurance'] = 0;
+            $item['unemployment_insurance'] = 0;
+            $item['trade_union_fund'] = 0;     
+             }
+            if($calculator_personal_income_tax->value == 1){
+            $item = Helpers::calculator_personal_income_tax($item, $options);  
+            }else{
+            $item['total_taxable_income'] = 0; 
+            $item['personal_income_tax'] = 0;     
+            }
+          }          
+            $item['total_deduction'] = $item['advanced']+$item['personal_income_tax']+$item['social_insurance']+$item['health_insurance']+$item['unemployment_insurance']+$item['trade_union_fund'];
+            $item['pay_employee'] = $item['total_salary'] - $item['total_deduction'];
             $arr->push($item);
           }
             return response()->json( [

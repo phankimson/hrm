@@ -24,4 +24,6 @@ return [
     'not'=> "Hiện tại chưa có",
     'labor_contract_comming'=> "Hợp đồng sắp hết hạn",
     'expire_contract'=>"Hết hạn",
+    'probationary'=>"Hết thử việc",
+    'probationary_ending'=>"Sắp hết thử việc",
 ];

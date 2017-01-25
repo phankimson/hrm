@@ -15,7 +15,6 @@
             <file>file:/E:/xampp/htdocs/hrm/resources/lang/vn/timekeeper.php</file>
             <file>file:/E:/xampp/htdocs/hrm/routes/web.php</file>
             <file>file:/E:/xampp/htdocs/hrm/app/Http/Controllers/PayrollController.php</file>
-            <file>file:/E:/xampp/htdocs/hrm/app/Http/Models/Advance.php</file>
             <file>file:/E:/xampp/htdocs/hrm/resources/lang/vn/menu.php</file>
             <file>file:/E:/xampp/htdocs/hrm/resources/views/admin/pages/listTimeKeeper.blade.php</file>
             <file>file:/E:/xampp/htdocs/hrm/public/addon/admin/scripts/epos-overtime.js</file>
@@ -30,6 +29,7 @@
             <file>file:/E:/xampp/htdocs/hrm/resources/lang/en/menu.php</file>
             <file>file:/E:/xampp/htdocs/hrm/resources/lang/en/timekeeper.php</file>
             <file>file:/E:/xampp/htdocs/hrm/app/Classes/Helpers.php</file>
+            <file>file:/E:/xampp/htdocs/hrm/resources/views/admin/pages/index.blade.php</file>
         </group>
     </open-files>
 </project-private>
