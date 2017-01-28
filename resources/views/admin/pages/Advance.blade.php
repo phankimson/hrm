@@ -5,8 +5,6 @@
 @stop
 @section('extra_css')
         <!-- BEGIN PAGE LEVEL PLUGINS -->
-        <link href="{{url('public/global/plugins/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css" />
-        <link href="{{url('public/global/plugins/select2/css/select2-bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{url('public/global/plugins/datatables/datatables.min.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{url('public/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{url('public/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css')}}" rel="stylesheet" type="text/css" />
@@ -85,7 +83,6 @@
         </script>         
         <script src="{{ url('public/addon/admin/scripts/epos-advance.js')}}"></script>
          <!-- BEGIN PAGE LEVEL PLUGINS -->
-        <script src="{{url('public/global/plugins/select2/js/select2.full.min.js')}}" type="text/javascript"></script>
 
         <script src="{{url('public/global/scripts/datatable.js')}}" type="text/javascript"></script>
         <script src="{{url('public/global/plugins/datatables/datatables.min.js')}}" type="text/javascript"></script>

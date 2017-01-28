@@ -16,6 +16,8 @@
         <link href="{{url('/public/global/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{url('/public/global/plugins/uniform/css/uniform.default.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{url('/public/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css')}}" rel="stylesheet" type="text/css" />
+        <link href="{{url('public/global/plugins/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css" />
+        <link href="{{url('public/global/plugins/select2/css/select2-bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
         <!-- END GLOBAL MANDATORY STYLES -->
         <!-- BEGIN THEME GLOBAL STYLES -->
         <link href="{{url('/public/global/css/components.min.css')}}" rel="stylesheet" id="style_components" type="text/css" />

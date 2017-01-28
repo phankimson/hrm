@@ -41,7 +41,7 @@ return [
     'report'=>'Report',
     'warehouse'=>'Warehouse',
     'overtime'=>'Overtime',
-    'issue-warehouse'=>'Issue Warehouse',
+    'charge-revenue'=>'Service charge revenue',
     'advance'=>'Advance',
     'timekeeper'=>'Timekeeper',
     'department'=>'Department',

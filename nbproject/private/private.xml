@@ -12,24 +12,15 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/xampp/htdocs/hrm/resources/lang/vn/timekeeper.php</file>
-            <file>file:/E:/xampp/htdocs/hrm/routes/web.php</file>
+            <file>file:/E:/xampp/htdocs/hrm/app/Http/Models/Overtime.php</file>
+            <file>file:/E:/xampp/htdocs/hrm/database/migrations/2017_01_28_220437_create_store_off.php</file>
             <file>file:/E:/xampp/htdocs/hrm/app/Http/Controllers/PayrollController.php</file>
-            <file>file:/E:/xampp/htdocs/hrm/resources/lang/vn/menu.php</file>
-            <file>file:/E:/xampp/htdocs/hrm/resources/views/admin/pages/listTimeKeeper.blade.php</file>
-            <file>file:/E:/xampp/htdocs/hrm/public/addon/admin/scripts/epos-overtime.js</file>
-            <file>file:/E:/xampp/htdocs/hrm/resources/views/admin/includes/header.blade.php</file>
-            <file>file:/E:/xampp/htdocs/hrm/resources/views/admin/includes/head.blade.php</file>
-            <file>file:/E:/xampp/htdocs/hrm/public/addon/admin/scripts/epos-payroll.js</file>
-            <file>file:/E:/xampp/htdocs/hrm/resources/views/admin/pages/Payroll.blade.php</file>
-            <file>file:/E:/xampp/htdocs/hrm/app/Http/Models/Period.php</file>
             <file>file:/E:/xampp/htdocs/hrm/index.php</file>
             <file>file:/E:/xampp/htdocs/hrm/app/Http/Models/Employee.php</file>
             <file>file:/E:/xampp/htdocs/hrm/app/Http/Models/Payroll.php</file>
-            <file>file:/E:/xampp/htdocs/hrm/resources/lang/en/menu.php</file>
-            <file>file:/E:/xampp/htdocs/hrm/resources/lang/en/timekeeper.php</file>
-            <file>file:/E:/xampp/htdocs/hrm/app/Classes/Helpers.php</file>
-            <file>file:/E:/xampp/htdocs/hrm/resources/views/admin/pages/index.blade.php</file>
+            <file>file:/E:/xampp/htdocs/hrm/app/Http/Controllers/OvertimeController.php</file>
+            <file>file:/E:/xampp/htdocs/hrm/database/migrations/2017_01_27_230020_create_service_charge_revenue.php</file>
+            <file>file:/E:/xampp/htdocs/hrm/public/addon/admin/scripts/epos-payroll.js</file>
         </group>
     </open-files>
 </project-private>

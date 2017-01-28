@@ -93,6 +93,14 @@ function GetAllValue(elem){
     jQuery(elem+" input[type='checkbox']").each(function() {
         arr[jQuery(this).attr("name")] = jQuery(this).bootstrapSwitch('state') == true ? 1 : 0;
     });
+    jQuery(elem+' select').each(function() {
+        if(jQuery(this).hasClass('select2me')){
+         arr[jQuery(this).attr("name")] = jQuery(this).select2('val').toString();     
+        }else{
+         arr[jQuery(this).attr("name")] = jQuery(this).find('option:selected').val();   
+        }
+       
+    });
     return arr;
 }
 

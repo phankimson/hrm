@@ -224,8 +224,7 @@
         </script>
                
         <script src="{{ url('public/addon/admin/scripts/epos-admin.js')}}"></script>
-         <!-- BEGIN PAGE LEVEL PLUGINS -->
-        <script src="{{url('public/global/plugins/select2/js/select2.full.min.js')}}" type="text/javascript"></script>
+         <!-- BEGIN PAGE LEVEL PLUGINS -->   
 
         <script src="{{url('public/global/scripts/datatable.js')}}" type="text/javascript"></script>
         <script src="{{url('public/global/plugins/datatables/datatables.min.js')}}" type="text/javascript"></script>

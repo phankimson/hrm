@@ -40,7 +40,7 @@ return [
     'report'=>'Báo cáo',
     'warehouse'=>'Kho',
     'overtime'=>'Bảng chấm tăng ca',
-    'issue-warehouse'=>'Xuất kho',
+    'charge-revenue'=>'Doanh thu phí phục vụ',
     'timekeeper'=>'Chấm công',
     'advance'=>'Bảng tạm ứng lương',
     'department'=>'Bộ phận',

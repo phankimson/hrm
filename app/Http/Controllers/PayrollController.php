@@ -6,6 +6,8 @@ use App\Http\Models\Options;
 use App\Http\Models\Department;
 use App\Http\Models\TimeKeeper;
 use App\Http\Models\Period;
+use App\Http\Models\Payroll;
+use App\Http\Models\ChargeRevenue;
 use App\Classes\Helpers;
 
 
@@ -21,13 +23,16 @@ class PayrollController extends Controller{
         $timekeeper = TimeKeeper::get_all();
         $options = Options::all();
         $period = Period::get_all($d->period_id);
+        $charge_revenue = ChargeRevenue::get_period($d->period_id);
         $arr = collect([]);
-        if($d->oper == 'add'){      
-          $offday_option = $options->where('code','OFF_DAY')->first();
-          $hourworkday_option = $options->where('code','HOUR_WORK_DAY')->first();
-          $percent_ph1 = $options->where('code','PERCENT_OVERTIME_1')->first();
-          $percent_ph2 = $options->where('code','PERCENT_OVERTIME_2')->first();
-          $percent_ph3 = $options->where('code','PERCENT_OVERTIME_3')->first();
+        $payroll = Payroll::get_all($d->department_id,$d->period_id);
+        $offday_option = $options->where('code','OFF_DAY')->first();
+        $percent_ph1 = $options->where('code','PERCENT_OVERTIME_1')->first();
+        $percent_ph2 = $options->where('code','PERCENT_OVERTIME_2')->first();
+        $percent_ph3 = $options->where('code','PERCENT_OVERTIME_3')->first();
+        
+        $hourworkday_option = $options->where('code','HOUR_WORK_DAY')->first();
+         
           $percent_night_shift = $options->where('code','PERCENT_NIGHT_SHIFT')->first();
           
           $percent_social_insurance = $options->where('code','PERCENT_SOCIAL_INSUR')->first();
@@ -35,20 +40,22 @@ class PayrollController extends Controller{
           $percent_unemployment_insurance = $options->where('code','PERCENT_UNEMPLOYEE')->first();
           $percent_trade_union_fund =$options->where('code','PERCENT_TRADE_UNION')->first();
           
-          $price_personal_deductions = $options->where('code','PRICE_PERSION_DEDUCT')->first();
+          $price_personal_deductions = $options->where('code','PRICE_PERSONAL_DEDUCT')->first();
           $price_number_dependents =  $options->where('code','PRICE_NUMBER_DEDUCT')->first(); 
           
           $calculator_personal_income_tax =  $options->where('code','CALCULATOR_PERSONAL_INCOME_TAX')->first(); 
           $calculator_insurrance =  $options->where('code','CALCULATOR_INSURRANCE')->first(); 
           
-          $employee = Employee::get_payroll($d->department_id,$d->period_id);
-          if(strpos($offday_option->value,",")){ 
+           if(strpos($offday_option->value,",")){ 
               $offDay = explode(',',$offday_option->value);          // SunDay :0 & Saturday:6            
           }else{
               $offDay[0] = $offday_option->value; // SunDay :0 & Saturday:6                      
           };
           $date = explode('/',$period->first()->code);
           $workDay = Helpers::countDays($date[1], $date[0],$offDay );
+        if($d->oper == 'add' && $payroll->count()<=0){      
+
+          $employee = Employee::get_payroll($d->department_id,$d->period_id);       
           foreach($employee as $k=>$v){
                $timekeeper_code = ''; $ts = [];$timekeeper_code_probationary='';$tsp = [];$total_work = 0 ;$total_probationary_work=0;
                foreach($v->timesheet as $t){
@@ -80,6 +87,7 @@ class PayrollController extends Controller{
                 }      
              $salary_work_day = ($v->salary_main + $v->allowances_accordance_salaries) / $workDay ;  
              $salary_probationary_work_day = ($v->salary_main * $v->probationary_coefficient) / $workDay ;  
+            $item['id'] = $v->id;   
             $item['code'] = $v->code;   
             $item['fullname'] = $v->fullname;  
             $item['department'] = $v->department;
@@ -88,7 +96,6 @@ class PayrollController extends Controller{
             $item['salary_main'] = $v->salary_main + $v->allowances_accordance_salaries;
             $item['salary_probationary'] = $v->salary_main * $v->probationary_coefficient;
             $item['salary_insurance'] = $v->salary_insurance ;
-            $item['allowances_accordance_salaries'] = $v->allowances_accordance_salaries ;
             $item['wdp'] = $tsp['1'];
             $item['wdps'] = $item['wdp'] * $salary_probationary_work_day;
             $item['wd'] = $ts['1']+$ts['5'];
@@ -119,7 +126,7 @@ class PayrollController extends Controller{
             foreach($v->advance as $a){
                 $item['advanced'] += $a->value ;
                  }
-            $item['service_charge'] = 0;          
+            ($charge_revenue->sum('revenue')>0) ? $item['service_charge'] = $charge_revenue->sum('revenue') / $employee->where('state',2)->count() : $item['service_charge'] = 0;          
             $item['on_leave_pay'] = 0;
           if($v->state == 0 || $v->state == 1){
             $item['total_taxable_income'] = 0; 
@@ -156,22 +163,58 @@ class PayrollController extends Controller{
                 'data'          => $arr,
                 'message' => trans('messages.success_load'),
             ]);
-        }else if($d->oper == 'edit' &&$value ->count() >0 || $d->oper == 'print' &&$value ->count() >0){
-          $employee = Employee::get_overtime($d->department_id,$d->period_id);
-          foreach($employee as $key => $val){
-              if(count($val['overtime'])){
-              $employee[$key]['value']=$val['overtime'][0]['value'];   
-              $employee[$key]['value1']=$val['overtime'][0]['value1']; 
-              $employee[$key]['value2']=$val['overtime'][0]['value2']; 
-              }else{
-              $employee[$key]['value']=0;    
-              $employee[$key]['value1']=0;  
-              $employee[$key]['value2']=0;  
-              }           
-          }
+        }else if($d->oper == 'edit' && $payroll->count() >0 || $d->oper == 'print' && $payroll->count() > 0){        
+            foreach($payroll as $v){
+                 $salary_work_day = $v->salary_main / $workDay ;  
+                 $salary_probationary_work_day = $v->salary_probationary / $workDay ;
+                 $item['id'] = $v->employee_id; 
+                 $item['code'] = $v->code;   
+                 $item['fullname'] = $v->fullname;  
+                 $item['department'] = $v->department;
+                 $item['position'] = $v->position;
+                 $item['begin_work_date'] = $v->begin_work_date ;
+                 $item['salary_main'] = $v->salary_main ;
+                 $item['salary_probationary'] = $v->salary_probationary;
+                 $item['salary_insurance'] = $v->salary_insurance ;
+                 $item['wdp'] = $v->wdp;
+                $item['wdps'] = $v->wdp * $salary_probationary_work_day;
+                $item['wd'] = $v->wd;
+                $item['wds'] = $v->wd * $salary_work_day;
+                $item['wp'] =  $v->wp;
+                $item['wps'] = $v->wps ;
+                $item['ph1'] = $v->ph1 ; 
+                $item['ph2'] = $v->ph2;
+                $item['ph3'] = $v->ph3;
+                $item['pht'] = ($item['ph1'] * $percent_ph1->value + $item['ph2'] * $percent_ph2->value + $item['ph3'] * $percent_ph3->value) * $salary_work_day;  
+                $item['ns'] = $v->ns;
+                $item['nss'] = $v->ns * $salary_work_day * $percent_night_shift->value;
+                $item['al'] = $v->al;
+                $item['als'] = $item['al']  * $salary_work_day;
+                $item['wc'] = $v->wc;
+                $item['wcs'] = $item['wc']  * $salary_work_day;
+                $item['telephone_allowance'] = $v->telephone_allowance;
+                $item['petrol_allowance'] = $v->petrol_allowance;
+                $item['shift_meal_allowance'] = $v->shift_meal_allowance;
+                $item['orther_allowance'] = $v->orther_allowance;
+                $item['total_salary'] = $item['orther_allowance']+$item['telephone_allowance']+$item['petrol_allowance']+$item['shift_meal_allowance']+$item['wds'] + $item['nss'] + $item['als'] + $item['wcs'] + $item['wps']+ $item['pht']+$item['wdps'];    
+                $item['advanced'] = $v->advance;
+                $item['service_charge'] = $v->service_charge;
+                $item['on_leave_pay'] = $v->on_leave_pay;
+                $item['personal_deductions'] = $v->personal_deductions ;
+                $item['number_dependents'] = $v->number_dependents ;
+                $item['total_taxable_income'] = $v->total_taxable_income; 
+                $item['personal_income_tax'] = $v->personal_income_tax;  
+                $item['social_insurance'] = $v->social_insurance;
+                $item['health_insurance'] = $v->health_insurance;
+                $item['unemployment_insurance'] = $v->unemployment_insurance;
+                $item['trade_union_fund'] = $v->trade_union_fund;
+                $item['total_deduction'] = $item['advanced']+$item['personal_income_tax']+$item['social_insurance']+$item['health_insurance']+$item['unemployment_insurance']+$item['trade_union_fund'];
+                $item['pay_employee'] = $item['total_salary'] - $item['total_deduction'];
+                 $arr->push($item);
+            }
              return response()->json( [
                 'status' 	=> true,
-                'data'          => $employee,
+                'data'          => $arr,
                 'message' => trans('messages.success_load'),
             ]);
         }else{
@@ -185,18 +228,44 @@ class PayrollController extends Controller{
         $data = $request->input('data');
         $t = json_decode($data);  
            foreach($t->hot as $ts){
-                if($ts->value>0){
-                   $value = Overtime::get_save($ts -> id, $t->period_id);
+                if($ts->salary_main>0){
+                   $value = Payroll::get_save($ts -> id, $t->period_id);
                         if($value !== null){
-                        $return = Overtime::find($value->id);
+                        $return = Payroll::find($value->id);
                         }else{
-                        $return = new Overtime(); 
+                        $return = new Payroll(); 
                         }
                         $return->period_id            = $t -> period_id;
                         $return->employee_id          = $ts -> id;
-                        $return->value                = $ts -> value;
-                        $return->value1                = $ts -> value1;
-                        $return->value2                = $ts -> value2;
+                        $return->position             = $ts -> position;
+                        $return->salary_main          = $ts -> salary_main;
+                        $return->salary_probationary  = $ts -> salary_probationary;
+                        $return->salary_insurance     = $ts -> salary_insurance;
+                        $return->wage_day_probationary= $ts -> wdp;
+                        $return->workday              = $ts -> wd;
+                        $return->holiday_work         = $ts -> wp;
+                        $return->holiday_work_value   = $ts -> wps;
+                        $return->nightshift           = $ts -> ns;
+                        $return->holiday_overtime     = $ts -> ph3;
+                        $return->off_overtime         = $ts -> ph2;
+                        $return->overtime             = $ts -> ph1;
+                        $return->arrive_leave         = $ts -> al;
+                        $return->work_clear           = $ts -> wc;
+                        $return->on_leave_pay         = $ts -> on_leave_pay;
+                        $return->telephone_allowance  = $ts -> telephone_allowance;
+                        $return->petrol_allowance       = $ts -> petrol_allowance;
+                        $return->shift_meal_allowance  = $ts -> shift_meal_allowance;
+                        $return->orther_allowance      = $ts -> orther_allowance;
+                        $return->personal_deductions   = $ts -> personal_deductions;
+                        $return->number_dependents     = $ts -> number_dependents;
+                        $return->advance               = $ts -> advanced;
+                        $return->total_taxable_income   = $ts -> total_taxable_income;
+                        $return->personal_income_tax   = $ts -> personal_income_tax;
+                        $return->social_insurance   = $ts -> social_insurance;
+                        $return->health_insurance   = $ts -> health_insurance;
+                        $return->unemployment_insurance   = $ts -> unemployment_insurance;
+                        $return->trade_union_fund   = $ts -> trade_union_fund;
+                        $return->service_charge   = $ts -> service_charge;
                         $return->save();      
                 }          
             }       

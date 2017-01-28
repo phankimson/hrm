@@ -44,14 +44,23 @@
                 <!-- INFO MODAL -->
                 <div class="modal fade" id="config" tabindex="-1" role="basic" aria-hidden="true">
                         <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                    <h4 class="modal-title">{{trans('index.config')}}</h4>
+                            <div class="modal-content  portlet box purple-studio">
+                                <div class="modal-header  portlet-title">
+                                   <div id='title' class='caption'>
+                                       {{trans('index.config')}}
                                 </div>
-                                <div class="modal-body"> 
-                                    <table  class="table borderless" id="config-form" style="border-style: none">                                               
-
+                                <div class='tools'>                                    
+                                </div>
+                                    <ul class="nav nav-tabs">
+                                    <li class="active"><a href="#infomation" data-toggle="tab">{{trans('employee.info')}}</a></li>
+                                    <li><a href="#insurance" data-toggle="tab">{{trans('employee.tax&insurance')}}</a></li>                             
+                                    </ul>                               
+                                </div>
+                                <div class="modal-body portlet-body">
+                                     <div class="tab-content"  id="config-form" >
+                                    <div class="tab-pane active" id="infomation">
+                                    <table  class="table borderless" style="border-style: none">                                               
+                                        
                                                 <tr>          
                                                   <td class="col-xs-1"><label class="control-label">{{trans('options.company')}}</label></td>
                                                   <td class="col-md-2"><input type="text" class="form-control input-large config" maxlength="100" name="company" value="{{$options->where('code','COMPANY')->implode('value')}}" id="maxlength_defaultconfig"></td>     
@@ -67,10 +76,137 @@
                                                 <tr>          
                                                   <td class="col-xs-1"><label class="control-label">{{trans('options.director_company')}}</label></td>
                                                   <td class="col-md-2"><input type="text" class="form-control input-large config" maxlength="100" name="director_company" value="{{$options->where('code','DIRECTOR_COMPANY')->implode('value')}}" id="maxlength_defaultconfig"></td>     
-                                                </tr>                                                
+                                                </tr>  
+                                                <tr>          
+                                                  <td class="col-xs-1"><label class="control-label">{{trans('options.off_day')}}</label></td>
+                                                  <td class="col-md-2">                                                 
+                                                      <select name="off_day" class="input-medium form-control select2me config" multiple="multiple"  data-placeholder="Select...">    
+                                                            <option value=""></option>
+                                                            <option {{strpos($options->where('code','OFF_DAY')->implode('value'),'0') !== false ? 'selected' : '' }}  value="0">{{trans('options.sun')}}</option>
+                                                            <option {{strpos($options->where('code','OFF_DAY')->implode('value'),'1') !== false ? 'selected' : '' }}  value="1">{{trans('options.mon')}}</option> 
+                                                            <option {{strpos($options->where('code','OFF_DAY')->implode('value'),'2') !== false ? 'selected' : '' }}  value="2">{{trans('options.tus')}}</option> 
+                                                            <option {{strpos($options->where('code','OFF_DAY')->implode('value'),'3') !== false ? 'selected' : '' }}  value="3">{{trans('options.wed')}}</option>      
+                                                            <option {{strpos($options->where('code','OFF_DAY')->implode('value'),'4') !== false ? 'selected' : '' }}  value="4">{{trans('options.thu')}}</option> 
+                                                            <option {{strpos($options->where('code','OFF_DAY')->implode('value'),'5') !== false ? 'selected' : '' }}  value="5">{{trans('options.fri')}}</option>  
+                                                            <option {{strpos($options->where('code','OFF_DAY')->implode('value'),'6') !== false ? 'selected' : '' }}  value="6">{{trans('options.sat')}}</option>  
+                                                    </select>
+                                                  </td>     
+                                                </tr>
+                                                <tr>          
+                                                  <td class="col-xs-1"><label class="control-label">{{trans('options.calculator_personal_income_tax')}}</label></td>
+                                                  <td class="col-md-2"><input type="checkbox" name="calculator_personal_income_tax" class="form-control make-switch config" {{$options->where('code','CALCULATOR_PERSONAL_INCOME_TAX')->implode('value') == '1' ? 'checked' : 'false' }} data-size="small" data-handle-width="25" data-on-text="<i class='fa fa-check'></i>" data-off-text="<i class='fa fa-times'></i>"></td>     
+                                                </tr>
+                                                <tr>          
+                                                  <td class="col-xs-1"><label class="control-label">{{trans('options.calculator_insurrance')}}</label></td>
+                                                  <td class="col-md-2"><input type="checkbox" name="calculator_insurrance" class="form-control make-switch config" {{$options->where('code','CALCULATOR_INSURRANCE')->implode('value') == '1' ? 'checked' : 'false'}}  data-size="small" data-handle-width="25" data-on-text="<i class='fa fa-check'></i>" data-off-text="<i class='fa fa-times'></i>"></td>     
+                                                </tr>
+                                                 <tr>          
+                                                  <td class="col-xs-1"><label class="control-label">{{trans('options.hour_work_day')}}</label></td>
+                                                  <td class="col-md-2"><input type="text" class="form-control input-large config" maxlength="100" name="hour_work_day" value="{{$options->where('code','HOUR_WORK_DAY')->implode('value')}}" id="maxlength_defaultconfig"></td>     
+                                                </tr> 
+                                                <tr>          
+                                                  <td class="col-xs-1"><label class="control-label">{{trans('options.percent_overtime_1')}}</label></td>
+                                                  <td class="col-md-2"><input type="text" class="form-control input-large config" maxlength="100" name="percent_overtime_1" value="{{$options->where('code','PERCENT_OVERTIME_1')->implode('value')}}" id="maxlength_defaultconfig"></td>     
+                                                </tr> 
+                                                <tr>          
+                                                  <td class="col-xs-1"><label class="control-label">{{trans('options.percent_overtime_2')}}</label></td>
+                                                  <td class="col-md-2"><input type="text" class="form-control input-large config" maxlength="100" name="percent_overtime_2" value="{{$options->where('code','PERCENT_OVERTIME_2')->implode('value')}}" id="maxlength_defaultconfig"></td>     
+                                                </tr>
+                                                <tr>          
+                                                  <td class="col-xs-1"><label class="control-label">{{trans('options.percent_overtime_3')}}</label></td>
+                                                  <td class="col-md-2"><input type="text" class="form-control input-large config" maxlength="100" name="percent_overtime_3" value="{{$options->where('code','PERCENT_OVERTIME_3')->implode('value')}}" id="maxlength_defaultconfig"></td>     
+                                                </tr>
+                                                <tr>          
+                                                  <td class="col-xs-1"><label class="control-label">{{trans('options.percent_night_shift')}}</label></td>
+                                                  <td class="col-md-2"><input type="text" class="form-control input-large config" maxlength="100" name="percent_night_shift" value="{{$options->where('code','PERCENT_NIGHT_SHIFT')->implode('value')}}" id="maxlength_defaultconfig"></td>     
+                                                </tr>
                                             </table> 
+                                      </div>
+                                         <div class="tab-pane" id="insurance">
+                                    <table  class="table borderless" style="border-style: none"> 
+                                            <tr>          
+                                                  <td class="col-xs-1"><label class="control-label">{{trans('options.percent_social_insur')}}</label></td>
+                                                  <td class="col-md-2" colspan="3"><input type="text" class="form-control input-large config" maxlength="100" name="percent_social_insur" value="{{$options->where('code','PERCENT_SOCIAL_INSUR')->implode('value')}}" id="maxlength_defaultconfig"></td> 
+                                                  <td class="col-md-2"></td> 
+                                                  <td class="col-md-2"></td> 
+                                            </tr>
+                                            <tr>          
+                                                  <td class="col-xs-1"><label class="control-label">{{trans('options.percent_health_insur')}}</label></td>
+                                                  <td class="col-md-2" colspan="3"><input type="text" class="form-control input-large config" maxlength="100" name="percent_health_insur" value="{{$options->where('code','PERCENT_HEALTH_INSUR')->implode('value')}}" id="maxlength_defaultconfig"></td> 
+                                                  <td class="col-md-2"></td> 
+                                                  <td class="col-md-2"></td> 
+                                            </tr>
+                                            <tr>          
+                                                  <td class="col-xs-1"><label class="control-label">{{trans('options.percent_unemployee')}}</label></td>
+                                                  <td class="col-md-2" colspan="3"><input type="text" class="form-control input-large config" maxlength="100" name="percent_unemployee" value="{{$options->where('code','PERCENT_UNEMPLOYEE')->implode('value')}}" id="maxlength_defaultconfig"></td> 
+                                                  <td class="col-md-2"></td> 
+                                                  <td class="col-md-2"></td> 
+                                            </tr>
+                                            <tr>          
+                                                  <td class="col-xs-1"><label class="control-label">{{trans('options.percent_trade_union')}}</label></td>
+                                                  <td class="col-md-2" colspan="3"><input type="text" class="form-control input-large config" maxlength="100" name="percent_trade_union" value="{{$options->where('code','PERCENT_TRADE_UNION')->implode('value')}}" id="maxlength_defaultconfig"></td> 
+                                                  <td class="col-md-2"></td> 
+                                                  <td class="col-md-2"></td> 
+                                            </tr>
+                                            <tr>          
+                                                  <td class="col-xs-1"><label class="control-label">{{trans('options.price_personal_deduct')}}</label></td>
+                                                  <td class="col-md-2" colspan="3"><input type="text" class="form-control input-large config" maxlength="100" name="price_personal_deduct" value="{{$options->where('code','PRICE_PERSION_DEDUCT')->implode('value')}}" id="maxlength_defaultconfig"></td> 
+                                                  <td class="col-md-2"></td> 
+                                                  <td class="col-md-2"></td> 
+                                            </tr>
+                                            <tr>          
+                                                  <td class="col-xs-1"><label class="control-label">{{trans('options.price_number_deduct')}}</label></td>
+                                                  <td class="col-md-2" colspan="3"><input type="text" class="form-control input-large config" maxlength="100" name="price_number_deduct" value="{{$options->where('code','PRICE_NUMBER_DEDUCT')->implode('value')}}" id="maxlength_defaultconfig"></td> 
+                                                  <td class="col-md-2"></td> 
+                                                  <td class="col-md-2"></td> 
+                                            </tr>
+                                            <tr>          
+                                                  <td class="col-xs-1"><label class="control-label">{{trans('options.personal_income_lv1')}}</label></td>
+                                                  <td class="col-md-1"><input type="text" class="form-control input-small config" maxlength="100" name="value-personal_income_lv1" value="{{$options->where('code','PERSONAL_INCOME_LV1')->implode('value')}}" id="maxlength_defaultconfig"></td> 
+                                                  <td class="col-md-1"><input type="text" class="form-control input-sm config" maxlength="100" name="value1-personal_income_lv1" value="{{$options->where('code','PERSONAL_INCOME_LV1')->implode('value1')}}" id="maxlength_defaultconfig"></td> 
+                                                  <td class="col-md-1"><input type="text" class="form-control input-small config" maxlength="100" name="value2-personal_income_lv1" value="{{$options->where('code','PERSONAL_INCOME_LV1')->implode('value2')}}" id="maxlength_defaultconfig"></td> 
+                                            </tr>
+                                            <tr>          
+                                                  <td class="col-xs-1"><label class="control-label">{{trans('options.personal_income_lv2')}}</label></td>
+                                                  <td class="col-md-2"><input type="text" class="form-control input-small config" maxlength="100" name="value-personal_income_lv2" value="{{$options->where('code','PERSONAL_INCOME_LV2')->implode('value')}}" id="maxlength_defaultconfig"></td> 
+                                                  <td class="col-md-2"><input type="text" class="form-control input-sm config" maxlength="100" name="value1-personal_income_lv2" value="{{$options->where('code','PERSONAL_INCOME_LV2')->implode('value1')}}" id="maxlength_defaultconfig"></td> 
+                                                  <td class="col-md-2"><input type="text" class="form-control input-small config" maxlength="100" name="value2-personal_income_lv2" value="{{$options->where('code','PERSONAL_INCOME_LV2')->implode('value2')}}" id="maxlength_defaultconfig"></td> 
+                                            </tr>  
+                                            <tr>          
+                                                  <td class="col-xs-1"><label class="control-label">{{trans('options.personal_income_lv3')}}</label></td>
+                                                  <td class="col-md-2"><input type="text" class="form-control input-small config" maxlength="100" name="value-personal_income_lv3" value="{{$options->where('code','PERSONAL_INCOME_LV3')->implode('value')}}" id="maxlength_defaultconfig"></td> 
+                                                  <td class="col-md-2"><input type="text" class="form-control input-sm config" maxlength="100" name="value1-personal_income_lv3" value="{{$options->where('code','PERSONAL_INCOME_LV3')->implode('value1')}}" id="maxlength_defaultconfig"></td> 
+                                                  <td class="col-md-2"><input type="text" class="form-control input-small config" maxlength="100" name="value2-personal_income_lv3" value="{{$options->where('code','PERSONAL_INCOME_LV3')->implode('value2')}}" id="maxlength_defaultconfig"></td> 
+                                            </tr>   
+                                            <tr>          
+                                                  <td class="col-xs-1"><label class="control-label">{{trans('options.personal_income_lv4')}}</label></td>
+                                                  <td class="col-md-2"><input type="text" class="form-control input-small config" maxlength="100" name="value-personal_income_lv4" value="{{$options->where('code','PERSONAL_INCOME_LV4')->implode('value')}}" id="maxlength_defaultconfig"></td> 
+                                                  <td class="col-md-2"><input type="text" class="form-control input-sm config" maxlength="100" name="value1-personal_income_lv4" value="{{$options->where('code','PERSONAL_INCOME_LV4')->implode('value1')}}" id="maxlength_defaultconfig"></td> 
+                                                  <td class="col-md-2"><input type="text" class="form-control input-small config" maxlength="100" name="value2-personal_income_lv4" value="{{$options->where('code','PERSONAL_INCOME_LV4')->implode('value2')}}" id="maxlength_defaultconfig"></td> 
+                                            </tr> 
+                                            <tr>          
+                                                  <td class="col-xs-1"><label class="control-label">{{trans('options.personal_income_lv5')}}</label></td>
+                                                  <td class="col-md-2"><input type="text" class="form-control input-small config" maxlength="100" name="value-personal_income_lv5" value="{{$options->where('code','PERSONAL_INCOME_LV5')->implode('value')}}" id="maxlength_defaultconfig"></td> 
+                                                  <td class="col-md-2"><input type="text" class="form-control input-sm config" maxlength="100" name="value1-personal_income_lv5" value="{{$options->where('code','PERSONAL_INCOME_LV5')->implode('value1')}}" id="maxlength_defaultconfig"></td> 
+                                                  <td class="col-md-2"><input type="text" class="form-control input-small config" maxlength="100" name="value2-personal_income_lv5" value="{{$options->where('code','PERSONAL_INCOME_LV5')->implode('value2')}}" id="maxlength_defaultconfig"></td> 
+                                            </tr>  
+                                            <tr>          
+                                                  <td class="col-xs-1"><label class="control-label">{{trans('options.personal_income_lv6')}}</label></td>
+                                                  <td class="col-md-2"><input type="text" class="form-control input-small config" maxlength="100" name="value-personal_income_lv6" value="{{$options->where('code','PERSONAL_INCOME_LV6')->implode('value')}}" id="maxlength_defaultconfig"></td> 
+                                                  <td class="col-md-2"><input type="text" class="form-control input-sm config" maxlength="100" name="value1-personal_income_lv6" value="{{$options->where('code','PERSONAL_INCOME_LV6')->implode('value1')}}" id="maxlength_defaultconfig"></td> 
+                                                  <td class="col-md-2"><input type="text" class="form-control input-small config" maxlength="100" name="value2-personal_income_lv6" value="{{$options->where('code','PERSONAL_INCOME_LV6')->implode('value2')}}" id="maxlength_defaultconfig"></td> 
+                                            </tr>  
+                                            <tr>          
+                                                  <td class="col-xs-1"><label class="control-label">{{trans('options.personal_income_lv7')}}</label></td>
+                                                  <td class="col-md-2"><input type="text" class="form-control input-small config" maxlength="100" name="value-personal_income_lv7" value="{{$options->where('code','PERSONAL_INCOME_LV7')->implode('value')}}" id="maxlength_defaultconfig"></td> 
+                                                  <td class="col-md-2"><input type="text" class="form-control input-sm config" maxlength="100" name="value1-personal_income_lv7" value="{{$options->where('code','PERSONAL_INCOME_LV7')->implode('value1')}}" id="maxlength_defaultconfig"></td> 
+                                                  <td class="col-md-2"><input type="text" class="form-control input-small config" maxlength="100" name="value2-personal_income_lv7" value="{{$options->where('code','PERSONAL_INCOME_LV7')->implode('value2')}}" id="maxlength_defaultconfig"></td> 
+                                            </tr>   
+                                            </table> 
+                                      </div>
+                                    </div>      
                                 </div>
-                                <div class="modal-footer">                                    
+                                <div class="modal-footer"  style=" background-color: #fff;">                                    
                                      <button type="button" class="btn green" id="save-config">{{trans('global.save')}}</button>
                                      <button type="button" class="btn dark btn-outline" data-dismiss="modal">{{trans('global.close')}}</button>
                                 </div>

@@ -72,7 +72,7 @@
                                 <div class="portlet-title tabbable-line">
                                     <div class="caption">
                                         <i class="icon-tag font-purple"></i>
-                                        <span class="caption-subject font-purple bold uppercase">{{trans('menu.period')}}</span>
+                                        <span class="caption-subject font-purple bold uppercase">{{trans('menu.charge-revenue')}}</span>
                                     </div>
                                     <div class="pull-right">
                                         <a class="btn default blue-stripe add tooltips" data-original-title="Ctrl+Alt+A" data-placement="top" data-container="body"><i class="fa fa-plus"></i> {{trans('global.add')}} </a>
@@ -142,11 +142,8 @@
                                                             <thead>
                                                                 <tr>
                                                                     <th> {{trans('global.no')}}</th>
-                                                                    <th> {{trans('period.code')}}</th>
-                                                                    <th> {{trans('period.name')}}</th> 
-                                                                    <th> {{trans('period.start')}}</th> 
-                                                                    <th> {{trans('period.end')}}</th> 
-                                                                    <th> {{trans('period.lock')}}</th> 
+                                                                    <th> {{trans('menu.period')}}</th>
+                                                                    <th> {{trans('charge-revenue.revenue')}}</th>         
                                                                     <th> {{trans('menu.active')}}</th>
                                                                 </tr>
                                                             </thead>
@@ -171,49 +168,30 @@
                                                 <div class="portlet-body" id='form-action'>
                                                         <div id="notification"></div>
                                                         <div class="form-group">
-                                                            <label class="col-sm-4 control-label">{{trans('period.code')}}</label>
+                                                            <label class="col-sm-4 control-label">{{trans('menu.period')}} (*)</label>
                                                             <div class="col-sm-5">                       
-                                                                        <input type="text" class="form-control input-large not-null" position="1" maxlength="50" name="code" id="maxlength_defaultconfig">
+                                                        <select name="period_id" id="period_id" data-placeholder="All"  position="1"  class="input-medium form-control select2me select2-check"> 
+                                                            <option value=""></option>
+                                                            @foreach($period as $p)
+                                                            <option {{$p->lock==1?'disabled':''}}disabled value="{{$p['id']}}">{{$p['name']}}</option>
+                                                            @endforeach
+                                                       </select>
                                                            </div>
                                                         </div>
                                                         <div class="tr-space"></div>
                                                         <div class="tr-space"></div>
                                                         <div class="form-group">
-                                                            <label class="col-sm-4 control-label">{{trans('period.name')}}</label>
+                                                            <label class="col-sm-4 control-label">{{trans('charge-revenue.revenue')}}</label>
                                                             <div class="col-sm-5">                       
-                                                                        <input type="text" class="form-control input-large not-null"  position="2" maxlength="100" name="name" id="maxlength_defaultconfig">
+                                                                        <input type="text" class="form-control input-large number"  position="2" maxlength="100" name="revenue" id="maxlength_defaultconfig">
                                                            </div>
                                                         </div>    
                                                         <div class="tr-space"></div>
                                                         <div class="tr-space"></div>
                                                         <div class="form-group">
-                                                            <label class="col-sm-4 control-label">{{trans('period.start')}}</label>
-                                                            <div class="col-sm-5">                       
-                                                                       <input class="form-control input-medium date-picker date" name='start'  position="3" size="10" data-date-format="dd/mm/yyyy" type="text" value="00/00/0000">
-                                                           </div>
-                                                        </div>
-                                                        <div class="tr-space"></div>
-                                                        <div class="tr-space"></div>
-                                                        <div class="form-group">
-                                                            <label class="col-sm-4 control-label">{{trans('period.end')}}</label>
-                                                            <div class="col-sm-5">                       
-                                                                       <input class="form-control input-medium date-picker date" name='end'  position="4" size="10" data-date-format="dd/mm/yyyy" type="text" value="00/00/0000">
-                                                           </div>                 
-                                                        </div>  
-                                                        <div class="tr-space"></div>
-                                                        <div class="tr-space"></div>
-                                                        <div class="form-group">
-                                                            <label class="col-sm-4 control-label">{{trans('period.lock')}}</label>
-                                                             <div class="col-md-4">
-                                                                    <input type="checkbox" name="lock" class="form-control make-switch"  position="5" checked data-on-text="<i class='fa fa-check'></i>" data-off-text="<i class='fa fa-times'></i>"> 
-                                                            </div>
-                                                        </div> 
-                                                        <div class="tr-space"></div>
-                                                        <div class="tr-space"></div>
-                                                        <div class="form-group">
                                                             <label class="col-sm-4 control-label">{{trans('menu.active')}}</label>
                                                             <div class="col-md-4">
-                                                                    <input type="checkbox" name="active" class="form-control make-switch"  position="6" checked data-on-text="<i class='fa fa-check'></i>" data-off-text="<i class='fa fa-times'></i>"> 
+                                                                    <input type="checkbox" name="active" class="form-control make-switch"  position="3" checked data-on-text="<i class='fa fa-check'></i>" data-off-text="<i class='fa fa-times'></i>"> 
                                                             </div>
                                                         </div> 
                                                     </div>
@@ -234,7 +212,7 @@
         jQuery(document).ready(function() {   
            EposAdmin.permission = <?= json_encode(session()->get('permission'));?>;    
            EposAdmin.data= <?= json_encode($data->toArray());?>;
-           EposAdmin.url = <?= json_encode(['save_url'=>'add/period','delete_url'=>'update/period','import_url'=>'import/period']);?>;
+           EposAdmin.url = <?= json_encode(['save_url'=>'add/charge-revenue','delete_url'=>'update/charge-revenue','import_url'=>'import/charge-revenue']);?>;
         });   
         </script>
                
@@ -244,6 +222,7 @@
         <script src="{{url('public/global/scripts/datatable.js')}}" type="text/javascript"></script>
         <script src="{{url('public/global/plugins/datatables/datatables.min.js')}}" type="text/javascript"></script>
         <script src="{{url('public/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js')}}" type="text/javascript"></script>
+        <script src="{{ url('public/global/plugins/jquery-number-master/jquery.number.min.js')}}" type="text/javascript"></script>
 
         <script src="{{ url('public/global/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js')}}" type="text/javascript"></script>
         <script src="{{ url('public/global/plugins/shortcuts.js')}}" type="text/javascript"></script>
