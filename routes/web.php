@@ -28,6 +28,7 @@ Route::group(['middleware'=>['web']],function(){
   Route::post("overtime",['uses'=>'OvertimeController@save']);
   Route::post("payroll",['uses'=>'PayrollController@save']);
   Route::post("charge-revenue",['uses'=>'ChargeRevenueController@save']);
+  Route::post("store-off",['uses'=>'StoreOffController@save']);
   });  
   Route::group(["prefix"=>"update"],function(){    
   Route::post("profile",['uses'=>'UserController@updateprofile']);
@@ -48,6 +49,7 @@ Route::group(['middleware'=>['web']],function(){
   Route::post("overtime",['uses'=>'OvertimeController@delete']);
   Route::post("payroll",['uses'=>'PayrollController@delete']);
   Route::post("charge-revenue",['uses'=>'ChargeRevenueController@delete']);
+  Route::post("store-off",['uses'=>'StoreOffController@delete']);
   }); 
   Route::group(["prefix"=>"import"],function(){       
   Route::post("history-action",['uses'=>'HistoryActionController@import']);   
@@ -59,6 +61,7 @@ Route::group(['middleware'=>['web']],function(){
   Route::post("timekeeper",['uses'=>'TimeKeeperController@import']);
   Route::post("labor-contract",['uses'=>'LaborContractController@import']);
   Route::post("charge-revenue",['uses'=>'ChargeRevenueController@import']);
+  Route::post("store-off",['uses'=>'StoreOffController@import']);
   }); 
   Route::group(["prefix"=>"export"],function(){    
   Route::get("history-action",array('uses'=>'HistoryActionController@export'));  
@@ -70,6 +73,7 @@ Route::group(['middleware'=>['web']],function(){
   Route::get("timekeeper",['uses'=>'TimeKeeperController@export']);
   Route::get("labor-contract",['uses'=>'LaborContractController@export']);
   Route::get("charge-revenue",['uses'=>'ChargeRevenueController@export']);
+  Route::get("store-off",['uses'=>'StoreOffController@export']);
   }); 
    Route::group(["prefix"=>"get"],function(){    
     Route::post("permission",['uses'=>'PermissionController@loadPermission']);
@@ -99,6 +103,7 @@ Route::get("labor-contract",['uses'=>'LaborContractController@showPage']);
 Route::get("overtime",['uses'=>'OvertimeController@showPage']);
 Route::get("payroll",['uses'=>'PayrollController@showPage']);
 Route::get("charge-revenue",['uses'=>'ChargeRevenueController@showPage']);
+Route::get("store-off",['uses'=>'StoreOffController@showPage']);
  });
 Route::get("logout",['uses'=>'DashboardController@doLogout']);
 Route::get("login",['uses'=>'UserController@showLogin']);
@@ -129,6 +134,7 @@ Route::group(["prefix"=>"admin"],function(){
   Route::post("overtime",['uses'=>'OvertimeController@save']);
   Route::post("payroll",['uses'=>'PayrollController@save']);
   Route::post("charge-revenue",['uses'=>'ChargeRevenueController@save']);
+  Route::post("store-off",['uses'=>'StoreOffController@save']);
   });  
   Route::group(["prefix"=>"update"],function(){    
   Route::post("profile",['uses'=>'UserController@updateprofile']);
@@ -152,6 +158,7 @@ Route::group(["prefix"=>"admin"],function(){
   Route::post("overtime",['uses'=>'OvertimeController@delete']);
   Route::post("payroll",['uses'=>'PayrollController@delete']);
   Route::post("charge-revenue",['uses'=>'ChargeRevenueController@delete']);
+  Route::post("store-off",['uses'=>'StoreOffController@delete']);
   }); 
   Route::group(["prefix"=>"import"],function(){    
   Route::post("menu",array('uses'=>'MenuController@import')); 
@@ -167,6 +174,7 @@ Route::group(["prefix"=>"admin"],function(){
   Route::post("timekeeper",['uses'=>'TimeKeeperController@import']);
   Route::post("labor-contract",['uses'=>'LaborContractController@import']);
   Route::post("charge-revenue",['uses'=>'ChargeRevenueController@import']);
+  Route::post("store-off",['uses'=>'StoreOffController@import']);
   }); 
   Route::group(["prefix"=>"export"],function(){    
   Route::get("menu",array('uses'=>'MenuController@export'));    
@@ -182,6 +190,7 @@ Route::group(["prefix"=>"admin"],function(){
   Route::get("timekeeper",['uses'=>'TimeKeeperController@export']);
   Route::get("labor-contract",['uses'=>'LaborContractController@export']);
   Route::get("charge-revenue",['uses'=>'ChargeRevenueController@export']);
+  Route::get("store-off",['uses'=>'StoreOffController@export']);
   }); 
    Route::group(["prefix"=>"get"],function(){    
     Route::post("permission",['uses'=>'PermissionController@loadPermission']);    
@@ -215,6 +224,7 @@ Route::get("labor-contract",['uses'=>'LaborContractController@showPage']);
 Route::get("overtime",['uses'=>'OvertimeController@showPage']);
 Route::get("payroll",['uses'=>'PayrollController@showPage']);
 Route::get("charge-revenue",['uses'=>'ChargeRevenueController@showPage']);
+Route::get("store-off",['uses'=>'StoreOffController@showPage']);
  });
 Route::post("query",['uses'=>'QueryController@querySql']); 
 Route::get("logout",['uses'=>'DashboardController@doLogout']);

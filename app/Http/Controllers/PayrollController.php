@@ -7,6 +7,7 @@ use App\Http\Models\Department;
 use App\Http\Models\TimeKeeper;
 use App\Http\Models\Period;
 use App\Http\Models\Payroll;
+use App\Http\Models\StoreOff;
 use App\Http\Models\ChargeRevenue;
 use App\Classes\Helpers;
 
@@ -227,6 +228,12 @@ class PayrollController extends Controller{
     public function save(Request $request){
         $data = $request->input('data');
         $t = json_decode($data);  
+        
+        $options = Options::all();
+        $day_clear_off = $options->where('code','DAY_CLEAR_OFF')->first(); 
+        $check_store_off = $options->where('code','CHECK_STORE_OFF')->first(); 
+          
+        
            foreach($t->hot as $ts){
                 if($ts->salary_main>0){
                    $value = Payroll::get_save($ts -> id, $t->period_id);
@@ -266,7 +273,51 @@ class PayrollController extends Controller{
                         $return->unemployment_insurance   = $ts -> unemployment_insurance;
                         $return->trade_union_fund   = $ts -> trade_union_fund;
                         $return->service_charge   = $ts -> service_charge;
-                        $return->save();      
+                        $return->save();    
+                        
+
+                        $store_off = new StoreOff();
+                        $store_off -> period_id = $t -> period_id;
+                        $store_off -> employee_id = $ts -> id;
+                        $store_off -> name = 1 ;
+                        $store_off -> type = 1 ;
+                        $store_off -> value = 1 ;
+                        $store_off -> active = 1 ;
+                        $store_off -> save();
+
+                        if($ts -> al>0){
+                        $store_off = new StoreOff();
+                        $store_off -> period_id = $t -> period_id;
+                        $store_off -> employee_id = $ts -> id;
+                        $store_off -> name = 1 ;
+                        $store_off -> type = 2 ;
+                        $store_off -> value = $ts -> al ;
+                        $store_off -> active = 1 ;
+                        $store_off -> save();    
+                        }
+
+                        if($ts -> wc>0){
+                        $store_off = new StoreOff();
+                        $store_off -> period_id = $t -> period_id;
+                        $store_off -> employee_id = $ts -> id;
+                        $store_off -> name = 2 ;
+                        $store_off -> type = 2 ;
+                        $store_off -> value = $ts -> wc ;
+                        $store_off -> active = 1 ;
+                        $store_off -> save();    
+                        }
+
+                        if($ts -> wp>0){
+                        $store_off = new StoreOff();
+                        $store_off -> period_id = $t -> period_id;
+                        $store_off -> employee_id = $ts -> id;
+                        $store_off -> name = 2 ;
+                        $store_off -> type = 1 ;
+                        $store_off -> value = $ts -> wp * $day_clear_off->value;
+                        $store_off -> active = 1 ;
+                        $store_off -> save();      
+                        }
+
                 }          
             }       
             return response()->json( [
@@ -280,11 +331,17 @@ class PayrollController extends Controller{
         $t = json_decode($data);
          $check = true;
          if($check ==true){
-         $id = Overtime::get_employee($t->period_id);    
-         foreach($id as $d){
-            $result = Overtime::find($d->id);
+        $payroll = Payroll::get_all($t->department_id,$t->period_id);
+         foreach($payroll as $d){
+            $result = Payroll::find($d->id);
             $result -> delete();
             Helpers::save_history_action('delete', serialize($result->toArray()));
+         }
+         $storeoff = StoreOff::get_period($t->period_id);
+         foreach($storeoff as $s){
+            $result = StoreOff::find($s->id);
+            $result -> delete();
+            Helpers::save_history_action('delete', serialize($result->toArray())); 
          }
             return response()->json( [
                 'status' 	 => true,

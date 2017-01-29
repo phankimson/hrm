@@ -17,8 +17,10 @@ class CreateStoreOff extends Migration
             $table->increments('id')->index();
             $table->integer('period_id');
             $table->integer('employee_id');
+            $table->tinyInteger('name');
             $table->tinyInteger('type');
-            $table->string('active');
+            $table->string('value');
+            $table->tinyInteger('active');
             $table->timestamps();
         });
     }
