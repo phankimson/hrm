@@ -120,6 +120,14 @@
                                                   <td class="col-xs-1"><label class="control-label">{{trans('options.percent_night_shift')}}</label></td>
                                                   <td class="col-md-2"><input type="text" class="form-control input-large config" maxlength="100" name="percent_night_shift" value="{{$options->where('code','PERCENT_NIGHT_SHIFT')->implode('value')}}" id="maxlength_defaultconfig"></td>     
                                                 </tr>
+                                                 <tr>          
+                                                  <td class="col-xs-1"><label class="control-label">{{trans('options.day_clear_off')}}</label></td>
+                                                  <td class="col-md-2"><input type="text" class="form-control input-large config" maxlength="100" name="day_clear_off" value="{{$options->where('code','DAY_CLEAR_OFF')->implode('value')}}" id="maxlength_defaultconfig"></td>     
+                                                </tr>
+                                                 <tr>          
+                                                  <td class="col-xs-1"><label class="control-label">{{trans('options.min_add_al')}}</label></td>
+                                                  <td class="col-md-2"><input type="text" class="form-control input-large config" maxlength="100" name="min_add_al" value="{{$options->where('code','MIN_ADD_AL')->implode('value')}}" id="maxlength_defaultconfig"></td>     
+                                                </tr>
                                             </table> 
                                       </div>
                                          <div class="tab-pane" id="insurance">

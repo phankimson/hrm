@@ -8,4 +8,6 @@ return array(
     'up'=>"Up",
     'down'=>"Down",
     'value'=>"Value",
+    'open'=>"Open",
+    'close'=>"Close",
 );

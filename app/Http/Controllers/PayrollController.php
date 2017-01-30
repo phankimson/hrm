@@ -232,7 +232,7 @@ class PayrollController extends Controller{
         $options = Options::all();
         $day_clear_off = $options->where('code','DAY_CLEAR_OFF')->first(); 
         $check_store_off = $options->where('code','CHECK_STORE_OFF')->first(); 
-          
+        $min_add_al = $options->where('code','MIN_ADD_AL')->first();   
         
            foreach($t->hot as $ts){
                 if($ts->salary_main>0){
@@ -275,7 +275,7 @@ class PayrollController extends Controller{
                         $return->service_charge   = $ts -> service_charge;
                         $return->save();    
                         
-
+                        if($ts -> wd + $ts -> al + $ts -> wc >= $min_add_al->value){
                         $store_off = new StoreOff();
                         $store_off -> period_id = $t -> period_id;
                         $store_off -> employee_id = $ts -> id;
@@ -284,7 +284,7 @@ class PayrollController extends Controller{
                         $store_off -> value = 1 ;
                         $store_off -> active = 1 ;
                         $store_off -> save();
-
+                        }
                         if($ts -> al>0){
                         $store_off = new StoreOff();
                         $store_off -> period_id = $t -> period_id;

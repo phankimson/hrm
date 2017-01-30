@@ -36,4 +36,8 @@ class Period extends Model
         $data = Period::TypeWhere('id',$id)->where('active','=',1)->get();
         return $data;
     }
+    public static function get_code($code){
+        $data = Period::where('code','=',$code)->first();
+        return $data;
+    }
 }

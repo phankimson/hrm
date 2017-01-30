@@ -60,7 +60,11 @@ class Employee extends Model
         public static function get_payroll($department=null,$period){
                 $value = Employee::join('department','department.id','=','employee.department_id')->TypeWhere('employee.department_id',$department)->with(['advance' => function($query)use($period){$query->where('advance.period_id','=',$period)->select('advance.id','advance.value','employee_id');}])->with(['timesheet' => function($query)use($period){$query->where('timesheet.period_id','=',$period)->get();}])->with(['overtime' => function($query)use($period){$query->where('overtime.period_id','=',$period)->select('overtime.id','overtime.value','overtime.value1','overtime.value2','employee_id');}])->select('employee.*','department.name as department')->orderBy('department.name')->get();
                 return $value;
-            }            
+            } 
+        public static function get_storeoff($department=null,$name=null,$employee=null,$period=null){
+                $value = Employee::join('department','department.id','=','employee.department_id')->TypeWhere('employee.department_id',$department)->TypeWhere('employee.id',$employee)->with(['storeoff' => function($query)use($period,$name){$query->TypeWhere('store_off.period_id',$period)->TypeWhere('store_off.name',$name)->get();}])->select('employee.id','employee.code','employee.fullname','employee.position','department.name as department')->orderBy('department.name')->get();
+                return $value;
+            }     
      public static function get_birthday($arr = null){
            $data = Employee::TypeWhereBetween(DB::raw('DATE_FORMAT(birthday, "%m-%d")'),$arr)->get();
         return $data;
@@ -82,4 +86,8 @@ class Employee extends Model
     {
         return $this->hasMany('App\Http\Models\Overtime','employee_id');
     }        
+ public function storeoff()
+    {
+        return $this->hasMany('App\Http\Models\StoreOff','employee_id');
+    }           
 }
