@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Mer 25 Janvier 2017 à 01:35
--- Version du serveur :  10.1.13-MariaDB
--- Version de PHP :  5.6.23
+-- Généré le :  Mar 31 Janvier 2017 à 05:01
+-- Version du serveur :  10.1.19-MariaDB
+-- Version de PHP :  5.6.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -34,6 +34,28 @@ CREATE TABLE `advance` (
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `charge_revenue`
+--
+
+CREATE TABLE `charge_revenue` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `period_id` int(11) NOT NULL,
+  `revenue` int(11) NOT NULL,
+  `active` tinyint(4) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Contenu de la table `charge_revenue`
+--
+
+INSERT INTO `charge_revenue` (`id`, `period_id`, `revenue`, `active`, `created_at`, `updated_at`) VALUES
+(1, 2, 2000000, 1, '2017-01-28 02:59:01', '2017-01-28 02:59:01');
 
 -- --------------------------------------------------------
 
@@ -928,7 +950,73 @@ INSERT INTO `history_action` (`id`, `user_id`, `type`, `menu_id`, `content`, `cr
 (735, 1, 4, 7, 'a:1:{i:0;a:9:{s:2:"id";i:29;s:4:"code";s:21:"CALCULATOR_INSURRANCE";s:4:"name";s:18:"Tính bảo hiểm";s:5:"value";s:1:"1";s:6:"value1";s:1:"0";s:6:"value2";s:1:"0";s:6:"active";i:1;s:10:"created_at";s:19:"0000-00-00 00:00:00";s:10:"updated_at";s:19:"0000-00-00 00:00:00";}}', '2017-01-24 14:48:48', '2017-01-24 14:48:48'),
 (736, 1, 1, 40, '', '2017-01-24 15:39:22', '2017-01-24 15:39:22'),
 (737, 1, 4, 22, 'a:1:{i:0;a:44:{s:2:"id";i:1;s:5:"image";s:35:"public/global/img/product_image.gif";s:4:"code";s:8:"KTTT0001";s:8:"fullname";s:13:"Phan Kim Sơn";s:5:"state";i:2;s:14:"marital_status";i:1;s:13:"department_id";i:5;s:8:"position";s:20:"Kế toán trưởng";s:8:"birthday";s:10:"1988-02-15";s:6:"gender";i:1;s:8:"national";s:2:"VN";s:13:"identity_card";s:9:"225386789";s:18:"identity_card_date";s:10:"2017-01-15";s:19:"identity_card_place";s:14:"Ca Khánh Hòa";s:7:"address";s:42:"9 Phan Chu Trinh - Nha Trang - Khánh Hòa";s:5:"phone";s:9:"058829926";s:9:"mobiphone";s:13:"01686 692 911";s:9:"education";s:1:"3";s:15:"education_level";s:12:"Đại học";s:23:"professional_experience";s:6:"5 năm";s:17:"language_employee";s:6:"0 1 4 ";s:11:"informatics";i:2;s:19:"code_insurance_book";s:11:"12345678910";s:24:"condition_insurance_book";s:10:"Đã nộp";s:22:"origins_insurance_book";s:24:"Bảo Hiểm Khánh Hòa";s:24:"code_personal_income_tax";s:9:"225386789";s:9:"code_bank";s:10:"1234567810";s:9:"name_bank";s:21:"Ngân Hàng Đông Á";s:24:"probationary_coefficient";s:4:"0.85";s:11:"salary_main";s:8:"12000000";s:16:"salary_insurance";s:8:"12000000";s:30:"allowances_accordance_salaries";s:6:"200000";s:16:"petrol_allowance";s:6:"100000";s:19:"telephone_allowance";s:6:"100000";s:20:"shift_meal_allowance";s:5:"10000";s:16:"orther_allowance";s:5:"20000";s:15:"begin_work_date";s:10:"2017-01-12";s:28:"end_probationary_coefficient";s:10:"2017-01-26";s:19:"personal_deductions";s:1:"1";s:17:"number_dependents";s:1:"0";s:4:"note";N;s:6:"active";i:1;s:10:"created_at";s:19:"2017-01-08 22:16:08";s:10:"updated_at";s:19:"2017-01-24 22:41:08";}}', '2017-01-24 15:41:08', '2017-01-24 15:41:08'),
-(738, 1, 4, 68, 'a:1:{i:0;a:44:{s:2:"id";i:1;s:5:"image";s:35:"public/global/img/product_image.gif";s:4:"code";s:8:"KTTT0001";s:8:"fullname";s:13:"Phan Kim Sơn";s:5:"state";i:2;s:14:"marital_status";i:1;s:13:"department_id";i:5;s:8:"position";s:20:"Kế toán trưởng";s:8:"birthday";s:10:"1988-02-15";s:6:"gender";i:1;s:8:"national";s:2:"VN";s:13:"identity_card";s:9:"225386789";s:18:"identity_card_date";s:10:"2017-01-15";s:19:"identity_card_place";s:14:"Ca Khánh Hòa";s:7:"address";s:42:"9 Phan Chu Trinh - Nha Trang - Khánh Hòa";s:5:"phone";s:9:"058829926";s:9:"mobiphone";s:13:"01686 692 911";s:9:"education";s:1:"3";s:15:"education_level";s:12:"Đại học";s:23:"professional_experience";s:6:"5 năm";s:17:"language_employee";s:6:"0 1 4 ";s:11:"informatics";i:2;s:19:"code_insurance_book";s:11:"12345678910";s:24:"condition_insurance_book";s:10:"Đã nộp";s:22:"origins_insurance_book";s:24:"Bảo Hiểm Khánh Hòa";s:24:"code_personal_income_tax";s:9:"225386789";s:9:"code_bank";s:10:"1234567810";s:9:"name_bank";s:21:"Ngân Hàng Đông Á";s:24:"probationary_coefficient";s:4:"0.85";s:11:"salary_main";s:8:"12000000";s:16:"salary_insurance";s:8:"12000000";s:30:"allowances_accordance_salaries";s:6:"200000";s:16:"petrol_allowance";s:6:"100000";s:19:"telephone_allowance";s:6:"100000";s:20:"shift_meal_allowance";s:5:"10000";s:16:"orther_allowance";s:5:"20000";s:15:"begin_work_date";s:10:"2017-01-12";s:28:"end_probationary_coefficient";s:10:"2017-02-16";s:19:"personal_deductions";s:1:"1";s:17:"number_dependents";s:1:"0";s:4:"note";N;s:6:"active";i:1;s:10:"created_at";s:19:"2017-01-08 22:16:08";s:10:"updated_at";s:19:"2017-01-24 22:46:24";}}', '2017-01-24 15:46:24', '2017-01-24 15:46:24');
+(738, 1, 4, 68, 'a:1:{i:0;a:44:{s:2:"id";i:1;s:5:"image";s:35:"public/global/img/product_image.gif";s:4:"code";s:8:"KTTT0001";s:8:"fullname";s:13:"Phan Kim Sơn";s:5:"state";i:2;s:14:"marital_status";i:1;s:13:"department_id";i:5;s:8:"position";s:20:"Kế toán trưởng";s:8:"birthday";s:10:"1988-02-15";s:6:"gender";i:1;s:8:"national";s:2:"VN";s:13:"identity_card";s:9:"225386789";s:18:"identity_card_date";s:10:"2017-01-15";s:19:"identity_card_place";s:14:"Ca Khánh Hòa";s:7:"address";s:42:"9 Phan Chu Trinh - Nha Trang - Khánh Hòa";s:5:"phone";s:9:"058829926";s:9:"mobiphone";s:13:"01686 692 911";s:9:"education";s:1:"3";s:15:"education_level";s:12:"Đại học";s:23:"professional_experience";s:6:"5 năm";s:17:"language_employee";s:6:"0 1 4 ";s:11:"informatics";i:2;s:19:"code_insurance_book";s:11:"12345678910";s:24:"condition_insurance_book";s:10:"Đã nộp";s:22:"origins_insurance_book";s:24:"Bảo Hiểm Khánh Hòa";s:24:"code_personal_income_tax";s:9:"225386789";s:9:"code_bank";s:10:"1234567810";s:9:"name_bank";s:21:"Ngân Hàng Đông Á";s:24:"probationary_coefficient";s:4:"0.85";s:11:"salary_main";s:8:"12000000";s:16:"salary_insurance";s:8:"12000000";s:30:"allowances_accordance_salaries";s:6:"200000";s:16:"petrol_allowance";s:6:"100000";s:19:"telephone_allowance";s:6:"100000";s:20:"shift_meal_allowance";s:5:"10000";s:16:"orther_allowance";s:5:"20000";s:15:"begin_work_date";s:10:"2017-01-12";s:28:"end_probationary_coefficient";s:10:"2017-02-16";s:19:"personal_deductions";s:1:"1";s:17:"number_dependents";s:1:"0";s:4:"note";N;s:6:"active";i:1;s:10:"created_at";s:19:"2017-01-08 22:16:08";s:10:"updated_at";s:19:"2017-01-24 22:46:24";}}', '2017-01-24 15:46:24', '2017-01-24 15:46:24'),
+(739, 1, 1, 1, '', '2017-01-25 09:57:42', '2017-01-25 09:57:42'),
+(740, 1, 1, 1, '', '2017-01-26 01:52:06', '2017-01-26 01:52:06'),
+(741, 1, 1, 1, '', '2017-01-26 15:11:37', '2017-01-26 15:11:37'),
+(742, 1, 1, 1, '', '2017-01-27 11:43:26', '2017-01-27 11:43:26'),
+(743, 1, 4, 7, 'a:1:{i:0;a:9:{s:2:"id";i:8;s:4:"code";s:7:"OFF_DAY";s:4:"name";s:22:"Ngày off trong tuần";s:5:"value";s:1:"2";s:6:"value1";s:1:"0";s:6:"value2";s:1:"0";s:6:"active";i:1;s:10:"created_at";s:19:"0000-00-00 00:00:00";s:10:"updated_at";s:19:"0000-00-00 00:00:00";}}', '2017-01-27 12:38:43', '2017-01-27 12:38:43'),
+(744, 1, 4, 7, 'a:1:{i:0;a:9:{s:2:"id";i:8;s:4:"code";s:7:"OFF_DAY";s:4:"name";s:22:"Ngày off trong tuần";s:5:"value";s:3:"0,1";s:6:"value1";s:1:"0";s:6:"value2";s:1:"0";s:6:"active";i:1;s:10:"created_at";s:19:"0000-00-00 00:00:00";s:10:"updated_at";s:19:"0000-00-00 00:00:00";}}', '2017-01-27 12:45:38', '2017-01-27 12:45:38'),
+(745, 1, 4, 7, 'a:1:{i:0;a:9:{s:2:"id";i:26;s:4:"code";s:21:"PRICE_PERSONAL_DEDUCT";s:4:"name";s:24:"Khấu trừ bản thân";s:5:"value";s:7:"9000000";s:6:"value1";s:1:"0";s:6:"value2";s:1:"0";s:6:"active";i:1;s:10:"created_at";s:19:"0000-00-00 00:00:00";s:10:"updated_at";s:19:"0000-00-00 00:00:00";}}', '2017-01-27 12:49:24', '2017-01-27 12:49:24'),
+(746, 1, 4, 7, 'a:1:{i:0;a:9:{s:2:"id";i:26;s:4:"code";s:21:"PRICE_PERSONAL_DEDUCT";s:4:"name";s:24:"Khấu trừ bản thân";s:5:"value";s:7:"9000000";s:6:"value1";s:1:"0";s:6:"value2";s:1:"0";s:6:"active";i:1;s:10:"created_at";s:19:"0000-00-00 00:00:00";s:10:"updated_at";s:19:"0000-00-00 00:00:00";}}', '2017-01-27 12:49:42', '2017-01-27 12:49:42'),
+(747, 1, 1, 7, '', '2017-01-27 13:01:16', '2017-01-27 13:01:16'),
+(748, 1, 1, 1, '', '2017-01-27 15:45:21', '2017-01-27 15:45:21'),
+(749, 1, 1, 65, '', '2017-01-27 15:46:46', '2017-01-27 15:46:46'),
+(750, 1, 1, 1, '', '2017-01-28 01:46:03', '2017-01-28 01:46:03'),
+(751, 1, 4, 6, 'a:1:{i:0;a:9:{s:2:"id";i:29;s:4:"type";i:0;s:9:"parent_id";i:9;s:4:"code";s:14:"charge-renevue";s:4:"name";s:26:"Doanh thu phí phục vụ";s:4:"icon";s:1:" ";s:4:"link";s:20:"admin/charge-renevue";s:8:"position";i:0;s:6:"active";i:1;}}', '2017-01-28 01:48:58', '2017-01-28 01:48:58'),
+(752, 1, 4, 6, 'a:1:{i:0;a:9:{s:2:"id";i:60;s:4:"type";i:1;s:9:"parent_id";i:46;s:4:"code";s:14:"charge-renevue";s:4:"name";s:26:"Doanh thu phí phục vụ";s:4:"icon";s:1:" ";s:4:"link";s:14:"charge-renevue";s:8:"position";i:0;s:6:"active";i:1;}}', '2017-01-28 01:49:21', '2017-01-28 01:49:21'),
+(753, 1, 4, 6, 'a:1:{i:0;a:9:{s:2:"id";i:29;s:4:"type";i:0;s:9:"parent_id";i:9;s:4:"code";s:14:"charge-revenue";s:4:"name";s:26:"Doanh thu phí phục vụ";s:4:"icon";s:1:" ";s:4:"link";s:20:"admin/charge-revenue";s:8:"position";i:0;s:6:"active";i:1;}}', '2017-01-28 02:40:28', '2017-01-28 02:40:28'),
+(754, 1, 4, 6, 'a:1:{i:0;a:9:{s:2:"id";i:60;s:4:"type";i:1;s:9:"parent_id";i:46;s:4:"code";s:14:"charge-revenue";s:4:"name";s:26:"Doanh thu phí phục vụ";s:4:"icon";s:1:" ";s:4:"link";s:14:"charge-revenue";s:8:"position";i:0;s:6:"active";i:1;}}', '2017-01-28 02:40:46', '2017-01-28 02:40:46'),
+(755, 1, 2, 29, 'a:1:{i:0;a:6:{s:2:"id";i:1;s:9:"period_id";i:2;s:7:"revenue";i:2000000;s:6:"active";i:1;s:10:"created_at";s:19:"2017-01-28 09:59:01";s:10:"updated_at";s:19:"2017-01-28 09:59:01";}}', '2017-01-28 02:59:01', '2017-01-28 02:59:01'),
+(756, 1, 1, 1, '', '2017-01-28 12:29:36', '2017-01-28 12:29:36'),
+(757, 1, 1, 1, '', '2017-01-29 08:32:13', '2017-01-29 08:32:13'),
+(758, 1, 4, 6, 'a:1:{i:0;a:9:{s:2:"id";i:66;s:4:"type";i:1;s:9:"parent_id";i:46;s:4:"code";s:9:"store-off";s:4:"name";s:26:"Điều chỉnh phép năm";s:4:"icon";s:1:" ";s:4:"link";s:9:"store-off";s:8:"position";i:0;s:6:"active";i:1;}}', '2017-01-29 08:33:59', '2017-01-29 08:33:59'),
+(759, 1, 4, 6, 'a:1:{i:0;a:9:{s:2:"id";i:39;s:4:"type";i:0;s:9:"parent_id";i:9;s:4:"code";s:9:"store-off";s:4:"name";s:26:"Điều chỉnh phép năm";s:4:"icon";s:1:" ";s:4:"link";s:9:"store-off";s:8:"position";i:1;s:6:"active";i:1;}}', '2017-01-29 08:35:03', '2017-01-29 08:35:03'),
+(760, 1, 2, 39, 'a:1:{i:0;a:9:{s:2:"id";i:1;s:9:"period_id";i:2;s:11:"employee_id";i:2;s:4:"name";i:1;s:4:"type";i:1;s:5:"value";s:1:"1";s:6:"active";i:1;s:10:"created_at";s:19:"2017-01-29 15:51:43";s:10:"updated_at";s:19:"2017-01-29 15:51:43";}}', '2017-01-29 08:51:43', '2017-01-29 08:51:43'),
+(761, 1, 5, 39, 'a:9:{s:2:"id";i:1;s:9:"period_id";i:2;s:11:"employee_id";i:2;s:4:"name";i:1;s:4:"type";i:1;s:5:"value";s:1:"1";s:6:"active";i:1;s:10:"created_at";s:19:"2017-01-29 15:51:43";s:10:"updated_at";s:19:"2017-01-29 15:51:43";}', '2017-01-29 08:51:50', '2017-01-29 08:51:50'),
+(762, 1, 4, 7, 'a:1:{i:0;a:9:{s:2:"id";i:30;s:4:"code";s:13:"DAY_CLEAR_OFF";s:4:"name";s:27:"Ngày nghỉ bù làm tết";s:5:"value";s:1:"2";s:6:"value1";s:1:"0";s:6:"value2";s:1:"0";s:6:"active";i:1;s:10:"created_at";s:19:"0000-00-00 00:00:00";s:10:"updated_at";s:19:"0000-00-00 00:00:00";}}', '2017-01-29 09:18:55', '2017-01-29 09:18:55'),
+(763, 1, 4, 7, 'a:1:{i:0;a:9:{s:2:"id";i:31;s:4:"code";s:15:"CHECK_STORE_OFF";s:4:"name";s:33:"Kiểm tra ngày bù, ngày phép";s:5:"value";s:1:"1";s:6:"value1";s:1:"0";s:6:"value2";s:1:"0";s:6:"active";i:1;s:10:"created_at";s:19:"0000-00-00 00:00:00";s:10:"updated_at";s:19:"0000-00-00 00:00:00";}}', '2017-01-29 09:21:53', '2017-01-29 09:21:53'),
+(764, 1, 5, 65, 'a:34:{s:2:"id";i:1;s:9:"period_id";i:2;s:11:"employee_id";i:1;s:8:"position";s:20:"Kế toán trưởng";s:11:"salary_main";s:8:"12200000";s:19:"salary_probationary";s:8:"10200000";s:16:"salary_insurance";s:8:"12000000";s:21:"wage_day_probationary";s:2:"15";s:7:"workday";s:1:"9";s:10:"nightshift";s:1:"0";s:12:"holiday_work";s:1:"2";s:18:"holiday_work_value";s:0:"";s:16:"holiday_overtime";s:5:"0.375";s:12:"off_overtime";s:4:"0.25";s:8:"overtime";s:5:"0.125";s:10:"work_clear";s:1:"1";s:12:"arrive_leave";s:1:"1";s:19:"telephone_allowance";s:6:"100000";s:16:"petrol_allowance";s:6:"100000";s:20:"shift_meal_allowance";s:5:"10000";s:16:"orther_allowance";s:5:"20000";s:12:"on_leave_pay";s:1:"0";s:19:"personal_deductions";s:1:"0";s:17:"number_dependents";s:1:"0";s:7:"advance";s:1:"0";s:20:"total_taxable_income";s:0:"";s:19:"personal_income_tax";s:1:"0";s:16:"social_insurance";s:1:"0";s:16:"health_insurance";s:1:"0";s:22:"unemployment_insurance";s:1:"0";s:16:"trade_union_fund";s:1:"0";s:14:"service_charge";s:7:"2000000";s:10:"created_at";s:19:"2017-01-28 11:46:18";s:10:"updated_at";s:19:"2017-01-28 11:46:18";}', '2017-01-29 09:26:24', '2017-01-29 09:26:24'),
+(765, 1, 5, 65, 'a:34:{s:2:"id";i:2;s:9:"period_id";i:2;s:11:"employee_id";i:2;s:8:"position";s:20:"Kế toán trưởng";s:11:"salary_main";s:7:"5200000";s:19:"salary_probationary";s:1:"0";s:16:"salary_insurance";s:1:"0";s:21:"wage_day_probationary";s:1:"0";s:7:"workday";s:2:"10";s:10:"nightshift";s:1:"0";s:12:"holiday_work";s:1:"0";s:18:"holiday_work_value";s:0:"";s:16:"holiday_overtime";s:1:"0";s:12:"off_overtime";s:1:"0";s:8:"overtime";s:1:"0";s:10:"work_clear";s:1:"0";s:12:"arrive_leave";s:1:"0";s:19:"telephone_allowance";s:1:"0";s:16:"petrol_allowance";s:1:"0";s:20:"shift_meal_allowance";s:1:"0";s:16:"orther_allowance";s:1:"0";s:12:"on_leave_pay";s:1:"0";s:19:"personal_deductions";s:1:"0";s:17:"number_dependents";s:7:"7200000";s:7:"advance";s:1:"0";s:20:"total_taxable_income";s:0:"";s:19:"personal_income_tax";s:1:"0";s:16:"social_insurance";s:1:"0";s:16:"health_insurance";s:1:"0";s:22:"unemployment_insurance";s:1:"0";s:16:"trade_union_fund";s:1:"0";s:14:"service_charge";s:7:"2000000";s:10:"created_at";s:19:"2017-01-28 11:46:18";s:10:"updated_at";s:19:"2017-01-28 11:46:18";}', '2017-01-29 09:26:24', '2017-01-29 09:26:24'),
+(766, 1, 5, 65, 'a:34:{s:2:"id";i:3;s:9:"period_id";i:2;s:11:"employee_id";i:1;s:8:"position";s:20:"Kế toán trưởng";s:11:"salary_main";s:8:"12200000";s:19:"salary_probationary";s:8:"10200000";s:16:"salary_insurance";s:8:"12000000";s:21:"wage_day_probationary";s:2:"15";s:7:"workday";s:1:"9";s:10:"nightshift";s:1:"0";s:12:"holiday_work";s:1:"2";s:18:"holiday_work_value";s:15:"933333.33333333";s:16:"holiday_overtime";s:5:"0.375";s:12:"off_overtime";s:4:"0.25";s:8:"overtime";s:5:"0.125";s:10:"work_clear";s:1:"1";s:12:"arrive_leave";s:1:"1";s:19:"telephone_allowance";s:6:"100000";s:16:"petrol_allowance";s:6:"100000";s:20:"shift_meal_allowance";s:5:"10000";s:16:"orther_allowance";s:5:"20000";s:12:"on_leave_pay";s:1:"0";s:19:"personal_deductions";s:1:"0";s:17:"number_dependents";s:1:"0";s:7:"advance";s:1:"0";s:20:"total_taxable_income";s:1:"0";s:19:"personal_income_tax";s:1:"0";s:16:"social_insurance";s:1:"0";s:16:"health_insurance";s:1:"0";s:22:"unemployment_insurance";s:1:"0";s:16:"trade_union_fund";s:1:"0";s:14:"service_charge";s:7:"2000000";s:10:"created_at";s:19:"2017-01-29 16:33:17";s:10:"updated_at";s:19:"2017-01-29 16:33:17";}', '2017-01-29 09:34:37', '2017-01-29 09:34:37'),
+(767, 1, 5, 65, 'a:34:{s:2:"id";i:4;s:9:"period_id";i:2;s:11:"employee_id";i:2;s:8:"position";s:20:"Kế toán trưởng";s:11:"salary_main";s:7:"5200000";s:19:"salary_probationary";s:1:"0";s:16:"salary_insurance";s:1:"0";s:21:"wage_day_probationary";s:1:"0";s:7:"workday";s:2:"10";s:10:"nightshift";s:1:"0";s:12:"holiday_work";s:1:"0";s:18:"holiday_work_value";s:1:"0";s:16:"holiday_overtime";s:1:"0";s:12:"off_overtime";s:1:"0";s:8:"overtime";s:1:"0";s:10:"work_clear";s:1:"0";s:12:"arrive_leave";s:1:"0";s:19:"telephone_allowance";s:1:"0";s:16:"petrol_allowance";s:1:"0";s:20:"shift_meal_allowance";s:1:"0";s:16:"orther_allowance";s:1:"0";s:12:"on_leave_pay";s:1:"0";s:19:"personal_deductions";s:1:"0";s:17:"number_dependents";s:7:"7200000";s:7:"advance";s:1:"0";s:20:"total_taxable_income";s:1:"0";s:19:"personal_income_tax";s:1:"0";s:16:"social_insurance";s:1:"0";s:16:"health_insurance";s:1:"0";s:22:"unemployment_insurance";s:1:"0";s:16:"trade_union_fund";s:1:"0";s:14:"service_charge";s:7:"2000000";s:10:"created_at";s:19:"2017-01-29 16:34:25";s:10:"updated_at";s:19:"2017-01-29 16:34:25";}', '2017-01-29 09:34:37', '2017-01-29 09:34:37'),
+(768, 1, 5, 65, 'a:9:{s:2:"id";i:2;s:9:"period_id";i:2;s:11:"employee_id";i:1;s:4:"name";i:1;s:4:"type";i:1;s:5:"value";s:1:"1";s:6:"active";i:1;s:10:"created_at";s:19:"2017-01-29 16:28:12";s:10:"updated_at";s:19:"2017-01-29 16:28:12";}', '2017-01-29 09:34:37', '2017-01-29 09:34:37'),
+(769, 1, 5, 65, 'a:9:{s:2:"id";i:3;s:9:"period_id";i:2;s:11:"employee_id";i:1;s:4:"name";i:1;s:4:"type";i:2;s:5:"value";s:1:"1";s:6:"active";i:1;s:10:"created_at";s:19:"2017-01-29 16:28:12";s:10:"updated_at";s:19:"2017-01-29 16:28:12";}', '2017-01-29 09:34:37', '2017-01-29 09:34:37'),
+(770, 1, 5, 65, 'a:9:{s:2:"id";i:4;s:9:"period_id";i:2;s:11:"employee_id";i:1;s:4:"name";i:2;s:4:"type";i:2;s:5:"value";s:1:"1";s:6:"active";i:1;s:10:"created_at";s:19:"2017-01-29 16:28:12";s:10:"updated_at";s:19:"2017-01-29 16:28:12";}', '2017-01-29 09:34:37', '2017-01-29 09:34:37'),
+(771, 1, 5, 65, 'a:9:{s:2:"id";i:5;s:9:"period_id";i:2;s:11:"employee_id";i:1;s:4:"name";i:2;s:4:"type";i:1;s:5:"value";s:1:"4";s:6:"active";i:1;s:10:"created_at";s:19:"2017-01-29 16:28:12";s:10:"updated_at";s:19:"2017-01-29 16:28:12";}', '2017-01-29 09:34:37', '2017-01-29 09:34:37'),
+(772, 1, 5, 65, 'a:9:{s:2:"id";i:6;s:9:"period_id";i:2;s:11:"employee_id";i:2;s:4:"name";i:1;s:4:"type";i:1;s:5:"value";s:1:"1";s:6:"active";i:1;s:10:"created_at";s:19:"2017-01-29 16:28:12";s:10:"updated_at";s:19:"2017-01-29 16:28:12";}', '2017-01-29 09:34:37', '2017-01-29 09:34:37'),
+(773, 1, 5, 65, 'a:9:{s:2:"id";i:7;s:9:"period_id";i:2;s:11:"employee_id";i:1;s:4:"name";i:1;s:4:"type";i:1;s:5:"value";s:1:"1";s:6:"active";i:1;s:10:"created_at";s:19:"2017-01-29 16:33:17";s:10:"updated_at";s:19:"2017-01-29 16:33:17";}', '2017-01-29 09:34:37', '2017-01-29 09:34:37'),
+(774, 1, 5, 65, 'a:9:{s:2:"id";i:8;s:9:"period_id";i:2;s:11:"employee_id";i:1;s:4:"name";i:1;s:4:"type";i:1;s:5:"value";s:1:"1";s:6:"active";i:1;s:10:"created_at";s:19:"2017-01-29 16:33:18";s:10:"updated_at";s:19:"2017-01-29 16:33:18";}', '2017-01-29 09:34:37', '2017-01-29 09:34:37'),
+(775, 1, 5, 65, 'a:9:{s:2:"id";i:9;s:9:"period_id";i:2;s:11:"employee_id";i:1;s:4:"name";i:1;s:4:"type";i:1;s:5:"value";s:1:"1";s:6:"active";i:1;s:10:"created_at";s:19:"2017-01-29 16:33:25";s:10:"updated_at";s:19:"2017-01-29 16:33:25";}', '2017-01-29 09:34:37', '2017-01-29 09:34:37'),
+(776, 1, 5, 65, 'a:9:{s:2:"id";i:10;s:9:"period_id";i:2;s:11:"employee_id";i:1;s:4:"name";i:1;s:4:"type";i:1;s:5:"value";s:1:"1";s:6:"active";i:1;s:10:"created_at";s:19:"2017-01-29 16:33:25";s:10:"updated_at";s:19:"2017-01-29 16:33:25";}', '2017-01-29 09:34:37', '2017-01-29 09:34:37'),
+(777, 1, 5, 65, 'a:9:{s:2:"id";i:11;s:9:"period_id";i:2;s:11:"employee_id";i:1;s:4:"name";i:1;s:4:"type";i:1;s:5:"value";s:1:"1";s:6:"active";i:1;s:10:"created_at";s:19:"2017-01-29 16:34:01";s:10:"updated_at";s:19:"2017-01-29 16:34:01";}', '2017-01-29 09:34:37', '2017-01-29 09:34:37'),
+(778, 1, 5, 65, 'a:9:{s:2:"id";i:12;s:9:"period_id";i:2;s:11:"employee_id";i:1;s:4:"name";i:1;s:4:"type";i:1;s:5:"value";s:1:"1";s:6:"active";i:1;s:10:"created_at";s:19:"2017-01-29 16:34:02";s:10:"updated_at";s:19:"2017-01-29 16:34:02";}', '2017-01-29 09:34:37', '2017-01-29 09:34:37'),
+(779, 1, 5, 65, 'a:9:{s:2:"id";i:13;s:9:"period_id";i:2;s:11:"employee_id";i:1;s:4:"name";i:1;s:4:"type";i:1;s:5:"value";s:1:"1";s:6:"active";i:1;s:10:"created_at";s:19:"2017-01-29 16:34:25";s:10:"updated_at";s:19:"2017-01-29 16:34:25";}', '2017-01-29 09:34:37', '2017-01-29 09:34:37'),
+(780, 1, 5, 65, 'a:9:{s:2:"id";i:14;s:9:"period_id";i:2;s:11:"employee_id";i:1;s:4:"name";i:1;s:4:"type";i:2;s:5:"value";s:1:"1";s:6:"active";i:1;s:10:"created_at";s:19:"2017-01-29 16:34:25";s:10:"updated_at";s:19:"2017-01-29 16:34:25";}', '2017-01-29 09:34:37', '2017-01-29 09:34:37'),
+(781, 1, 5, 65, 'a:9:{s:2:"id";i:15;s:9:"period_id";i:2;s:11:"employee_id";i:1;s:4:"name";i:2;s:4:"type";i:2;s:5:"value";s:1:"1";s:6:"active";i:1;s:10:"created_at";s:19:"2017-01-29 16:34:25";s:10:"updated_at";s:19:"2017-01-29 16:34:25";}', '2017-01-29 09:34:38', '2017-01-29 09:34:38'),
+(782, 1, 5, 65, 'a:9:{s:2:"id";i:16;s:9:"period_id";i:2;s:11:"employee_id";i:1;s:4:"name";i:2;s:4:"type";i:1;s:5:"value";s:1:"4";s:6:"active";i:1;s:10:"created_at";s:19:"2017-01-29 16:34:25";s:10:"updated_at";s:19:"2017-01-29 16:34:25";}', '2017-01-29 09:34:38', '2017-01-29 09:34:38'),
+(783, 1, 5, 65, 'a:9:{s:2:"id";i:17;s:9:"period_id";i:2;s:11:"employee_id";i:2;s:4:"name";i:1;s:4:"type";i:1;s:5:"value";s:1:"1";s:6:"active";i:1;s:10:"created_at";s:19:"2017-01-29 16:34:25";s:10:"updated_at";s:19:"2017-01-29 16:34:25";}', '2017-01-29 09:34:38', '2017-01-29 09:34:38'),
+(784, 1, 1, 1, '', '2017-01-31 02:29:31', '2017-01-31 02:29:31'),
+(785, 1, 4, 6, 'a:1:{i:0;a:9:{s:2:"id";i:31;s:4:"type";i:0;s:9:"parent_id";i:11;s:4:"code";s:16:"report-store-off";s:4:"name";s:33:"Báo cáo công phép, nghỉ bù";s:4:"icon";s:1:" ";s:4:"link";s:22:"admin/report-store-off";s:8:"position";i:0;s:6:"active";i:1;}}', '2017-01-31 02:39:40', '2017-01-31 02:39:40'),
+(786, 1, 4, 6, 'a:1:{i:0;a:9:{s:2:"id";i:62;s:4:"type";i:1;s:9:"parent_id";i:48;s:4:"code";s:16:"report-store-off";s:4:"name";s:33:"Báo cáo công phép, nghỉ bù";s:4:"icon";s:1:" ";s:4:"link";s:16:"report-store-off";s:8:"position";i:0;s:6:"active";i:1;}}', '2017-01-31 02:40:03', '2017-01-31 02:40:03'),
+(787, 1, 4, 7, 'a:1:{i:0;a:9:{s:2:"id";i:32;s:4:"code";s:10:"MIN_ADD_AL";s:4:"name";s:47:"Ngày làm tối thiểu để đc nghỉ phép";s:5:"value";s:2:"20";s:6:"value1";s:1:"0";s:6:"value2";s:1:"0";s:6:"active";i:1;s:10:"created_at";s:19:"0000-00-00 00:00:00";s:10:"updated_at";s:19:"0000-00-00 00:00:00";}}', '2017-01-31 02:41:09', '2017-01-31 02:41:09'),
+(788, 1, 4, 19, 'a:1:{i:0;a:7:{s:2:"id";i:1;s:4:"code";s:7:"01/2017";s:4:"name";s:12:"Kỳ 01/2017";s:5:"start";s:10:"2017-01-01";s:3:"end";s:10:"2017-01-31";s:4:"lock";i:1;s:6:"active";i:1;}}', '2017-01-31 02:42:28', '2017-01-31 02:42:28'),
+(789, 1, 3, 28, 'a:1:{i:0;a:7:{s:2:"id";i:16;s:4:"type";i:2;s:4:"code";s:2:"8W";s:4:"name";s:11:"Đi làm 8h";s:5:"value";s:1:"8";s:6:"method";s:1:"1";s:6:"active";i:1;}}', '2017-01-31 03:45:03', '2017-01-31 03:45:03'),
+(790, 1, 3, 28, 'a:1:{i:0;a:7:{s:2:"id";i:17;s:4:"type";i:2;s:4:"code";s:4:"7.5W";s:4:"name";s:13:"Đi làm 7.5h";s:5:"value";s:3:"7.5";s:6:"method";s:1:"1";s:6:"active";i:1;}}', '2017-01-31 03:45:23', '2017-01-31 03:45:23'),
+(791, 1, 3, 28, 'a:1:{i:0;a:7:{s:2:"id";i:18;s:4:"type";i:2;s:4:"code";s:2:"7W";s:4:"name";s:11:"Đi làm 7h";s:5:"value";s:1:"7";s:6:"method";s:1:"1";s:6:"active";i:1;}}', '2017-01-31 03:45:38', '2017-01-31 03:45:38'),
+(792, 1, 3, 28, 'a:1:{i:0;a:7:{s:2:"id";i:19;s:4:"type";i:2;s:4:"code";s:4:"6.5W";s:4:"name";s:13:"Đi làm 6.5h";s:5:"value";s:3:"6.5";s:6:"method";s:1:"1";s:6:"active";i:1;}}', '2017-01-31 03:45:50', '2017-01-31 03:45:50'),
+(793, 1, 3, 28, 'a:1:{i:0;a:7:{s:2:"id";i:20;s:4:"type";i:2;s:4:"code";s:2:"6W";s:4:"name";s:11:"Đi làm 6h";s:5:"value";s:1:"6";s:6:"method";s:1:"1";s:6:"active";i:1;}}', '2017-01-31 03:46:00', '2017-01-31 03:46:00'),
+(794, 1, 3, 28, 'a:1:{i:0;a:7:{s:2:"id";i:21;s:4:"type";i:2;s:4:"code";s:4:"5.5W";s:4:"name";s:13:"Đi làm 5.5h";s:5:"value";s:3:"5.5";s:6:"method";s:1:"1";s:6:"active";i:1;}}', '2017-01-31 03:46:11', '2017-01-31 03:46:11'),
+(795, 1, 3, 28, 'a:1:{i:0;a:7:{s:2:"id";i:22;s:4:"type";i:2;s:4:"code";s:2:"5W";s:4:"name";s:11:"Đi làm 5h";s:5:"value";s:1:"5";s:6:"method";s:1:"1";s:6:"active";i:1;}}', '2017-01-31 03:58:51', '2017-01-31 03:58:51'),
+(796, 1, 3, 28, 'a:1:{i:0;a:7:{s:2:"id";i:23;s:4:"type";i:2;s:4:"code";s:4:"4.5W";s:4:"name";s:13:"Đi làm 4.5h";s:5:"value";s:3:"4.5";s:6:"method";s:1:"1";s:6:"active";i:1;}}', '2017-01-31 03:59:04', '2017-01-31 03:59:04'),
+(797, 1, 3, 28, 'a:1:{i:0;a:7:{s:2:"id";i:24;s:4:"type";i:2;s:4:"code";s:2:"4W";s:4:"name";s:11:"Đi làm 4h";s:5:"value";s:1:"4";s:6:"method";s:1:"1";s:6:"active";i:1;}}', '2017-01-31 03:59:20', '2017-01-31 03:59:20'),
+(798, 1, 3, 28, 'a:1:{i:0;a:7:{s:2:"id";i:25;s:4:"type";i:2;s:4:"code";s:4:"3.5W";s:4:"name";s:13:"Đi làm 3.5h";s:5:"value";s:3:"3.5";s:6:"method";s:1:"1";s:6:"active";i:1;}}', '2017-01-31 03:59:36', '2017-01-31 03:59:36'),
+(799, 1, 3, 28, 'a:1:{i:0;a:7:{s:2:"id";i:26;s:4:"type";i:2;s:4:"code";s:2:"3W";s:4:"name";s:11:"Đi làm 3h";s:5:"value";s:1:"3";s:6:"method";s:1:"1";s:6:"active";i:1;}}', '2017-01-31 03:59:46', '2017-01-31 03:59:46'),
+(800, 1, 3, 28, 'a:1:{i:0;a:7:{s:2:"id";i:27;s:4:"type";i:2;s:4:"code";s:4:"2.5W";s:4:"name";s:13:"Đi làm 2.5h";s:5:"value";s:3:"2.5";s:6:"method";s:1:"1";s:6:"active";i:1;}}', '2017-01-31 04:00:04', '2017-01-31 04:00:04'),
+(801, 1, 3, 28, 'a:1:{i:0;a:7:{s:2:"id";i:28;s:4:"type";i:2;s:4:"code";s:2:"2W";s:4:"name";s:11:"Đi làm 2h";s:5:"value";s:1:"2";s:6:"method";s:1:"1";s:6:"active";i:1;}}', '2017-01-31 04:00:15', '2017-01-31 04:00:15'),
+(802, 1, 3, 28, 'a:1:{i:0;a:7:{s:2:"id";i:29;s:4:"type";i:2;s:4:"code";s:4:"1.5W";s:4:"name";s:13:"Đi làm 1.5h";s:5:"value";s:3:"1.5";s:6:"method";s:1:"1";s:6:"active";i:1;}}', '2017-01-31 04:00:26', '2017-01-31 04:00:26'),
+(803, 1, 3, 28, 'a:1:{i:0;a:7:{s:2:"id";i:30;s:4:"type";i:2;s:4:"code";s:2:"1W";s:4:"name";s:11:"Đi làm 1h";s:5:"value";s:1:"1";s:6:"method";s:1:"1";s:6:"active";i:1;}}', '2017-01-31 04:00:36', '2017-01-31 04:00:36'),
+(804, 1, 3, 28, 'a:1:{i:0;a:7:{s:2:"id";i:31;s:4:"type";i:2;s:4:"code";s:4:"0.5W";s:4:"name";s:13:"Đi làm 0.5h";s:5:"value";s:3:"0.5";s:6:"method";s:1:"1";s:6:"active";i:1;}}', '2017-01-31 04:00:48', '2017-01-31 04:00:48');
 
 -- --------------------------------------------------------
 
@@ -1040,16 +1128,16 @@ INSERT INTO `menu` (`id`, `type`, `parent_id`, `code`, `name`, `icon`, `link`, `
 (26, 0, 9, 'labor-contract', 'Hợp đồng lao động', ' ', 'admin/labor-contract', 0, 1),
 (27, 0, 17, 'product-group', 'Nhóm hàng hóa', '', 'admin/product-group', 0, 0),
 (28, 0, 17, 'timekeeper', 'Danh mục chấm công', ' ', 'admin/timekeeper', 0, 1),
-(29, 0, 10, 'issue-warehouse', 'Xuất kho', '', 'admin/issue-warehouse', 0, 0),
+(29, 0, 9, 'charge-revenue', 'Doanh thu phí phục vụ', ' ', 'admin/charge-revenue', 0, 1),
 (30, 0, 17, 'warehouse', 'Kho', '', 'admin/warehouse', 0, 0),
-(31, 0, 11, 'report-warehouse', 'Tồn kho theo giá mua', '', 'admin/report-warehouse', 0, 0),
+(31, 0, 11, 'report-store-off', 'Báo cáo công phép, nghỉ bù', ' ', 'admin/report-store-off', 0, 1),
 (32, 0, 11, 'report-detail-warehouse', 'Tồn kho chi tiết', '', 'admin/report-detail-warehouse', 0, 0),
 (33, 0, 11, 'report-history-price', 'Báo cáo lịch sử giá', '', 'admin/report-history-price', 0, 0),
 (35, 2, 0, 'report', 'Báo cáo', '', '', 1, 1),
 (36, 2, 35, 'report-income-shift', 'Báo cáo ca', '', 'report-income-shift', 1, 0),
 (37, 2, 0, 'frontend', 'Thu ngân', '', 'index', 0, 1),
 (38, 0, 11, 'report-income-shift', 'Báo cáo ca', '', 'admin/report-income-shift', 0, 0),
-(39, 2, 35, 'report-total-income', 'Báo cáo ca', '', 'report-total-income', 1, 0),
+(39, 0, 9, 'store-off', 'Điều chỉnh phép năm', ' ', 'store-off', 1, 1),
 (40, 0, 9, 'payroll', 'Bảng lương', ' ', 'admin/payroll', 0, 1),
 (41, 1, 0, 'index', 'Trang chủ', 'icon-home', 'manage/index', -1, 0),
 (42, 1, 0, 'systems', 'Quản lý hệ thống', '', '', 1, 1),
@@ -1070,13 +1158,13 @@ INSERT INTO `menu` (`id`, `type`, `parent_id`, `code`, `name`, `icon`, `link`, `
 (57, 1, 51, 'partner', 'Danh sách khách hàng / NCC', '', 'manage/partner', 0, 0),
 (58, 1, 46, 'labor-contract', 'Hợp đồng lao động', ' ', 'labor-contract', 0, 1),
 (59, 1, 51, 'product-group', 'Nhóm hàng hóa', '', 'manage/product-group', 0, 0),
-(60, 1, 47, 'issue-warehouse', 'Xuất kho', '', 'manage/issue-warehouse', 0, 0),
+(60, 1, 46, 'charge-revenue', 'Doanh thu phí phục vụ', ' ', 'charge-revenue', 0, 1),
 (61, 1, 51, 'warehouse', 'Kho', '', 'manage/warehouse', 0, 0),
-(62, 1, 48, 'report-warehouse', 'Tồn kho theo giá mua', '', 'manage/report-warehouse', 0, 0),
+(62, 1, 48, 'report-store-off', 'Báo cáo công phép, nghỉ bù', ' ', 'report-store-off', 0, 1),
 (63, 1, 48, 'report-detail-warehouse', 'Tồn kho chi tiết', '', 'manage/report-detail-warehouse', 0, 0),
 (64, 1, 48, 'report-history-price', 'Báo cáo lịch sử giá', '', 'manage/report-history-price', 0, 0),
 (65, 1, 46, 'payroll', 'Bảng lương', ' ', 'payroll', 0, 1),
-(66, 1, 48, 'report-total-income', 'Báo cáo ca', '', 'manage/report-total-income', 0, 0),
+(66, 1, 46, 'store-off', 'Điều chỉnh phép năm', ' ', 'store-off', 0, 1),
 (67, 1, 51, 'timekeeper', 'Danh mục chấm công', ' ', 'timekeeper', 0, 1),
 (68, 1, 51, 'employee', 'Nhân viên', '', 'employee', 0, 1),
 (69, 2, 0, 'return', 'Nhập trả', '', 'return', 0, 1);
@@ -1100,7 +1188,9 @@ INSERT INTO `migrations` (`migration`, `batch`) VALUES
 ('2016_02_07_122552_create-social-logins', 1),
 ('2017_01_14_182157_create_labor_contract', 2),
 ('2017_01_15_194931_create_overtime_table', 3),
-('2017_01_16_195718_create_payroll_table', 4);
+('2017_01_16_195718_create_payroll_table', 4),
+('2017_01_27_230020_create_service_charge_revenue', 5),
+('2017_01_28_220437_create_store_off', 6);
 
 -- --------------------------------------------------------
 
@@ -1150,13 +1240,13 @@ INSERT INTO `options` (`id`, `code`, `name`, `value`, `value1`, `value2`, `activ
 (23, 'PERSONAL_INCOME_LV5', '52tr>TNDN Bậc 5 >32', '32000000', '0.25', '3250000', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (24, 'PERSONAL_INCOME_LV6', '80tr>TNDN Bậc 6 >52', '52000000', '0.3', '5850000', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (25, 'PERSONAL_INCOME_LV7', 'TNDN Bậc 7 >80TR', '80000000', '0.35', '9850000', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(26, 'PRICE_PERSION_DEDUCT', 'Khấu trừ bản thân', '9000000', '0', '0', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(26, 'PRICE_PERSONAL_DEDUCT', 'Khấu trừ bản thân', '', '0', '0', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (27, 'PRICE_NUMBER_DEDUCT', 'Khấu trừ người phụ thuộc', '3600000', '0', '0', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(28, 'CALCULATOR_PERSONAL_INCOME_TAX', 'Tính thuế TNDN', '1', '0', '0', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(29, 'CALCULATOR_INSURRANCE', 'Tính bảo hiểm', '1', '0', '0', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(30, 'TWITTER', 'twitter', 'twitter', '0', '0', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(31, 'GOOGLE+', 'google+', 'google+', '0', '0', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(32, 'LINKEDIN', 'linkedin', 'linkedin', '0', '0', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(28, 'CALCULATOR_PERSONAL_INCOME_TAX', 'Tính thuế TNDN', '0', '0', '0', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(29, 'CALCULATOR_INSURRANCE', 'Tính bảo hiểm', '0', '0', '0', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(30, 'DAY_CLEAR_OFF', 'Ngày nghỉ bù làm tết', '2', '0', '0', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(31, 'CHECK_STORE_OFF', 'Kiểm tra ngày bù, ngày phép', '1', '0', '0', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(32, 'MIN_ADD_AL', 'Ngày làm tối thiểu để đc nghỉ phép', '20', '0', '0', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (33, 'YOUTUBE', 'youtube', 'youtube', '0', '0', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (34, 'VIMEO', 'vimeo', 'vimeo', '0', '0', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (35, 'ADDRESS1', 'Đảo bạch tuộc 2', '26-28 Trương Vĩnh Ký Phường Tân Thành – Quận Tân Phú - HCM', '0', '0', 1, '2016-01-15 02:42:08', '2016-07-18 05:09:38'),
@@ -1197,32 +1287,46 @@ CREATE TABLE `payroll` (
   `id` int(10) UNSIGNED NOT NULL,
   `period_id` int(11) NOT NULL,
   `employee_id` int(11) NOT NULL,
-  `wage_day` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `workday` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `nightshift` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `holiday_work` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `holiday_overtime` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `off_overtime` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `overtime` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `work_clear` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `arrive_leave` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `telephone_allowance` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `petrol_allowance` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `shift_meal_allowance` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `orther_allowance` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `on_leave_pay` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `personal_deductions` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `family_allowances` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `advance` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `personal_income_tax` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `social_insurance` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `health_insurance` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `unemployment_insurance` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `service_charge` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `bonus_sales` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `position` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `salary_main` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `salary_probationary` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `salary_insurance` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `wage_day_probationary` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `workday` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `nightshift` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `holiday_work` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `holiday_work_value` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `holiday_overtime` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `off_overtime` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `overtime` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `work_clear` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `arrive_leave` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `telephone_allowance` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `petrol_allowance` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `shift_meal_allowance` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `orther_allowance` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `on_leave_pay` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `personal_deductions` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `number_dependents` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `advance` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `total_taxable_income` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `personal_income_tax` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `social_insurance` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `health_insurance` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `unemployment_insurance` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `trade_union_fund` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `service_charge` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Contenu de la table `payroll`
+--
+
+INSERT INTO `payroll` (`id`, `period_id`, `employee_id`, `position`, `salary_main`, `salary_probationary`, `salary_insurance`, `wage_day_probationary`, `workday`, `nightshift`, `holiday_work`, `holiday_work_value`, `holiday_overtime`, `off_overtime`, `overtime`, `work_clear`, `arrive_leave`, `telephone_allowance`, `petrol_allowance`, `shift_meal_allowance`, `orther_allowance`, `on_leave_pay`, `personal_deductions`, `number_dependents`, `advance`, `total_taxable_income`, `personal_income_tax`, `social_insurance`, `health_insurance`, `unemployment_insurance`, `trade_union_fund`, `service_charge`, `created_at`, `updated_at`) VALUES
+(5, 2, 1, 'Kế toán trưởng', '12200000', '10200000', '12000000', '15', '9', '0', '2', '933333.33333333', '0.375', '0.25', '0.125', '1', '1', '100000', '100000', '10000', '20000', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '2000000', '2017-01-29 09:34:52', '2017-01-29 09:34:52'),
+(6, 2, 2, 'Kế toán trưởng', '5200000', '0', '0', '0', '10', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '7200000', '0', '0', '0', '0', '0', '0', '0', '2000000', '2017-01-29 09:34:52', '2017-01-29 09:34:52');
 
 -- --------------------------------------------------------
 
@@ -1245,7 +1349,7 @@ CREATE TABLE `period` (
 --
 
 INSERT INTO `period` (`id`, `code`, `name`, `start`, `end`, `lock`, `active`) VALUES
-(1, '01/2017', 'Kỳ 01/2017', '2017-01-01', '2017-01-31', 0, 1),
+(1, '01/2017', 'Kỳ 01/2017', '2017-01-01', '2017-01-31', 1, 1),
 (2, '02/2017', 'Kỳ 02/2017', '2017-02-01', '2017-02-28', 1, 1);
 
 -- --------------------------------------------------------
@@ -1262,6 +1366,35 @@ CREATE TABLE `social_logins` (
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `store_off`
+--
+
+CREATE TABLE `store_off` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `period_id` int(11) NOT NULL,
+  `employee_id` int(11) NOT NULL,
+  `name` tinyint(4) NOT NULL,
+  `type` tinyint(4) NOT NULL,
+  `value` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `active` tinyint(4) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Contenu de la table `store_off`
+--
+
+INSERT INTO `store_off` (`id`, `period_id`, `employee_id`, `name`, `type`, `value`, `active`, `created_at`, `updated_at`) VALUES
+(18, 2, 1, 1, 1, '1', 1, '2017-01-29 09:34:52', '2017-01-29 09:34:52'),
+(19, 2, 1, 1, 2, '1', 1, '2017-01-29 09:34:52', '2017-01-29 09:34:52'),
+(20, 2, 1, 2, 2, '1', 1, '2017-01-29 09:34:52', '2017-01-29 09:34:52'),
+(21, 2, 1, 2, 1, '4', 1, '2017-01-29 09:34:52', '2017-01-29 09:34:52'),
+(22, 2, 2, 1, 1, '1', 1, '2017-01-29 09:34:52', '2017-01-29 09:34:52');
 
 -- --------------------------------------------------------
 
@@ -1324,7 +1457,23 @@ INSERT INTO `timekeeper` (`id`, `type`, `code`, `name`, `value`, `method`, `acti
 (12, 1, 'CL/2', 'Nghỉ bù nửa ngày - CL/2', '0.5', '4', 1),
 (13, 1, 'UL/2', 'Nghỉ nửa ngày - UL/2', '0.5', '2', 1),
 (14, 1, 'OT', 'Đi công tác - OT', '1', '1', 1),
-(15, 1, 'OT/2', 'Đi công tác - OT/2', '0.5', '1', 1);
+(15, 1, 'OT/2', 'Đi công tác - OT/2', '0.5', '1', 1),
+(16, 2, '8W', 'Đi làm 8h', '8', '1', 1),
+(17, 2, '7.5W', 'Đi làm 7.5h', '7.5', '1', 1),
+(18, 2, '7W', 'Đi làm 7h', '7', '1', 1),
+(19, 2, '6.5W', 'Đi làm 6.5h', '6.5', '1', 1),
+(20, 2, '6W', 'Đi làm 6h', '6', '1', 1),
+(21, 2, '5.5W', 'Đi làm 5.5h', '5.5', '1', 1),
+(22, 2, '5W', 'Đi làm 5h', '5', '1', 1),
+(23, 2, '4.5W', 'Đi làm 4.5h', '4.5', '1', 1),
+(24, 2, '4W', 'Đi làm 4h', '4', '1', 1),
+(25, 2, '3.5W', 'Đi làm 3.5h', '3.5', '1', 1),
+(26, 2, '3W', 'Đi làm 3h', '3', '1', 1),
+(27, 2, '2.5W', 'Đi làm 2.5h', '2.5', '1', 1),
+(28, 2, '2W', 'Đi làm 2h', '2', '1', 1),
+(29, 2, '1.5W', 'Đi làm 1.5h', '1.5', '1', 1),
+(30, 2, '1W', 'Đi làm 1h', '1', '1', 1),
+(31, 2, '0.5W', 'Đi làm 0.5h', '0.5', '1', 1);
 
 -- --------------------------------------------------------
 
@@ -1507,6 +1656,13 @@ ALTER TABLE `advance`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Index pour la table `charge_revenue`
+--
+ALTER TABLE `charge_revenue`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `service_charge_revenue_id_index` (`id`);
+
+--
 -- Index pour la table `department`
 --
 ALTER TABLE `department`
@@ -1589,6 +1745,13 @@ ALTER TABLE `social_logins`
   ADD KEY `social_logins_user_id_index` (`user_id`);
 
 --
+-- Index pour la table `store_off`
+--
+ALTER TABLE `store_off`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `store_off_id_index` (`id`);
+
+--
 -- Index pour la table `template`
 --
 ALTER TABLE `template`
@@ -1628,6 +1791,11 @@ ALTER TABLE `user_permission`
 ALTER TABLE `advance`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT pour la table `charge_revenue`
+--
+ALTER TABLE `charge_revenue`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
 -- AUTO_INCREMENT pour la table `department`
 --
 ALTER TABLE `department`
@@ -1651,7 +1819,7 @@ ALTER TABLE `help_desk`
 -- AUTO_INCREMENT pour la table `history_action`
 --
 ALTER TABLE `history_action`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=739;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=805;
 --
 -- AUTO_INCREMENT pour la table `history_salary`
 --
@@ -1681,7 +1849,7 @@ ALTER TABLE `overtime`
 -- AUTO_INCREMENT pour la table `payroll`
 --
 ALTER TABLE `payroll`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT pour la table `period`
 --
@@ -1693,6 +1861,11 @@ ALTER TABLE `period`
 ALTER TABLE `social_logins`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT pour la table `store_off`
+--
+ALTER TABLE `store_off`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+--
 -- AUTO_INCREMENT pour la table `template`
 --
 ALTER TABLE `template`
@@ -1701,7 +1874,7 @@ ALTER TABLE `template`
 -- AUTO_INCREMENT pour la table `timekeeper`
 --
 ALTER TABLE `timekeeper`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 --
 -- AUTO_INCREMENT pour la table `timesheet`
 --
