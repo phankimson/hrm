@@ -40,4 +40,6 @@ return array(
     'calculator_insurrance'=> 'Tính BH',
     'price_personal_deduct'=>'Khấu trừ bản thân',
     'price_number_deduct'=> 'Khấu trừ người phụ thuộc',
+    'day_clear_off'=>'Ngày nghỉ khi đi làm ngày lễ',
+    'min_add_al'=>'Ngày làm tối thiểu để đc nghỉ phép', 
 );

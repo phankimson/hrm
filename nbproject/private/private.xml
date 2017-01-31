@@ -12,9 +12,22 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/D:/xampp/htdocs/hrm/app/Http/Controllers/PayrollController.php</file>
             <file>file:/D:/xampp/htdocs/hrm/app/Http/Models/StoreOff.php</file>
             <file>file:/D:/xampp/htdocs/hrm/app/Http/Models/Payroll.php</file>
+=======
+            <file>file:/E:/xampp/htdocs/hrm/resources/lang/vn/options.php</file>
+            <file>file:/E:/xampp/htdocs/hrm/routes/web.php</file>
+            <file>file:/E:/xampp/htdocs/hrm/app/Http/Controllers/PayrollController.php</file>
+            <file>file:/E:/xampp/htdocs/hrm/index.php</file>
+            <file>file:/E:/xampp/htdocs/hrm/app/Http/Models/Employee.php</file>
+            <file>file:/E:/xampp/htdocs/hrm/resources/lang/en/options.php</file>
+            <file>file:/E:/xampp/htdocs/hrm/app/Http/Controllers/ReportStoreOffController.php</file>
+            <file>file:/E:/xampp/htdocs/hrm/resources/views/admin/includes/header.blade.php</file>
+            <file>file:/E:/xampp/htdocs/hrm/resources/views/admin/pages/reportStoreOff.blade.php</file>
+            <file>file:/E:/xampp/htdocs/hrm/public/addon/admin/scripts/epos-report-stock.js</file>
+>>>>>>> origin/master
         </group>
     </open-files>
 </project-private>

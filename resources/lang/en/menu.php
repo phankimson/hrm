@@ -63,7 +63,7 @@ return [
     'help-desk'=>'Help desk',
     'query'=>'Query SQL',
     'format-voucher'=> 'Format Vouchers',   
-    'report-warehouse'=> 'Report Warehouse',
+    'report-store-off'=> 'Report Store Off',
     'report-detail-warehouse'=> 'Report Detail Warehouse',
     'report-history-price'=> 'Report History Price',
     'store-off'=>'Adjustment annual leave',

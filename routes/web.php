@@ -83,6 +83,7 @@ Route::group(['middleware'=>['web']],function(){
     Route::post("load-chart",['uses'=>'DashboardController@loadChart']);
     Route::post("overtime",['uses'=>'OvertimeController@load']);
     Route::post("payroll",['uses'=>'PayrollController@load']);
+    Route::post("report-store-off",['uses'=>'ReportStoreOffController@loadReport']);
   }); 
  Route::group(['middleware' => 'check.permission'], function () { 
 Route::get("/",['uses'=>'DashboardController@showIndex']);
@@ -104,6 +105,7 @@ Route::get("overtime",['uses'=>'OvertimeController@showPage']);
 Route::get("payroll",['uses'=>'PayrollController@showPage']);
 Route::get("charge-revenue",['uses'=>'ChargeRevenueController@showPage']);
 Route::get("store-off",['uses'=>'StoreOffController@showPage']);
+Route::get("report-store-off",['uses'=>'ReportStoreOffController@showPage']);
  });
 Route::get("logout",['uses'=>'DashboardController@doLogout']);
 Route::get("login",['uses'=>'UserController@showLogin']);
@@ -200,6 +202,7 @@ Route::group(["prefix"=>"admin"],function(){
     Route::post("load-chart",['uses'=>'DashboardController@loadChart']);
     Route::post("overtime",['uses'=>'OvertimeController@load']);
     Route::post("payroll",['uses'=>'PayrollController@load']);
+    Route::post("report-store-off",['uses'=>'ReportStoreOffController@loadReport']);
   }); 
  Route::group(['middleware' => 'check.permission'], function () { 
 Route::get("index",['uses'=>'DashboardController@showIndex']); 
@@ -225,6 +228,7 @@ Route::get("overtime",['uses'=>'OvertimeController@showPage']);
 Route::get("payroll",['uses'=>'PayrollController@showPage']);
 Route::get("charge-revenue",['uses'=>'ChargeRevenueController@showPage']);
 Route::get("store-off",['uses'=>'StoreOffController@showPage']);
+Route::get("report-store-off",['uses'=>'ReportStoreOffController@showPage']);
  });
 Route::post("query",['uses'=>'QueryController@querySql']); 
 Route::get("logout",['uses'=>'DashboardController@doLogout']);

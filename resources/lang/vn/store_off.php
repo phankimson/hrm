@@ -8,4 +8,6 @@ return array(
     'up'=>"Tăng",
     'down'=>"Giảm",
     'value'=>"Số ngày",
+    'open'=>"Đầu kỳ",
+    'close'=>"Cuối kỳ",
 );

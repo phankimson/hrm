@@ -63,7 +63,7 @@ return [
     'help-desk'=>'Hỗ trợ',
     'query'=>'Truy vấn SQL',
     'format-voucher'=> 'Định dạng chứng từ',
-    'report-warehouse'=> 'Báo cáo xuất nhập tồn',
+    'report-store-off'=> 'Báo cáo công phép, nghỉ bù',
     'report-detail-warehouse'=> 'Báo cáo chi tiết xuất nhập tồn',
     'report-history-price'=> 'Báo cáo lịch sử giá',
     'store-off'=>'Điều chỉnh phép năm',
