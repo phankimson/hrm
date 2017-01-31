@@ -64,7 +64,7 @@ return [
     'query'=>'Truy vấn SQL',
     'format-voucher'=> 'Định dạng chứng từ',
     'report-store-off'=> 'Báo cáo công phép, nghỉ bù',
-    'report-detail-warehouse'=> 'Báo cáo chi tiết xuất nhập tồn',
+    'timesheet-hour'=> 'Bảng chấm công (theo giờ)',
     'report-history-price'=> 'Báo cáo lịch sử giá',
     'store-off'=>'Điều chỉnh phép năm',
     'payroll'=>'Bảng lương',

@@ -64,7 +64,7 @@ return [
     'query'=>'Query SQL',
     'format-voucher'=> 'Format Vouchers',   
     'report-store-off'=> 'Report Store Off',
-    'report-detail-warehouse'=> 'Report Detail Warehouse',
+    'timesheet-hour'=> 'Timesheet (hour)',
     'report-history-price'=> 'Report History Price',
     'store-off'=>'Adjustment annual leave',
     'payroll'=>'Payroll',

@@ -56,7 +56,7 @@ class PayrollController extends Controller{
           $workDay = Helpers::countDays($date[1], $date[0],$offDay );
         if($d->oper == 'add' && $payroll->count()<=0){      
 
-          $employee = Employee::get_payroll($d->department_id,$d->period_id);       
+          $employee = Employee::get_payroll($d->department_id,$d->period_id,1);       
           foreach($employee as $k=>$v){
                $timekeeper_code = ''; $ts = [];$timekeeper_code_probationary='';$tsp = [];$total_work = 0 ;$total_probationary_work=0;
                foreach($v->timesheet as $t){

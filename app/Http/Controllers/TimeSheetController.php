@@ -50,7 +50,7 @@ class TimeSheetController extends Controller
                 'message' => trans('messages.success_load'),
             ]);
         }else if($d->oper == 'edit' &&$value->count() > 0){
-          $timesheet = Employee::get_timesheet($d->department_id,$d->period_id);
+          $timesheet = Employee::get_timesheet($d->department_id,$d->period_id,1);
           for($i =0; $i<count($timesheet);$i++){
               foreach($timesheet[$i]['timesheet'] as $t){              
                 $timesheet[$i][$t['day']] = $t['timekeeper_code'];  
@@ -65,7 +65,7 @@ class TimeSheetController extends Controller
                 'message' => trans('messages.success_load'),
            ]);
         }else if($d->oper == 'print' &&$value->count() > 0){
-            $timesheet = Employee::get_timesheet($d->department_id,$d->period_id);
+            $timesheet = Employee::get_timesheet($d->department_id,$d->period_id,1);
           for($i =0; $i<count($timesheet);$i++){
                foreach($timesheet[$i]['timesheet'] as $t){              
                 $timesheet[$i][$t['day']] = $t['timekeeper_code'];  
@@ -79,7 +79,7 @@ class TimeSheetController extends Controller
                 'message' => trans('messages.success_load'),
               ]); 
         }else if($d->oper == 'total' &&$value->count() > 0){
-          $timesheet = Employee::get_timesheet($d->department_id,$d->period_id);
+          $timesheet = Employee::get_timesheet($d->department_id,$d->period_id,1);
           for($i =0; $i<count($timesheet);$i++){ 
               $timesheet[$i]['timekeeper'] ='';
               if($timesheet[$i]['timesheet']){

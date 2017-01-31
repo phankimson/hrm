@@ -45,8 +45,8 @@ class Employee extends Model
         $data = Employee::TypeWhere('department_id',$department)->join('department','department.id','=','employee.department_id')->select('department.name as department','employee.*')->get();
         return $data;
     } 
-     public static function get_timesheet($department=null,$period){
-                $value = Employee::join('department','department.id','=','employee.department_id')->TypeWhere('employee.department_id',$department)->with(['timesheet' => function($query)use($period){$query->where('timesheet.period_id','=',$period)->get();}])->select('employee.id','employee.code','employee.fullname','employee.position','department.name as department')->orderBy('department.name')->get()->toArray();
+     public static function get_timesheet($department=null,$period,$type){
+                $value = Employee::join('department','department.id','=','employee.department_id')->TypeWhere('employee.department_id',$department)->with(['timesheet' => function($query)use($period,$type){$query->where('timesheet.period_id','=',$period)->where('timesheet.type','=',$type)->get();}])->select('employee.id','employee.code','employee.fullname','employee.position','department.name as department')->orderBy('department.name')->get()->toArray();
                 return $value;
             }
      public static function get_advance($department=null,$period){
@@ -57,8 +57,8 @@ class Employee extends Model
                 $value = Employee::join('department','department.id','=','employee.department_id')->TypeWhere('employee.department_id',$department)->with(['overtime' => function($query)use($period){$query->where('overtime.period_id','=',$period)->select('overtime.id','overtime.value','overtime.value1','overtime.value2','employee_id');}])->select('employee.id','employee.code','employee.fullname','employee.position','department.name as department')->orderBy('department.name')->get()->toArray();
                 return $value;
             }    
-        public static function get_payroll($department=null,$period){
-                $value = Employee::join('department','department.id','=','employee.department_id')->TypeWhere('employee.department_id',$department)->with(['advance' => function($query)use($period){$query->where('advance.period_id','=',$period)->select('advance.id','advance.value','employee_id');}])->with(['timesheet' => function($query)use($period){$query->where('timesheet.period_id','=',$period)->get();}])->with(['overtime' => function($query)use($period){$query->where('overtime.period_id','=',$period)->select('overtime.id','overtime.value','overtime.value1','overtime.value2','employee_id');}])->select('employee.*','department.name as department')->orderBy('department.name')->get();
+        public static function get_payroll($department=null,$period,$type){
+                $value = Employee::join('department','department.id','=','employee.department_id')->TypeWhere('employee.department_id',$department)->with(['advance' => function($query)use($period){$query->where('advance.period_id','=',$period)->select('advance.id','advance.value','employee_id');}])->with(['timesheet' => function($query)use($period,$type){$query->where('timesheet.period_id','=',$period)->where('timesheet.type','=',$type)->get();}])->with(['overtime' => function($query)use($period){$query->where('overtime.period_id','=',$period)->select('overtime.id','overtime.value','overtime.value1','overtime.value2','employee_id');}])->select('employee.*','department.name as department')->orderBy('department.name')->get();
                 return $value;
             } 
         public static function get_storeoff($department=null,$name=null,$employee=null,$period=null){
