@@ -45,7 +45,7 @@ return [
     'advance'=>'Bảng tạm ứng lương',
     'department'=>'Bộ phận',
     'labor-contract'=>'Hợp đồng lao động',
-    'product-group'=>'Nhóm hàng hóa',
+    'payroll-hour'=>'Bảng lương (theo giờ)',
     'timesheet'=>'Bảng chấm công',
     'period'=>'Kỳ làm việc',
     'index' => 'Trang chính',

@@ -88,20 +88,26 @@ class TimeSheetHourController extends Controller
                }
                $timesheet[$i]['timekeeper']= explode(',',$timesheet[$i]['timekeeper']);
                 foreach($timekeeper as $tk){           
-                $timesheet[$i][$tk['code']] = count(array_keys($timesheet[$i]['timekeeper'],$tk['code']));
-                }
+                    if(isset($timesheet[$i][$tk['method']])){
+                      $timesheet[$i][$tk['method']] += count(array_keys($timesheet[$i]['timekeeper'],$tk['code']))*$tk['value'];                       
+                    }else{
+                 $timesheet[$i][$tk['method']] =0;      
+                $timesheet[$i][$tk['method']] += count(array_keys($timesheet[$i]['timekeeper'],$tk['code']))*$tk['value'];
+                    }                
+                 }
               }else{
                 foreach($timekeeper as $tk){           
-                $timesheet[$i][$tk['code']] = 0;
+                $timesheet[$i][$tk['method']] = 0;
                 }  
-              }               
+              }
+              $tkh = array(array("code"=>"1","name"=>trans('timekeeper.w')),array("code"=>"2","name"=>trans('timekeeper.off')),array("code"=>"3","name"=>trans('timekeeper.al')),array("code"=>"4","name"=>trans('timekeeper.lo')),array("code"=>"5","name"=>trans('timekeeper.ns')));
              
                 unset($timesheet[$i]['timesheet'],$timesheet[$i]['department'],$timesheet[$i]['timekeeper'],$timesheet[$i]['position']);
           }
            return response()->json( [
                 'status' 	=> true,
                 'data'          => $timesheet,
-                'tk'            => $timekeeper,
+                'tk'            => $tkh,
                 'message' => trans('messages.success_load'),
             ]);           
         }else{
@@ -125,7 +131,8 @@ class TimeSheetHourController extends Controller
                           $timesheet = TimeSheet::find($value->id);    
                          }else{
                           $timesheet = new TimeSheet();    
-                         }                        
+                         } 
+                        $timesheet->type                 = 2; 
                         $timesheet->period_id            = $t->period_id;
                         $timesheet->day                  = $key;
                         $timesheet->employee_id          = $ts -> id;

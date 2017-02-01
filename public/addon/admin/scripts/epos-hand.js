@@ -82,14 +82,14 @@ var EposHand = function () {
                  var data = data;    
                 var ArrayHeaders=['Mã nhân viên','Tên nhân viên'];
                 $.each(tk, function(index, item) {
-                    ArrayHeaders.push(item.code);
+                    ArrayHeaders.push(item.name);
                 });
                 var ArrayColumn =[{data:'code',readOnly: true,width : ( 0.1 * $(window).width() )},{data:'fullname',readOnly: true,width : ( 0.1 * $(window).width() )}];
                 $.each(tk, function(index, item) {
                     var columnsList = {   
                    data : item.code,
                    readOnly: true,
-                   width : ( 1 * $(window).width() )/item.length
+//                   width : ( 1 * $(window).width() )/item.length
                  };
                     ArrayColumn.push(columnsList);
                 });                

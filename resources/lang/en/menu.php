@@ -46,7 +46,7 @@ return [
     'timekeeper'=>'Timekeeper',
     'department'=>'Department',
     'labor-contract'=>'Labor Contact',
-    'product-group'=>'Product Group',
+    'payroll-hour'=>'Bảng lương (theo giờ)',
     'timesheet'=>'Timesheet',
     'period'=>'Period',
     'index' => 'Dashboard',

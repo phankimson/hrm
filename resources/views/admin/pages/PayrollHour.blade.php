@@ -21,7 +21,7 @@
                         <div class="portlet-title tabbable-line">
                             <div class="caption">
                                 <i class="icon-tag font-purple"></i>
-                                <span class="caption-subject font-purple bold uppercase">{{trans('menu.timesheet-hour')}}</span>
+                                <span class="caption-subject font-purple bold uppercase">{{trans('menu.payroll-hour')}}</span>
                             </div> 
                              <a href="javascript:;" class="btn blue-hoki pull-right" style="display: none" id="btn-show"> {{trans('global.show')}}
                                             <i class="fa fa-sort-down"></i>
@@ -33,8 +33,7 @@
                           <a class="btn default green-stripe save tooltips" data-original-title="Ctrl+Alt+S" data-placement="top" data-container="body"> <i class="fa fa-save"></i> {{trans('global.save')}} </a>
                           <a class="btn default purple-stripe cancel tooltips" data-original-title="Ctrl+Alt+C" data-placement="top" data-container="body"> <i class="fa fa-cancel"></i> {{trans('global.cancel')}} </a>
                           <a class="btn default red-stripe delete tooltips" data-original-title="Ctrl+Alt+D" data-placement="top" data-container="body"> <i class="fa fa-times"></i> {{trans('global.delete')}} </a> 
-                          <a class="btn default red-stripe print tooltips" data-original-title="Ctrl+Alt+P" data-placement="top" data-container="body"> <i class="fa fa-print"></i> {{trans('global.print')}} </a>
-                          <a class="btn default yellow-stripe total" data-original-title="Ctrl+Alt+T" data-placement="top" data-container="body"> <i class="fa fa-tag"></i> {{trans('timesheet.total')}} </a>                                      
+                          <a class="btn default red-stripe print tooltips" data-original-title="Ctrl+Alt+P" data-placement="top" data-container="body"> <i class="fa fa-print"></i> {{trans('global.print')}} </a>                          
                                       </div>                            
                         </div>  
                         <div class="portlet-body query-form">                                                             
@@ -78,11 +77,11 @@
         @section('extra_javascript')     
           <script>
         jQuery(document).ready(function() {   
-           EposHand.permission = <?= json_encode(session()->get('permission'));?>; 
-           EposHand.url = <?= json_encode(['load_url'=>'get/timesheet-hour','delete_url'=>'update/timesheet-hour','save_url'=>'add/timesheet-hour']);?>;
+           Epos.permission = <?= json_encode(session()->get('permission'));?>; 
+           Epos.url = <?= json_encode(['load_url'=>'get/payroll-hour','delete_url'=>'update/payroll-hour','save_url'=>'add/payroll-hour']);?>;
         });  
         </script>         
-        <script src="{{ url('public/addon/admin/scripts/epos-hand.js')}}"></script>
+        <script src="{{ url('public/addon/admin/scripts/epos-payroll.js')}}"></script>
          <!-- BEGIN PAGE LEVEL PLUGINS -->
 
         <script src="{{url('public/global/scripts/datatable.js')}}" type="text/javascript"></script>
@@ -92,6 +91,7 @@
         <script src="{{ url('public/global/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js')}}" type="text/javascript"></script>
         <script src="{{ url('public/global/plugins/shortcuts.js')}}" type="text/javascript"></script>
         <script src="{{ url('public/global/plugins/jquery.print.js')}}" type="text/javascript"></script>
+        <script src="{{ url('public/global/plugins/jquery-number-master/jquery.number.min.js')}}" type="text/javascript"></script>
 
         <script src="{{ url('public/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js')}}" type="text/javascript"></script>    
         <script src="{{ url('public/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js')}}" type="text/javascript"></script>

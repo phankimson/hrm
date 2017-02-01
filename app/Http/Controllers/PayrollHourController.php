@@ -16,7 +16,7 @@ class PayrollHourController extends Controller{
     public function showPage(){
         $department = Department::get_active();
         $period = Period::get_active();
-        return view("admin.pages.Payroll",['department'=>$department,'period'=>$period]);
+        return view("admin.pages.PayrollHour",['department'=>$department,'period'=>$period]);
     }
     public function load(Request $request){
         $data = $request->input('data');
@@ -28,6 +28,7 @@ class PayrollHourController extends Controller{
         $arr = collect([]);
         $payroll = Payroll::get_all($d->department_id,$d->period_id);
         $offday_option = $options->where('code','OFF_DAY')->first();
+        $hour_work = $options->where('code','HOUR_WORK')->first();
         $percent_ph1 = $options->where('code','PERCENT_OVERTIME_1')->first();
         $percent_ph2 = $options->where('code','PERCENT_OVERTIME_2')->first();
         $percent_ph3 = $options->where('code','PERCENT_OVERTIME_3')->first();
@@ -56,7 +57,7 @@ class PayrollHourController extends Controller{
           $workDay = Helpers::countDays($date[1], $date[0],$offDay );
         if($d->oper == 'add' && $payroll->count()<=0){      
 
-          $employee = Employee::get_payroll($d->department_id,$d->period_id,1);       
+          $employee = Employee::get_payroll($d->department_id,$d->period_id,2);       
           foreach($employee as $k=>$v){
                $timekeeper_code = ''; $ts = [];$timekeeper_code_probationary='';$tsp = [];$total_work = 0 ;$total_probationary_work=0;
                foreach($v->timesheet as $t){
@@ -86,8 +87,8 @@ class PayrollHourController extends Controller{
                 $tsp[$tkp->method] += $tkp->value * count(array_keys($timesheet_probationary,$tkp->code)) ;      
                   }
                 }      
-             $salary_work_day = ($v->salary_main + $v->allowances_accordance_salaries) / $workDay ;  
-             $salary_probationary_work_day = ($v->salary_main * $v->probationary_coefficient) / $workDay ;  
+             $salary_work = ($v->salary_main + $v->allowances_accordance_salaries) / $workDay /$hour_work->value;  
+             $salary_probationary_work = ($v->salary_main * $v->probationary_coefficient) / $workDay /$hour_work->value;  
             $item['id'] = $v->id;   
             $item['code'] = $v->code;   
             $item['fullname'] = $v->fullname;  
@@ -98,11 +99,11 @@ class PayrollHourController extends Controller{
             $item['salary_probationary'] = $v->salary_main * $v->probationary_coefficient;
             $item['salary_insurance'] = $v->salary_insurance ;
             $item['wdp'] = $tsp['1'];
-            $item['wdps'] = $item['wdp'] * $salary_probationary_work_day;
+            $item['wdps'] = $item['wdp'] * $salary_probationary_work;
             $item['wd'] = $ts['1']+$ts['5'];
-            $item['wds'] = $item['wd'] * $salary_work_day;
+            $item['wds'] = $item['wd'] * $salary_work;
             $item['wp'] =  ($ts['1']+$ts['3']+$ts['4']+$ts['5'] - $total_work + $ts['2'])+ ($tsp['1']+$tsp['3']+$tsp['4']+$tsp['5'] - $total_probationary_work + $tsp['2']);
-            $item['wps'] = ($ts['1']+$ts['3']+$ts['4']+$ts['5'] - $total_work + $ts['2']) * $salary_work_day + ($tsp['1']+$tsp['3']+$tsp['4']+$tsp['5'] - $total_probationary_work + $tsp['2'])* $salary_probationary_work_day ;
+            $item['wps'] = ($ts['1']+$ts['3']+$ts['4']+$ts['5'] - $total_work + $ts['2']) * $salary_work + ($tsp['1']+$tsp['3']+$tsp['4']+$tsp['5'] - $total_probationary_work + $tsp['2'])* $salary_probationary_work ;
             $item['ph1'] = 0 ; $item['ph2'] = 0; $item['ph3'] = 0;
             $item['personal_deductions'] = $v->personal_deductions * $price_personal_deductions->value;
             $item['number_dependents'] = $v->number_dependents * $price_number_dependents->value;
@@ -111,13 +112,13 @@ class PayrollHourController extends Controller{
                 $item['ph2'] += $o->value1/$hourworkday_option->value;
                 $item['ph3'] += $o->value2/$hourworkday_option->value;
                  }
-            $item['pht'] = ($item['ph1'] * $percent_ph1->value + $item['ph2'] * $percent_ph2->value + $item['ph3'] * $percent_ph3->value) * $salary_work_day;  
+            $item['pht'] = ($item['ph1'] * $percent_ph1->value + $item['ph2'] * $percent_ph2->value + $item['ph3'] * $percent_ph3->value) * $salary_work;  
             $item['ns'] = $ts['5'];
-            $item['nss'] = $item['ns'] * $salary_work_day * $percent_night_shift->value;
+            $item['nss'] = $item['ns'] * $salary_work * $percent_night_shift->value;
             $item['al'] = $ts['3'];
-            $item['als'] = $item['al']  * $salary_work_day;
+            $item['als'] = $item['al']  * $salary_work;
             $item['wc'] = $ts['4'];
-            $item['wcs'] = $item['wc']  * $salary_work_day;
+            $item['wcs'] = $item['wc']  * $salary_work;
             $item['telephone_allowance'] = $v->telephone_allowance;
             $item['petrol_allowance'] = $v->petrol_allowance;
             $item['shift_meal_allowance'] = $v->shift_meal_allowance;
@@ -166,8 +167,8 @@ class PayrollHourController extends Controller{
             ]);
         }else if($d->oper == 'edit' && $payroll->count() >0 || $d->oper == 'print' && $payroll->count() > 0){        
             foreach($payroll as $v){
-                 $salary_work_day = $v->salary_main / $workDay ;  
-                 $salary_probationary_work_day = $v->salary_probationary / $workDay ;
+                 $salary_work = $v->salary_main / $workDay /  $hour_work ->value ;  
+                 $salary_probationary_work = $v->salary_probationary / $workDay /$hour_work ->value;
                  $item['id'] = $v->employee_id; 
                  $item['code'] = $v->code;   
                  $item['fullname'] = $v->fullname;  
@@ -178,21 +179,21 @@ class PayrollHourController extends Controller{
                  $item['salary_probationary'] = $v->salary_probationary;
                  $item['salary_insurance'] = $v->salary_insurance ;
                  $item['wdp'] = $v->wdp;
-                $item['wdps'] = $v->wdp * $salary_probationary_work_day;
+                $item['wdps'] = $v->wdp * $salary_probationary_work;
                 $item['wd'] = $v->wd;
-                $item['wds'] = $v->wd * $salary_work_day;
+                $item['wds'] = $v->wd * $salary_work;
                 $item['wp'] =  $v->wp;
                 $item['wps'] = $v->wps ;
                 $item['ph1'] = $v->ph1 ; 
                 $item['ph2'] = $v->ph2;
                 $item['ph3'] = $v->ph3;
-                $item['pht'] = ($item['ph1'] * $percent_ph1->value + $item['ph2'] * $percent_ph2->value + $item['ph3'] * $percent_ph3->value) * $salary_work_day;  
+                $item['pht'] = ($item['ph1'] * $percent_ph1->value + $item['ph2'] * $percent_ph2->value + $item['ph3'] * $percent_ph3->value) * $salary_work;  
                 $item['ns'] = $v->ns;
-                $item['nss'] = $v->ns * $salary_work_day * $percent_night_shift->value;
+                $item['nss'] = $v->ns * $salary_work * $percent_night_shift->value;
                 $item['al'] = $v->al;
-                $item['als'] = $item['al']  * $salary_work_day;
+                $item['als'] = $item['al']  * $salary_work;
                 $item['wc'] = $v->wc;
-                $item['wcs'] = $item['wc']  * $salary_work_day;
+                $item['wcs'] = $item['wc']  * $salary_work;
                 $item['telephone_allowance'] = $v->telephone_allowance;
                 $item['petrol_allowance'] = $v->petrol_allowance;
                 $item['shift_meal_allowance'] = $v->shift_meal_allowance;
