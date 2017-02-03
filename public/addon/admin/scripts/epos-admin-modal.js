@@ -250,7 +250,8 @@
        shortcut.remove(key+"C");
        shortcut.remove(key+"D");
        shortcut.remove(key+"I");
-       jQuery('a.add,a.copy,.cancel,a.edit,a.save,a.delete,a.import').off('click'); 
+       shortcut.remove(key+"P");
+       jQuery('a.add,a.copy,.cancel,a.edit,a.save,a.delete,a.import,a.print').off('click'); 
        jQuery('#grid').find('tbody').off( 'click', 'tr', btnclickgroupitem);
        if(type==1){//Default    
        jQuery('.fileinput').fileinput('clear');
@@ -261,6 +262,7 @@
        shortcut.add(key+"E",function(e) {btnEdit(e);});
        shortcut.add(key+"D",function(e) {btnDelete(e);});
        shortcut.add(key+"I",function(e) {btnImport(e);});
+       shortcut.add(key+"P",function(e) {btnPrint(e);});
        jQuery('.make-switch').not('.config').bootstrapSwitch('state', true);   
        jQuery('#action,#upload,#import').modal('hide');     
        jQuery('#title').text('');
@@ -272,6 +274,7 @@
        jQuery('a.delete').on('click',btnDelete);
        jQuery('a.import').on('click',btnImport);  
        jQuery('a.upload').on('click',btnUpload);  
+       jQuery('a.print').on('click',btnPrint);  
        jQuery('.form-control').not('.config').not('input[type="search"]').not('select[name="grid_length"]').attr('disabled','');
        jQuery('.cancel,a.save').attr('disabled',''); 
        sessionStorage.removeItem('rowid');
@@ -547,6 +550,37 @@
          }
         jQuerylink.data('lockedAt', +new Date()); 
         };
+       var btnPrint = function(e){ 
+          var jQuerylink = jQuery(e.target);
+          e.preventDefault();
+         if(!jQuerylink.data('lockedAt') || +new Date() - jQuerylink.data('lockedAt') > 300) {
+          if(action['d']==true){   
+         var crit = sessionStorage.rowid;
+           if(crit){
+         EPosUiBlock.show_loading();
+           var postdata = {'id' : crit};  
+                RequestURLWaiting(url['print_url'],'json',postdata,function(results){
+                  if(results.status == false){               
+                   bootbox.alert(results.message);
+                   }else{
+                     jQuery('#add_modal').append('<div id="print">'+results.arr+'</div>');
+                     jQuery('#print').print().remove();
+                   }
+                    initStatus(1); 
+                   EPosUiBlock.hide_loading();
+            },true);  
+
+           }else{
+          bootbox.alert(transText["you_must_select_item_to_delete"]);        
+          }
+           }else{
+        bootbox.alert(transText["you_are_not_permission_delete"]);    
+        }
+         }
+        jQuerylink.data('lockedAt', +new Date()); 
+        }; 
+        
+        
       var btnSave = function(e){ 
           var jQuerylink = jQuery(e.target);
           e.preventDefault();

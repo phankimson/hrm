@@ -58,6 +58,7 @@ return [
     'setting'=>'Setting',
     'options' => 'Options Eposvn',
     'template'=>'Template',
+    'form-voucher'=>'Form Voucher',
     'user'=>'User Account',
     'history-price'=>'History price',
     'help-desk'=>'Help desk',

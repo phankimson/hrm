@@ -58,6 +58,7 @@ return [
     'setting'=>'Cài đặt',
     'options' => 'Hệ thống Eposvn',
     'template'=>'Mẫu chứng từ',
+    'form-voucher'=>'Mẫu chứng từ nhân sự',
     'user'=>'Tài khoản người dùng',
     'history_action'=>'Lịch sử hoạt động',
     'help-desk'=>'Hỗ trợ',

@@ -128,6 +128,10 @@
                                                   <td class="col-xs-1"><label class="control-label">{{trans('options.min_add_al')}}</label></td>
                                                   <td class="col-md-2"><input type="text" class="form-control input-large config" maxlength="100" name="min_add_al" value="{{$options->where('code','MIN_ADD_AL')->implode('value')}}" id="maxlength_defaultconfig"></td>     
                                                 </tr>
+                                                <tr>          
+                                                  <td class="col-xs-1"><label class="control-label">{{trans('options.hour_work')}}</label></td>
+                                                  <td class="col-md-2"><input type="text" class="form-control input-large config" maxlength="100" name="hour_work" value="{{$options->where('code','HOUR_WORK')->implode('value')}}" id="maxlength_defaultconfig"></td>     
+                                                </tr>
                                             </table> 
                                       </div>
                                          <div class="tab-pane" id="insurance">

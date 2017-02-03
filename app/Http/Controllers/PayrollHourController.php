@@ -234,7 +234,7 @@ class PayrollHourController extends Controller{
         $day_clear_off = $options->where('code','DAY_CLEAR_OFF')->first(); 
         $check_store_off = $options->where('code','CHECK_STORE_OFF')->first(); 
         $min_add_al = $options->where('code','MIN_ADD_AL')->first();   
-        
+        $hour_work = $options->where('code','HOUR_WORK')->first();
            foreach($t->hot as $ts){
                 if($ts->salary_main>0){
                    $value = Payroll::get_save($ts -> id, $t->period_id);
@@ -292,7 +292,7 @@ class PayrollHourController extends Controller{
                         $store_off -> employee_id = $ts -> id;
                         $store_off -> name = 1 ;
                         $store_off -> type = 2 ;
-                        $store_off -> value = $ts -> al ;
+                        $store_off -> value = $ts -> al/$hour_work->value ;
                         $store_off -> active = 1 ;
                         $store_off -> save();    
                         }
@@ -303,7 +303,7 @@ class PayrollHourController extends Controller{
                         $store_off -> employee_id = $ts -> id;
                         $store_off -> name = 2 ;
                         $store_off -> type = 2 ;
-                        $store_off -> value = $ts -> wc ;
+                        $store_off -> value = $ts -> wc/$hour_work->value ;
                         $store_off -> active = 1 ;
                         $store_off -> save();    
                         }
