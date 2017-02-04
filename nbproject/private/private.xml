@@ -1,33 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
-        <file>
-            <url>resources/views/admin/pages/profile.blade.php</url>
-            <bookmark id="1">
-                <name/>
-                <line>320</line>
-                <key/>
-            </bookmark>
-        </file>
-    </editor-bookmarks>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/D:/xampp/htdocs/hrm/app/Http/Controllers/PayrollController.php</file>
-            <file>file:/D:/xampp/htdocs/hrm/app/Http/Models/StoreOff.php</file>
-            <file>file:/D:/xampp/htdocs/hrm/app/Http/Models/Payroll.php</file>
-=======
+            <file>file:/E:/xampp/htdocs/hrm/resources/views/admin/pages/TimeSheetHour.blade.php</file>
+            <file>file:/E:/xampp/htdocs/hrm/app/Http/Models/TimeSheet.php</file>
             <file>file:/E:/xampp/htdocs/hrm/resources/lang/vn/options.php</file>
             <file>file:/E:/xampp/htdocs/hrm/routes/web.php</file>
             <file>file:/E:/xampp/htdocs/hrm/app/Http/Controllers/PayrollController.php</file>
-            <file>file:/E:/xampp/htdocs/hrm/index.php</file>
-            <file>file:/E:/xampp/htdocs/hrm/app/Http/Models/Employee.php</file>
-            <file>file:/E:/xampp/htdocs/hrm/resources/lang/en/options.php</file>
+            <file>file:/E:/xampp/htdocs/hrm/resources/lang/vn/menu.php</file>
             <file>file:/E:/xampp/htdocs/hrm/app/Http/Controllers/ReportStoreOffController.php</file>
             <file>file:/E:/xampp/htdocs/hrm/resources/views/admin/includes/header.blade.php</file>
             <file>file:/E:/xampp/htdocs/hrm/resources/views/admin/pages/reportStoreOff.blade.php</file>
+            <file>file:/E:/xampp/htdocs/hrm/app/Http/Controllers/TimeSheetHourController.php</file>
             <file>file:/E:/xampp/htdocs/hrm/public/addon/admin/scripts/epos-report-stock.js</file>
->>>>>>> origin/master
+            <file>file:/E:/xampp/htdocs/hrm/resources/views/admin/pages/Payroll.blade.php</file>
+            <file>file:/E:/xampp/htdocs/hrm/index.php</file>
+            <file>file:/E:/xampp/htdocs/hrm/app/Http/Models/Employee.php</file>
+            <file>file:/E:/xampp/htdocs/hrm/resources/lang/en/options.php</file>
+            <file>file:/E:/xampp/htdocs/hrm/resources/lang/en/menu.php</file>
+            <file>file:/E:/xampp/htdocs/hrm/app/Http/Controllers/TimeSheetController.php</file>
         </group>
     </open-files>
 </project-private>

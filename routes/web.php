@@ -27,9 +27,11 @@ Route::group(['middleware'=>['web']],function(){
   Route::post("labor-contract",['uses'=>'LaborContractController@save']);
   Route::post("overtime",['uses'=>'OvertimeController@save']);
   Route::post("payroll",['uses'=>'PayrollController@save']);
+  Route::post("payroll-hour",['uses'=>'PayrollHourController@save']);
   Route::post("charge-revenue",['uses'=>'ChargeRevenueController@save']);
   Route::post("store-off",['uses'=>'StoreOffController@save']);
   Route::post("timesheet-hour",['uses'=>'TimeSheetHourController@save']); 
+  Route::post("form-voucher",['uses'=>'FormVoucherController@save']); 
   });  
   Route::group(["prefix"=>"update"],function(){    
   Route::post("profile",['uses'=>'UserController@updateprofile']);
@@ -49,9 +51,11 @@ Route::group(['middleware'=>['web']],function(){
   Route::post("labor-contract",['uses'=>'LaborContractController@delete']);
   Route::post("overtime",['uses'=>'OvertimeController@delete']);
   Route::post("payroll",['uses'=>'PayrollController@delete']);
+  Route::post("payroll-hour",['uses'=>'PayrollHourController@delete']);
   Route::post("charge-revenue",['uses'=>'ChargeRevenueController@delete']);
   Route::post("store-off",['uses'=>'StoreOffController@delete']);
   Route::post("timesheet-hour",['uses'=>'TimeSheetHourController@delete']); 
+  Route::post("form-voucher",['uses'=>'FormVoucherController@delete']); 
   }); 
   Route::group(["prefix"=>"import"],function(){       
   Route::post("history-action",['uses'=>'HistoryActionController@import']);   
@@ -86,7 +90,9 @@ Route::group(['middleware'=>['web']],function(){
     Route::post("load-chart",['uses'=>'DashboardController@loadChart']);
     Route::post("overtime",['uses'=>'OvertimeController@load']);
     Route::post("payroll",['uses'=>'PayrollController@load']);
+    Route::post("payroll-hour",['uses'=>'PayrollHourController@load']);
     Route::post("report-store-off",['uses'=>'ReportStoreOffController@loadReport']);
+    Route::post("form-voucher",['uses'=>'FormVoucherController@printData']); 
   }); 
  Route::group(['middleware' => 'check.permission'], function () { 
 Route::get("/",['uses'=>'DashboardController@showIndex']);
@@ -109,7 +115,13 @@ Route::get("payroll",['uses'=>'PayrollController@showPage']);
 Route::get("charge-revenue",['uses'=>'ChargeRevenueController@showPage']);
 Route::get("store-off",['uses'=>'StoreOffController@showPage']);
 Route::get("report-store-off",['uses'=>'ReportStoreOffController@showPage']);
+<<<<<<< HEAD
 Route::get("timesheet-hour",['uses'=>'TimeSheetHourController@showPage']); 
+=======
+Route::get("timesheet-hour",['uses'=>'TimeSheetHourController@showPages']); 
+Route::get("payroll-hour",['uses'=>'PayrollHourController@showPage']);
+Route::get("form-voucher",['uses'=>'FormVoucherController@showPage']); 
+>>>>>>> origin/master
  });
 Route::get("logout",['uses'=>'DashboardController@doLogout']);
 Route::get("login",['uses'=>'UserController@showLogin']);
@@ -139,9 +151,11 @@ Route::group(["prefix"=>"admin"],function(){
   Route::post("labor-contract",['uses'=>'LaborContractController@save']);
   Route::post("overtime",['uses'=>'OvertimeController@save']);
   Route::post("payroll",['uses'=>'PayrollController@save']);
+  Route::post("payroll-hour",['uses'=>'PayrollHourController@save']);
   Route::post("charge-revenue",['uses'=>'ChargeRevenueController@save']);
   Route::post("store-off",['uses'=>'StoreOffController@save']);
   Route::post("timesheet-hour",['uses'=>'TimeSheetHourController@save']); 
+  Route::post("form-voucher",['uses'=>'FormVoucherController@save']); 
   });  
   Route::group(["prefix"=>"update"],function(){    
   Route::post("profile",['uses'=>'UserController@updateprofile']);
@@ -164,9 +178,11 @@ Route::group(["prefix"=>"admin"],function(){
   Route::post("labor-contract",['uses'=>'LaborContractController@delete']);
   Route::post("overtime",['uses'=>'OvertimeController@delete']);
   Route::post("payroll",['uses'=>'PayrollController@delete']);
+  Route::post("payroll-hour",['uses'=>'PayrollHourController@delete']);
   Route::post("charge-revenue",['uses'=>'ChargeRevenueController@delete']);
   Route::post("store-off",['uses'=>'StoreOffController@delete']);
   Route::post("timesheet-hour",['uses'=>'TimeSheetHourController@delete']); 
+  Route::post("form-voucher",['uses'=>'FormVoucherController@delete']); 
   }); 
   Route::group(["prefix"=>"import"],function(){    
   Route::post("menu",array('uses'=>'MenuController@import')); 
@@ -209,7 +225,9 @@ Route::group(["prefix"=>"admin"],function(){
     Route::post("load-chart",['uses'=>'DashboardController@loadChart']);
     Route::post("overtime",['uses'=>'OvertimeController@load']);
     Route::post("payroll",['uses'=>'PayrollController@load']);
+    Route::post("payroll-hour",['uses'=>'PayrollHourController@load']);
     Route::post("report-store-off",['uses'=>'ReportStoreOffController@loadReport']);
+    Route::post("form-voucher",['uses'=>'FormVoucherController@printData']); 
   }); 
  Route::group(['middleware' => 'check.permission'], function () { 
 Route::get("index",['uses'=>'DashboardController@showIndex']); 
@@ -237,6 +255,8 @@ Route::get("charge-revenue",['uses'=>'ChargeRevenueController@showPage']);
 Route::get("store-off",['uses'=>'StoreOffController@showPage']);
 Route::get("report-store-off",['uses'=>'ReportStoreOffController@showPage']);
 Route::get("timesheet-hour",['uses'=>'TimeSheetHourController@showPage']); 
+Route::get("payroll-hour",['uses'=>'PayrollHourController@showPage']);
+Route::get("form-voucher",['uses'=>'FormVoucherController@showPage']); 
  });
 Route::post("query",['uses'=>'QueryController@querySql']); 
 Route::get("logout",['uses'=>'DashboardController@doLogout']);

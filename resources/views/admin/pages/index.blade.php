@@ -18,7 +18,7 @@
             <!-- BEGIN CONTENT -->
             <div class="page-content-wrapper">
                 <!-- INFO MODAL -->
-                <div class="modal fade" id="notification" data-backdrop="true" role="dialog">
+<!--                <div class="modal fade" id="notification" data-backdrop="true" role="dialog">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -43,10 +43,10 @@
                                     </div> 
                                 </div>                                
                             </div>
-                            <!-- /.modal-content -->
+                             /.modal-content 
                         </div>
-                        <!-- /.modal-dialog -->
-                    </div>
+                         /.modal-dialog 
+                    </div>-->
                 <!-- INFO MODAL -->
                 <!-- BEGIN CONTENT BODY -->
                 <div class="page-content">                  

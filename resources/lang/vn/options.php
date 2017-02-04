@@ -42,4 +42,5 @@ return array(
     'price_number_deduct'=> 'Khấu trừ người phụ thuộc',
     'day_clear_off'=>'Ngày nghỉ khi đi làm ngày lễ',
     'min_add_al'=>'Ngày làm tối thiểu để đc nghỉ phép', 
+    'hour_work'=>'Số giờ làm việc trong 1 ngày', 
 );

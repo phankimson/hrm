@@ -125,7 +125,8 @@ class TimeSheetController extends Controller
                           $timesheet = TimeSheet::find($value->id);    
                          }else{
                           $timesheet = new TimeSheet();    
-                         }                        
+                         }               
+                        $timesheet->type               = 1;  
                         $timesheet->period_id            = $t->period_id;
                         $timesheet->day                  = $key;
                         $timesheet->employee_id          = $ts -> id;

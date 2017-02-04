@@ -32,7 +32,6 @@
         <script src="{{url('public/layouts/layout/scripts/layout.min.js')}}" type="text/javascript"></script>
         <script src="{{url('public/layouts/layout/scripts/demo.min.js')}}" type="text/javascript"></script>
         <script src="{{url('public/layouts/global/scripts/quick-sidebar.min.js')}}" type="text/javascript"></script>
-        <script src="{{url('public/addon/frontend/scripts/customize.js')}}" type="text/javascript"></script>
         <script src="{{url('public/addon/admin/scripts/config.js')}}" type="text/javascript"></script>
         <script src="{{url('public/addon/global/scripts/framework.js')}}" type="text/javascript"></script>
         <!-- END THEME LAYOUT SCRIPTS -->

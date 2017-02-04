@@ -42,4 +42,5 @@ return array(
     'price_number_deduct'=> 'Price number deduct',
     'day_clear_off'=>'Day clear off',
     'min_add_al'=>'Min add annual leave',
+    'hour_work'=>'Hour work', 
 );
