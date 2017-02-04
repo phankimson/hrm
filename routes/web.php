@@ -109,7 +109,7 @@ Route::get("payroll",['uses'=>'PayrollController@showPage']);
 Route::get("charge-revenue",['uses'=>'ChargeRevenueController@showPage']);
 Route::get("store-off",['uses'=>'StoreOffController@showPage']);
 Route::get("report-store-off",['uses'=>'ReportStoreOffController@showPage']);
-Route::get("timesheet-hour",['uses'=>'TimeSheetHourController@showPages']); 
+Route::get("timesheet-hour",['uses'=>'TimeSheetHourController@showPage']); 
  });
 Route::get("logout",['uses'=>'DashboardController@doLogout']);
 Route::get("login",['uses'=>'UserController@showLogin']);
