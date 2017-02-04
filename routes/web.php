@@ -115,20 +115,15 @@ Route::get("payroll",['uses'=>'PayrollController@showPage']);
 Route::get("charge-revenue",['uses'=>'ChargeRevenueController@showPage']);
 Route::get("store-off",['uses'=>'StoreOffController@showPage']);
 Route::get("report-store-off",['uses'=>'ReportStoreOffController@showPage']);
-<<<<<<< HEAD
 Route::get("timesheet-hour",['uses'=>'TimeSheetHourController@showPage']); 
-=======
-Route::get("timesheet-hour",['uses'=>'TimeSheetHourController@showPages']); 
 Route::get("payroll-hour",['uses'=>'PayrollHourController@showPage']);
-Route::get("form-voucher",['uses'=>'FormVoucherController@showPage']); 
->>>>>>> origin/master
- });
+Route::get("form-voucher",['uses'=>'FormVoucherController@showPage']);
 Route::get("logout",['uses'=>'DashboardController@doLogout']);
 Route::get("login",['uses'=>'UserController@showLogin']);
 Route::get("profile",['uses'=>'UserController@showProfile']);
 Route::post("login",['uses'=>'UserController@doLogin']);
 Route::post("lock",['uses'=>'UserController@doLogin']);
-
+});
 
 
 Route::group(["prefix"=>"admin"],function(){
