@@ -12,7 +12,7 @@ use App\Http\Models\ChargeRevenue;
 use App\Classes\Helpers;
 
 
-class PayrollHourController extends Controller{
+class PayrollController extends Controller{
     public function showPage(){
         $department = Department::get_active();
         $period = Period::get_active();
